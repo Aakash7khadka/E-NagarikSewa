@@ -1,51 +1,315 @@
 ﻿<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - smartpalika</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Lato:wght@100;300&family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">smartpalika</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+    <a asp-controller="Attendance" asp-action="Index">ATTTTN</a>
+    <!-- body starts here -->
+    <div class="site-wrap ">
+        <header class="navbar navbar-expand-md navbar-dark bd-navbar site_header ">
+            <nav class="container-fluid flex-wrap flex-md-nowrap" aria-label="Main navigation">
+                <a class="navbar-brand " href="#">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/710px-Emblem_of_Nepal.svg.png" alt="" height="24" class="d-inline-block align-text-top">
+                    E-Nagarpalika
+                </a>
+
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                    <svg class="bi" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
+                    </svg>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+
+                <div class="collapse navbar-collapse" id="bdNavbar">
+
+
+                    <form class="d-flex input-group top_search d-xs-none top_search w-50 me-0">
+                        <input type="text" class="form-control" placeholder="Nagarpalika Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                        <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
+
+                    </form>
+
+                    <hr class="d-md-none text-white-50">
+
+                    <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
+                        <li class="nav-item col-6 col-md-auto">
+                            <a class="nav-link p-2" type="button" class="btn btn-primary" id="liveToastBtn" onclick="toastNotification()">
+                                <i class="bi bi-bell fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        <li class="nav-item col-6 col-md-auto">
+
+                            <a class="nav-link p-2" type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" " onclick="toastMessage()">
+                                <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                            </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Attendance" asp-action="Index">Attendance</a>
+                        <li class="nav-item col-6 col-md-auto">
+                            <a class="nav-link p-2" type="button" class="btn btn-primary" id="liveToastBtn" onclick="toastProfile()">
+                                <i class="bi bi-person-check fs-4"></i><small><i class="bi bi-caret-down"></i></small>
+                            </a>
                         </li>
+
+
                     </ul>
+
+                </div>
+            </nav>
+        </header>
+
+
+
+        <!-- Sidebar -->
+        <div class="d-flex align-items-start ">
+
+            <div class="nav flex-column nav-pills me-3 sidebar_main fw-bold" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <button class="nav-link active text-left" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-menu-button-wide pe-3"></i>Home</button>
+                <button class="nav-link" id="v-pills-profile-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="bi bi-person-check pe-3 fw-bold"></i>Profile</button>
+                <button class="nav-link pe-5" id="v-pills-settings-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-employee" type="button" role="tab" aria-controls="v-pills-employee" aria-selected="false"><i class="bi bi-people pe-3"></i>Employees</button>
+
+                <button onclick="location.href='@Url.Action("Index", "Attendance")'" class="nav-link pe-5" id="v-pills-atn-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-atn" type="button" role="tab" aria-controls="v-pills-atn" aria-selected="false"><i class="bi bi-card-checklist pe-3"></i> <a asp-controller="Attendance" asp-action="Index">  Attendance</a></button>
+
+                <button class="nav-link pe-5" id="v-pills-settings-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="bi bi-gear pe-3"></i>Settings</button>
+
+
+            </div>
+
+            <!-- Tab Content Start -->
+            <div class="tab-content  w-auto main_tab_content  pe-0" id="v-pills-tabContent">
+                <div class="tab-pane  fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                    <div class="container-fluid">
+                        @RenderBody()
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+                    <div class="container-fluid p-0 m-0">
+                        <div class="d-flex justify-content-between p-0 m-0">
+
+                            <div class="item w-25 bg-dark m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item w-75 bg-dark m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                                        <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="v-pills-employee" role="tabpanel" aria-labelledby="v-pills-employee-tab">
+                    <div class="container-fluid p-0 m-0">
+                        <div class="d-flex flex-wrap justify-content-between p-0 m-0">
+
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="item flex-fill pe-2 py-2 m-1">
+                                <div class="card m-1" style="width: 100%;">
+                                    <img src="..." class="card-img-top" alt="...">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Card title</h5>
+                                        <p class="card-text">Some quick example text to build on </p>
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-atn" role="tabpanel" aria-labelledby="v-pills-atn-tab">
+
+
+                </div>
+                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                    <img src="https://image.freepik.com/free-vector/smart-home-management-application_23-2148621994.jpg" width="900px" alt="">
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <!-- Tab Content Ends -->
+
+
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - smartpalika - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+
+
+    <!-- body ends here -->
+    <!-- Toast Start Notification-->
+    <div class="liveNotificationToast" style="z-index:3000">
+        <div id="liveNotificationToast" class="toast" role="alert" data-delay="1000" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <i class="bi bi-bell fs-4 pe-2"></i>
+                <strong class="me-auto">Notification</strong>
+                <small>11 mins ago</small>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        The current button
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                </div>
+            </div>
         </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @RenderSection("Scripts", required: false)
+    </div>
+
+    <!-- Toast End -->
+    <!-- Start Message-->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+            <h5 id="offcanvasRightLabel">Message</h5>
+            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+        <div class="offcanvas-body">
+            ...
+        </div>
+    </div>
+
+    <!-- Message End -->
+    <!-- Toast Start Profile-->
+    <div class="liveNotificationToast" style="z-index:1000">
+        <div id="liveProfileToast" class="toast" role="alert" data-delay="1000" aria-live="assertive" aria-atomic="true">
+            <div class="toast-header">
+                <img src="https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp" class="me-2" alt="">
+                <strong class="me-auto fs-6 profile_text">
+                    Morgan Freeman
+                    <br> <small class="fw-lighter">CEO and Founder</small>
+                </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body">
+                <div class="list-group">
+                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                        The current button
+                    </button>
+                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast End -->
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    <script>
+        var option =
+        {
+            animation: true,
+            delay: 2000
+
+        }
+
+        function toastNotification() {
+            var toastHtmlElementNotification = document.getElementById("liveNotificationToast");
+            var toastElementNotification = new bootstrap.Toast(toastHtmlElementNotification, option);
+            toastElementNotification.show();
+
+
+
+        }
+        function toastMessage() {
+            var toastHtmlElementMessage = document.getElementById("liveMessageToast");
+            var toastElementMessage = new bootstrap.Toast(toastHtmlElementMessage, option);
+            toastElementMessage.show();
+
+
+
+        }
+        function toastProfile() {
+            var toastHtmlElementProfile = document.getElementById("liveProfileToast");
+            var toastElementProfile = new bootstrap.Toast(toastHtmlElementProfile, option);
+            toastElementProfile.show();
+
+        }
+
+
+
+    </script>
+    <script>
+
+    </script>
 </body>
 </html>
