@@ -1,0 +1,87 @@
+﻿@model IEnumerable<smartpalika.Models.Attendance>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+@{var aakash_count = Model.Where(s => s.Uid == 0).Count(); }
+@{var sudeep_count = Model.Where(s => s.Uid == 1).Count(); }
+@{var vishal_count = Model.Where(s => s.Uid == 2).Count(); }
+
+
+<div class="d-flex">
+
+    @if (aakash_count % 2 == 1)
+    {
+       <partial name="_AakashPresent" />
+    }
+    else
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Absent</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Aakash Khadka</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+
+
+    @if (sudeep_count % 2 == 1)
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Present</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Sudeep Kharel</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Absent</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Sudeep Kharel</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+
+
+    @if (vishal_count % 2 == 1)
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Present</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Vishal Purkoti</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card m-2" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Abscent</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Vishal Purkoti</h6>
+                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+            </div>
+        </div>
+    }
+
+
+
+</div>
