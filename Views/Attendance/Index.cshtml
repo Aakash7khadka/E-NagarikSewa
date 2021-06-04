@@ -4,14 +4,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Index</h1>
+<h1 class="text-secondary fs-4 mt-2 ps-4">Employee Availability</h1><hr class="ms-4" />
 
 @{var aakash_count = Model.Where(s => s.Uid == 0).Count(); }
 @{var sudeep_count = Model.Where(s => s.Uid == 1).Count(); }
 @{var vishal_count = Model.Where(s => s.Uid == 2).Count(); }
 
 
-<div class="d-flex">
+<div class="d-flex justify-content-start p-0 mt-4 " >
 
     @if (aakash_count % 2 == 1)
     {
@@ -23,7 +23,7 @@
         <div class="card ms-4 bg-danger text-light" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Aakash Khadka</h5>
-                <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
+                <p  class="card-subtitle mb-2 text-light fs-6">Deputy Mayor</p>
                 <br>
                 <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Absent <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
 
@@ -47,7 +47,7 @@
     else
     {
 
-        <div class="card ms-4 bg-danger text-light" style="width: 18rem;">
+        <div class="card ms-4 bg-danger text-light opac-4 " style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Sudeep Kharel</h5>
                 <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>

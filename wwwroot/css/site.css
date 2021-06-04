@@ -5,6 +5,10 @@
 
 body {
     font-family: 'Inter', sans-serif !important;
+    box-sizing:border-box !important;
+}
+.gv-red {
+    background-color: #f94144 !important;
 }
 
 .site-wrap {
@@ -96,6 +100,23 @@ body {
     color: red;
 }
 
+/*Necessary styles*/
+.opac-2 {
+    opacity: 0.2 !important;
+}
+
+.opac-4 {
+    opacity: 0.4 !important;
+}
+
+.opac-6 {
+    opacity: 0.6 !important;
+}
+
+.opac-8 {
+    opacity: 0.8 !important;
+}
+
 @media (min-width:1920px) {
     .liveNotificationToast {
         position: fixed;
@@ -103,3 +124,4 @@ body {
         right: 30%;
     }
 }
+
