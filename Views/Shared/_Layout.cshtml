@@ -243,10 +243,11 @@
             ...
         </div>
     </div>
+    <a asp-controller="Account" asp-action="Register">  Register</a>
 
     <!-- Message End -->
     <!-- Toast Start Profile-->
-    <div class="liveNotificationToast" style="z-index:1000">
+    @*<div class="liveNotificationToast" style="z-index:1000">
         <div id="liveProfileToast" class="toast" role="alert" data-delay="1000" aria-live="assertive" aria-atomic="true">
             <div class="toast-header">
                 <img src="https://qph.fs.quoracdn.net/main-qimg-134e3bf89fff27bf56bdbd04e7dbaedf.webp" class="me-2" alt="">
@@ -255,21 +256,21 @@
                     <br> <small class="fw-lighter">CEO and Founder</small>
                 </strong>
                 <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        The current button
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                </div>
-            </div>
-        </div>
-    </div>
+            </div>*@
 
+    @*<div class="toast-body">
+        <div class="list-group">
+            <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
+                The current button
+            </button>
+            <button type="button" class="list-group-item list-group-item-action" onclick="location.href='@Url.Action("Register", "Account")'"  ></button>
+            <button type="button" class="list-group-item list-group-item-action">A third button item</button>
+            <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
+            <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
+        </div>*@
+    <!--</div>
+        </div>
+    </div>-->
     <!-- Toast End -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
