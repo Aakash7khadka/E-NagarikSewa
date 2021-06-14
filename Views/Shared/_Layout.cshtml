@@ -10,299 +10,96 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200&family=Lato:wght@100;300&family=Open+Sans&display=swap" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src='main.js'></script>
+</head>
+<body>
+    <div class="wrapper p-0 ">
+        <!-- Main Nav -->
+        <header class="navbar navbar-expand navbar-dark main_nav flex-column flex-md-row bd-navbar main_nav">
+            <a class="navbar-brand mr-0 mr-md-2" href="/" aria-label="Bootstrap">
+                <h6>E-Nagarik Sewa</h6>
+            </a>
+
+
+
+            <ul class="navbar-nav ml-md-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link text-light pl-2 pr-2 mx-1 py-3 my-n2" href="https://github.com/twbs" target="_blank" rel="noopener" aria-label="GitHub">
+                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-light  px-2 mx-1 py-3 my-n2" href="https://bootstrap-slack.herokuapp.com/" target="_blank" rel="noopener" aria-label="Slack">
+                        <i class="bi bi-bell fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                    </a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-item nav-link text-light dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="bi bi-person-check fw-bolder"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+                        @if (signInManager.IsSignedIn(User))
+                        {
+
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <button type="submit" class="dropdown-item">Logout @User.Identity.Name</button>
+                            </form>
+                        }
+                    
+                        else
+                        {
+
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
+                        <a class="dropdown-item" asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
+                        }
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="https://getbootstrap.com/docs/3.4/">v3.4.1</a>
+                        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/docs/versions/">All versions</a>
+
+
+                    </div>
+                </li>
+
+            </ul>
+            <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3 border border-light" href="/docs/4.6/getting-started/download/">Appointment</a>
+
+        </header>
+
+        <!-- Main Nav Ends -->
+
+
+
+        <div class="row  content_area m-0 p-0">
+            <div class="col-2 p-0 text-dark sidebar_main left">
+                <nav class="nav flex-column">
+                    <a class="nav-link active" href="#section0"><i class="bi bi-menu-button-wide pr-3"></i>Home</a>
+                    <a class="nav-link" href="#section1"><i class="bi bi-person-check pr-3 fw-bold"></i>Profile</a>
+                    <a class="nav-link" asp-controller="Attendance" asp-action="Index"><i class="bi bi-card-checklist pr-3"></i>Attendance</a>
+
+                </nav>
+            </div>
+            <div class="col-10 right">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/jquery-validate/jquery.validate.js"></script>
     <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
-</head>
-<body>
-    <!-- body starts here -->
-    <div class="site-wrap ">
-        <header class="navbar navbar-expand-md navbar-dark bd-navbar site_header ">
-            <nav class="container-fluid flex-wrap flex-md-nowrap" aria-label="Main navigation">
-                <a class="navbar-brand " href="#">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Emblem_of_Nepal.svg/710px-Emblem_of_Nepal.svg.png" alt="" height="24" class="d-inline-block align-text-top">
-                    E-Nagarpalika
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#bdNavbar" aria-controls="bdNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <svg class="bi" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd" d="M2.5 11.5A.5.5 0 0 1 3 11h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 7h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4A.5.5 0 0 1 3 3h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z" />
-                    </svg>
-                </button>
-
-                <div class="collapse navbar-collapse" id="bdNavbar">
-
-
-                    <form class="d-flex input-group top_search d-xs-none top_search w-50 me-0">
-                        <input type="text" class="form-control" placeholder="Nagarpalika Search" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                        <span class="input-group-text" id="basic-addon2"><i class="bi bi-search"></i></span>
-
-                    </form>
-
-                    <hr class="d-md-none text-white-50">
-
-                    <ul class="navbar-nav flex-row flex-wrap ms-md-auto">
-                        <li class="nav-item col-6 col-md-auto">
-                            <a class="nav-link p-2" type="button" class="btn btn-primary" id="liveToastBtn" onclick="toastNotification()">
-                                <i class="bi bi-bell fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
-                            </a>
-                        </li>
-                        <li class="nav-item col-6 col-md-auto">
-
-                            <a class="nav-link p-2" type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" " onclick="toastMessage()">
-                                <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
-                            </a>
-                        </li>
-                        <li class="nav-item col-6 col-md-auto">
-                            <a class="nav-link p-2" type="button" class="btn btn-primary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
-                                <i class="bi bi-person-check fs-4"></i><small><i class="bi bi-caret-down"></i></small>
-                            </a>
-                        </li>
-
-
-                    </ul>
-
-                </div>
-            </nav>
-        </header>
-
-
-
-        <!-- Sidebar -->
-        <div class="d-flex align-items-start ">
-
-            <div class="nav flex-column nav-pills me-3 sidebar_main fw-bold" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <button class="nav-link active text-left" id="v-pills-home-tab" data-bs-toggle="pill" data-bs-target="#v-pills-home" type="button" role="tab" aria-controls="v-pills-home" aria-selected="true"><i class="bi bi-menu-button-wide pe-3"></i>Home</button>
-                <button class="nav-link" id="v-pills-profile-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-profile" type="button" role="tab" aria-controls="v-pills-profile" aria-selected="false"> <i class="bi bi-person-check pe-3 fw-bold"></i>Profile</button>
-                <button class="nav-link pe-5" id="v-pills-settings-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-employee" type="button" role="tab" aria-controls="v-pills-employee" aria-selected="false"><i class="bi bi-people pe-3"></i>Employees</button>
-
-                <button onclick="location.href='@Url.Action("Index", "Attendance")'" class="nav-link pe-5" id="v-pills-atn-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-atn" type="button" role="tab" aria-controls="v-pills-atn" aria-selected="false"><i class="bi bi-card-checklist pe-3"></i> <a asp-controller="Attendance" asp-action="Index">  Attendance</a></button>
-
-                <button class="nav-link pe-5" id="v-pills-settings-tab text-left" data-bs-toggle="pill" data-bs-target="#v-pills-settings" type="button" role="tab" aria-controls="v-pills-settings" aria-selected="false"><i class="bi bi-gear pe-3"></i>Settings</button>
-
-
-            </div>
-
-            <!-- Tab Content Start -->
-            <div class="tab-content  w-auto main_tab_content  pe-0" id="v-pills-tabContent">
-                <div class="tab-pane  fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                    <div class="container-fluid">
-                        @RenderBody()
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-
-                    <div class="container-fluid p-0 m-0">
-                        <div class="d-flex justify-content-between p-0 m-0">
-
-                            <div class="item w-25 bg-dark m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item w-75 bg-dark m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                                        <a href="#" class="btn btn-primary">Go somewhere</a>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
-                <div class="tab-pane fade" id="v-pills-employee" role="tabpanel" aria-labelledby="v-pills-employee-tab">
-                    <div class="container-fluid p-0 m-0">
-                        <div class="d-flex flex-wrap justify-content-between p-0 m-0">
-
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="item flex-fill pe-2 py-2 m-1">
-                                <div class="card m-1" style="width: 100%;">
-                                    <img src="..." class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Card title</h5>
-                                        <p class="card-text">Some quick example text to build on </p>
-
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-                <div class="tab-pane fade" id="v-pills-atn" role="tabpanel" aria-labelledby="v-pills-atn-tab">
-
-
-                </div>
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                    <img src="https://image.freepik.com/free-vector/smart-home-management-application_23-2148621994.jpg" width="900px" alt="">
-                </div>
-            </div>
-
-            <!-- Tab Content Ends -->
-
-
-        </div>
-    </div>
-
-
-
-    <!-- body ends here -->
-    <!-- Toast Start Notification-->
-    <div class="liveNotificationToast" style="z-index:3000">
-        <div id="liveNotificationToast" class="toast" role="alert" data-delay="1000" aria-live="assertive" aria-atomic="true">
-            <div class="toast-header">
-                <i class="bi bi-bell fs-4 pe-2"></i>
-                <strong class="me-auto">Notification</strong>
-                <small>11 mins ago</small>
-                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-            </div>
-            <div class="toast-body">
-                <div class="list-group">
-                    <button type="button" class="list-group-item list-group-item-action active" aria-current="true">
-                        The current button
-                    </button>
-                    <button type="button" class="list-group-item list-group-item-action">A second item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A third button item</button>
-                    <button type="button" class="list-group-item list-group-item-action">A fourth button item</button>
-                    <button type="button" class="list-group-item list-group-item-action" disabled>A disabled button item</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Toast End -->
-    <!-- Start Message-->
-  
-    <!-- Message Ends-->
-    <!--Profile starts-->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel">Account</h5>
-            @if (signInManager.IsSignedIn(User))
-            {
-                <form method="post" asp-action="Logout" asp-controller="Account">
-                    <button type="submit">Logout @User.Identity.Name</button>
-                </form>
-            }
-            else { 
-        <div class="d-block">
-
-            <a asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
-            <a asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
-        </div>
-            }
-        
-          
-           
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-     </div>
-    <!---->
-
-  
-
-    <!-- Toast End -->
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-    <script>
-        var option =
-        {
-            animation: true,
-            delay: 2000
-
-        }
-
-        function toastNotification() {
-            var toastHtmlElementNotification = document.getElementById("liveNotificationToast");
-            var toastElementNotification = new bootstrap.Toast(toastHtmlElementNotification, option);
-            toastElementNotification.show();
-
-
-
-        }
-        function toastMessage() {
-            var toastHtmlElementMessage = document.getElementById("liveMessageToast");
-            var toastElementMessage = new bootstrap.Toast(toastHtmlElementMessage, option);
-            toastElementMessage.show();
-
-
-
-        }
-        function toastProfile() {
-            var toastHtmlElementProfile = document.getElementById("liveProfileToast");
-            var toastElementProfile = new bootstrap.Toast(toastHtmlElementProfile, option);
-            toastElementProfile.show();
-
-        }
-
-
-
-    </script>
     <script src="https://kit.fontawesome.com/6d51dbda3a.js" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      $(document).on('click','.sidebar_main a',function(){
+          $(this).addClass('active').siblings().removeClass('active')
+      })
+    </script>
 </body>
 </html>

@@ -1,48 +1,43 @@
 ﻿:root {
-    --blue: #1b5692;
-    --white: #ffffff;
+    --bs-blue: #1b5692;
+    --bs-white: #ffffff;
 }
 
 body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
     font-family: 'Inter', sans-serif !important;
-    box-sizing:border-box !important;
-}
-.gv-red {
-    background-color: #f94144 !important;
 }
 
-.site-wrap {
-    max-width: 1920px;
+.wrapper {
+    max-width: 1768px;
     margin: 0 auto;
 }
 
-.site_header {
-    background-color: var(--blue);
-    border-bottom: 2px solid white !important;
-}
-
-.top_search {
-    max-width: 70%;
+.main_nav {
+    background-color: #1b5692;
+    color: white !important;
+    font-size: 1.2rem;
+    box-sizing: border-box !important;
     margin: 0 auto;
+    border-bottom: 1px solid white;
 }
 
-.sidebar_main .active {
-    background-color: var(--blue) !important;
-    border-radius: 0% !important;
+.content_area .right {
+    padding: 0;
 }
 
-.navbar-nav a .active {
-    color: red !important;
+.main_nav a, .main_nav .nav-link a {
+    color: white;
 }
 
-.sidebar_main button {
-    text-align: left !important;
-    color: #3e4148;
-    font-weight: 500 !important;
+.main_nav .dropdown-menu a {
+    color: #383838;
 }
 
-.nav a {
-    text-decoration: none;
+.main_nav .badge {
+    display: none;
 }
 
 .sidebar_main {
@@ -53,75 +48,12 @@ body {
     min-width: 200px;
 }
 
-    .sidebar_main button {
-        font-weight: 600;
-        color: #383838;
+    .sidebar_main a {
+        color: black;
+        font-weight: 500;
     }
 
-.liveNotificationToast {
-    position: fixed;
-    top: 8vh;
-    right: 2%;
-}
-
-
-.sidebar_main img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.liveNotificationToast img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-
-.profile_text {
-    line-height: 20px !important;
-}
-
-.box {
-    background: purple;
-    width: 100%;
-    height: 200px;
-    border: 1px solid #383838;
-    box-sizing: border-box;
-}
-
-.main_tab_content .tab-pane {
-    width: calc(100vw - 220px);
-    max-width: 1704px;
-}
-
-.custom-switch label {
-    color: red;
-}
-
-/*Necessary styles*/
-.opac-2 {
-    opacity: 0.2 !important;
-}
-
-.opac-4 {
-    opacity: 0.4 !important;
-}
-
-.opac-6 {
-    opacity: 0.6 !important;
-}
-
-.opac-8 {
-    opacity: 0.8 !important;
-}
-
-@media (min-width:1920px) {
-    .liveNotificationToast {
-        position: fixed;
-        top: 8vh;
-        right: 30%;
+    .sidebar_main .active {
+        background: var(--bs-blue);
+        color: var(--bs-white)
     }
-}
-
