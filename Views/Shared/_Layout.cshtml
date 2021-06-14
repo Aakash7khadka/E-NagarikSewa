@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset='utf-8'>
@@ -240,10 +241,20 @@
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h5 id="offcanvasRightLabel">Account</h5>
-            <div class="d-block">
-       
-                <a asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
-            </div>
+            @if (signInManager.IsSignedIn(User))
+            {
+                <form method="post" asp-action="Logout" asp-controller="Account">
+                    <button type="submit">Logout @User.Identity.Name</button>
+                </form>
+            }
+            else { 
+        <div class="d-block">
+
+            <a asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
+            <a asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
+        </div>
+            }
+        
           
            
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>

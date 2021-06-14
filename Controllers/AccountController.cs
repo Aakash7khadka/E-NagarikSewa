@@ -22,6 +22,14 @@ namespace smartpalika.Controllers
             return View();
         }
         [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("index", "Home");
+
+        }
+
+        [HttpPost]
         public async Task<IActionResult> Register(RegisterUserVM registerUserVM)
         {
             if (ModelState.IsValid)
