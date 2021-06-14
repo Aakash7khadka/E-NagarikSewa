@@ -24,6 +24,7 @@ namespace smartpalika.Models
             
         }
         public DbSet<smartpalika.Models.LoginVM> LoginVM { get; set; }
+        public DbSet<smartpalika.Models.CreateRoleVM> CreateRoleVM { get; set; }
 
     }
 }

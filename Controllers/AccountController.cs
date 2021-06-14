@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using smartpalika.Models;
 using System;
@@ -29,14 +30,17 @@ namespace smartpalika.Controllers
 
         }
 
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
+            TempData["returnUrl"] = returnUrl;
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginVM obj,string returnUrl)
+        [AllowAnonymous]
+        public async Task<IActionResult> Login(LoginVM obj)
         {
+            string returnUrl = TempData["returnUrl"].ToString();
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.Rememberme,false);
@@ -44,7 +48,7 @@ namespace smartpalika.Controllers
                 {
                     if(! string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        return LocalRedirect(returnUrl);
+                        return Redirect(returnUrl);
                     }
                     return RedirectToAction("index", "Home");
                 }
