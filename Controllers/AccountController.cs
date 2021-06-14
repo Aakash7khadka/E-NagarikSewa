@@ -29,6 +29,26 @@ namespace smartpalika.Controllers
 
         }
 
+        public IActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginVM obj)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.Rememberme,false);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid login attempt");
+            }
+            return View(obj);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserVM registerUserVM)
         {

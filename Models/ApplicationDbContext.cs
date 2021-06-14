@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using smartpalika.Models;
 
 namespace smartpalika.Models
 {
@@ -22,6 +23,7 @@ namespace smartpalika.Models
             //modelBuilder.Seed();
             
         }
+        public DbSet<smartpalika.Models.LoginVM> LoginVM { get; set; }
 
     }
 }

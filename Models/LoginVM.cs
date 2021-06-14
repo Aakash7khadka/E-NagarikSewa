@@ -6,20 +6,19 @@ using System.Threading.Tasks;
 
 namespace smartpalika.Models
 {
-    public class RegisterUserVM
+    public class LoginVM
     {
-      
+        [Key]
+        public int ID { get; set; }
         [Required]
-        [EmailAddress]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        [Required]
-        [DataType(DataType.Password)]
-        [Compare("Password",ErrorMessage ="Passwords are not matching..")]
-        public string ConfirmPassword { get; set; }
+        [Display(Name ="Remember Me")]
+        public bool Rememberme { get; set; }
     }
 }
