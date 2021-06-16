@@ -10,8 +10,8 @@ using smartpalika.Models;
 namespace smartpalika.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210610071437_identity")]
-    partial class identity
+    [Migration("20210616123742_users")]
+    partial class users
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -233,6 +233,44 @@ namespace smartpalika.Migrations
                     b.HasKey("Entry_id");
 
                     b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("smartpalika.Models.CreateRoleVM", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("RoleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("CreateRoleVM");
+                });
+
+            modelBuilder.Entity("smartpalika.Models.LoginVM", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Rememberme")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("LoginVM");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
