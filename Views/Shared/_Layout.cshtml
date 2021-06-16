@@ -87,15 +87,15 @@
 
         <div class="row  content_area m-0 p-0">
 
-            @{
-                if (User.Identity.IsAuthenticated)
+           
+                @if(User.Identity.IsAuthenticated)
                 {
                     <div class="col-2 p-0 text-dark sidebar_main left">
                         <nav class="nav flex-column">
                             <a class="nav-link active" href="#section0"><i class="bi bi-menu-button-wide pr-3"></i>Home</a>
                             <a class="nav-link" href="#section1"><i class="bi bi-person-check pr-3 fw-bold"></i>Profile</a>
 
-                            if (User.IsInRole("Admin"))
+                            @if (User.IsInRole("Admin"))
                             {
                             <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
                             }
@@ -105,7 +105,7 @@
                         </nav>
                     </div>
                 }
-            }
+            
             <div class="col-10 right">
                 <div class="container-fluid">
                     @RenderBody()
