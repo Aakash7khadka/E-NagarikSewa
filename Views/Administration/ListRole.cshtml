@@ -9,6 +9,7 @@
     <h3 class="mt-4">Roles</h3>
     <a class="btn btn-primary mb-2" asp-controller="Administration" asp-action="CreateRole" style="z-index:999"> Create Role</a>
 
+
     <table class="table  table-bordered table-hover">
         <thead>
             <tr>
@@ -28,9 +29,15 @@
                         <td>@x</td>
                         <td>@role.Id</td>
                         <td>@role.Name</td>
+                      <td> <a asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id"> Edit</a></td>
                     </tr>
                 }
             }
+          else
+{
+    <p>Not found</p>
+    <p>create</p>
+}
         </tbody>
     </table>
 </div>
