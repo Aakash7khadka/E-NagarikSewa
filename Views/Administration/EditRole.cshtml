@@ -8,7 +8,7 @@
 
 <hr />
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-4 border mx-4">
         <form method="post" asp-action="EditRole">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
@@ -22,34 +22,39 @@
                 <span asp-validation-for="RoleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Update" class="btn btn-primary" />
+                <input type="submit" value="Update" class="btn btn-primary btn-sm" />
             </div>
         </form>
     </div>
+    <div class="col">
+        <table  class="table  table-bordered table-hover w-50 ">
+            <thead class="bg-secondary text-light">
+                <tr>
+                    <th>Users in this role</th>
+                </tr>
+            </thead>
+            <tbody>
+            @if (Model.Users.Any())
+            {
+                @foreach (var user in Model.Users)
+                {
+                <tr>
+                    <td>@user</td>
+                </tr>
+                }
+            }
+            else
+            {
+                <br />
+                <h4> No users associated with this role at the moment</h4>
+
+
+            }
+               </tbody>
+        </table>
+        <a class="btn btn-primary btn-sm mt-2" asp-action="EditUsersInRole" asp-route-id="@Model.Id">Add or Remove Users</a>
+
+    </div>
 </div>
-<h2> Users in this role</h2>
-@if (Model.Users.Any())
-{
-    @foreach (var user in Model.Users)
-    {
-        @user
-        <br />
-    }
-}
-else
-{
-    <br />
-    <h4> No users associated with this role at the moment</h4>
-
-
-}
-<br />
-
-<br /><br />
-<a class="btn btn-primary" asp-action="EditUsersInRole" asp-route-id="@Model.Id">Add or Remove Users</a>
-
-<br />
-<br />
-
 
 <a class=" ml-2" asp-controller="Administration" asp-action="ListRole" style="z-index:999">&#8592 Back to List</a>

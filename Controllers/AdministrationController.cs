@@ -36,7 +36,7 @@ namespace smartpalika.Controllers
                 var result=await roleManager.CreateAsync(irole);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("index", "home");
+                    return RedirectToAction("ListRole");
                 }
                 foreach(var error in result.Errors)
                 {

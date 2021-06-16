@@ -1,5 +1,5 @@
 ﻿:root {
-    --bs-blue: #1b5692;
+    --bs-blue: #5e60ce;
     --bs-white: #ffffff;
 }
 
@@ -9,15 +9,22 @@ body {
     box-sizing: border-box;
     font-family: 'Inter', sans-serif !important;
 }
-
+.btn-primary {
+    background: var(--bs-blue) !important;
+}
+.text-primary {
+    color: var(--bs-blue) !important;
+}
 .wrapper {
     max-width: 1768px;
     margin: 0 auto;
 }
 
 .main_nav {
-    background-color: #1b5692;
-    color: white !important;
+    /*background-color: var(--bs-blue);*/
+    background: rgb(94,96,192);
+    background: linear-gradient(69deg, rgba(94,96,192,1) 0%, rgba(137,139,255,1) 100%);
+    color: #383838 !important;
     font-size: 1.2rem;
     box-sizing: border-box !important;
     margin: 0 auto;
@@ -57,3 +64,7 @@ body {
         background: var(--bs-blue);
         color: var(--bs-white)
     }
+
+.btn_md {
+font-size:1.3rem;
+}
