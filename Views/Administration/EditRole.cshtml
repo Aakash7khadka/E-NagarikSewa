@@ -1,0 +1,42 @@
+﻿@model smartpalika.Models.EditRoleVM
+@{
+    ViewData["Title"] = "EditRole";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>EditRole</h1>
+
+<h4>EditRole</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" asp-action="EditRole">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+
+                <input asp-for="Id" class="form-control" disabled />
+
+            </div>
+            <div class="form-group">
+                <label asp-for="RoleName" class="control-label"></label>
+                <input asp-for="RoleName" class="form-control" />
+                <span asp-validation-for="RoleName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Update" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<h2> Users in this role</h2>
+@if (Model.Users.Any())
+{
+    @foreach (var user in Model.Users)
+    {
+        @user
+    }
+}
+else 
+{ 
+   <h3> No users associated with this role</h3>
+}
