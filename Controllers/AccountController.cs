@@ -40,7 +40,12 @@ namespace smartpalika.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(LoginVM obj)
         {
-            string returnUrl = TempData["returnUrl"].ToString();
+            string returnUrl="";
+            if (TempData["returnUrl"] !=null)
+            {
+                 returnUrl = TempData["returnUrl"].ToString();
+            }
+            
             if (ModelState.IsValid)
             {
                 var result = await signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.Rememberme,false);

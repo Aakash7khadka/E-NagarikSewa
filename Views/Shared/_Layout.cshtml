@@ -47,13 +47,14 @@
                             <form method="post" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="dropdown-item">Logout @User.Identity.Name</button>
                             </form>
+                            <a class="dropdown-item" asp-controller="Administration" asp-action="ListRole" style="z-index:999"> Roles</a>
                         }
-                    
+
                         else
                         {
 
-                        <a class="dropdown-item" asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
-                        <a class="dropdown-item" asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
                         }
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="https://getbootstrap.com/docs/3.4/">v3.4.1</a>
