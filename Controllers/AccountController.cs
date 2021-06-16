@@ -65,6 +65,7 @@ namespace smartpalika.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterUserVM registerUserVM)
         {
+            
             if (ModelState.IsValid)
             {
                 var user = new IdentityUser()
@@ -72,10 +73,12 @@ namespace smartpalika.Controllers
                     UserName = registerUserVM.Email,
                     Email=registerUserVM.Email
                 };
+                
                 var result=await userManager.CreateAsync(user, registerUserVM.Password);
                 if (result.Succeeded)
                 {
                     await signInManager.SignInAsync(user, isPersistent: false);
+                    
                     return RedirectToAction("index", "home");
                 }
                 foreach(var error in result.Errors)

@@ -8,6 +8,7 @@ namespace smartpalika.Models
 {
     public class CreateRoleVM
     {
+       
         public Guid Id { get; set; }
         [Required]
         public string RoleName { get; set; }

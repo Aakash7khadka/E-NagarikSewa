@@ -6,7 +6,6 @@
 
 <h1>EditRole</h1>
 
-<h4>EditRole</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,9 +33,23 @@
     @foreach (var user in Model.Users)
     {
         @user
+        <br />
     }
 }
-else 
-{ 
-   <h3> No users associated with this role</h3>
+else
+{
+    <br />
+    <h4> No users associated with this role at the moment</h4>
+
+
 }
+<br />
+
+<br /><br />
+<a class="btn btn-primary" asp-action="EditUsersInRole" asp-route-id="@Model.Id">Add or Remove Users</a>
+
+<br />
+<br />
+
+
+<a class=" ml-2" asp-controller="Administration" asp-action="ListRole" style="z-index:999">&#8592 Back to List</a>
