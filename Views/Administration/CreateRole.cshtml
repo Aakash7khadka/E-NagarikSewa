@@ -5,30 +5,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>CreateRole</h1>
+<h3 class="mt-4 ml-2">Create Role</h3>
 
-<h4>CreateRoleVM</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
+<hr class="ml-2" />
+<div class="row ">
+    <div class="col-md-4 border ml-4 px-3 py-2 rounded">
         <form asp-action="CreateRole">
-            <div asp-validation-summary="All" class="text-danger"></div>
             @*<div class="form-group">
-                
-                <input asp-for="ID" class="form-control" hidden/>
-          
-            </div>*@
+
+                    <input asp-for="ID" class="form-control" hidden/>
+
+                </div>*@
             <div class="form-group">
                 <label asp-for="RoleName" class="control-label"></label>
                 <input asp-for="RoleName" class="form-control" />
                 <span asp-validation-for="RoleName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Create" class="btn btn-primary btn-sm" />
             </div>
         </form>
     </div>
 </div>
 
 
-<a class="dropdown-item" asp-controller="Administration" asp-action="ListRole" style="z-index:999">Back to List</a>
+<a class=" ml-2" asp-controller="Administration" asp-action="ListRole" style="z-index:999">&#8592 Back to List</a>
