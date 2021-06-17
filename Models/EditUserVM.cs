@@ -9,9 +9,10 @@ namespace smartpalika.Models
     public class EditUserVM
     {
         [Key]
-        public int ID { get; set; }
+        public string ID { get; set; }
         public string Email { get; set; }
-        public string Name { get; set; }
+        [Display(Name ="Full Name")]
+        public string FullName { get; set; }
         public string Address { get; set; }
         [DataType(DataType.PhoneNumber)]
         [Display(Name ="Phone Number")]

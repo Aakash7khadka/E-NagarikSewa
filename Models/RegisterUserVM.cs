@@ -14,7 +14,8 @@ namespace smartpalika.Models
         public string Email { get; set; }
 
         [Required]
-        public string Name { get; set; }
+        [Display(Name ="Full Name")]
+        public string FullName { get; set; }
 
         [Required]
         public string Address { get; set; }

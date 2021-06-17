@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace smartpalika.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize/*(Roles ="Admin")*/]
     public class AdministrationController : Controller
     {
         private RoleManager<IdentityRole> roleManager;

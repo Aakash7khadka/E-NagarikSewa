@@ -72,10 +72,11 @@ namespace smartpalika.Controllers
                 var files = HttpContext.Request.Form.Files;
                 var user = new ApplicationUser()
                 {
-                    UserName = registerUserVM.Name,
+                    UserName = registerUserVM.Email,
                     Email=registerUserVM.Email,
                     PhoneNumber=registerUserVM.PhoneNumber,
-                    Address=registerUserVM.Address
+                    Address=registerUserVM.Address,
+                    FullName=registerUserVM.FullName
                     
 
                 };
@@ -112,7 +113,8 @@ namespace smartpalika.Controllers
             var user =await userManager.FindByNameAsync(User.Identity.Name);
             EditUserVM usr = new EditUserVM()
             {
-                Name = user.UserName,
+                ID=user.Id,
+                FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
                 Email=user.Email,
@@ -124,13 +126,14 @@ namespace smartpalika.Controllers
 
         [HttpPost]
         [Authorize]
-        public async Task<IActionResult> EditUser(EditUserVM usr)
+        public async Task<IActionResult> EditUser(EditUserVM usr,string id)
         {
             var files = HttpContext.Request.Form.Files;
-            var user = await userManager.FindByEmailAsync(usr.Email);
+            var user = await userManager.FindByIdAsync(id);
             //user.UserName = usr.Name;
             user.PhoneNumber = usr.PhoneNumber;
             user.Address = usr.Address;
+            user.FullName = usr.FullName;
            
             if (files.Count() != 0)
             {
@@ -148,7 +151,7 @@ namespace smartpalika.Controllers
             await signInManager.SignOutAsync();
            
             await signInManager.SignInAsync(user,isPersistent:false);
-            return RedirectToAction("EditUser");
+            return RedirectToAction("Index");
         }
         [Authorize]
         public async Task<IActionResult> DeleteUser()
@@ -157,7 +160,7 @@ namespace smartpalika.Controllers
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             EditUserVM usr = new EditUserVM()
             {
-                Name = user.UserName,
+                FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
                 Email = user.Email
@@ -181,7 +184,7 @@ namespace smartpalika.Controllers
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             EditUserVM usr = new EditUserVM()
             {
-                Name = user.UserName,
+                FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
                 Email = user.Email,
