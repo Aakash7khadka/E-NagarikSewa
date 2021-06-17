@@ -1,10 +1,28 @@
-﻿<div class="card ms-4 bg-success text-light" style="width: 18rem;">
-    <div class="card-body">
-        <h5 class="card-title">Aakash Khadka</h5>
-        <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
-        <br>
-        <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Present <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
+﻿@model smartpalika.Models.UserAttendanceVM
 
+@if (@Model.isPresent)
+{
+    <div class="card ms-4 bg-success text-light m-2" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Username</h5>
+            <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
+            <br>
+            <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Present <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
+            <h6 class="card-subtitle mb-2 text-light">Entered on:@Model.entryDate</h6>
+        </div>
     </div>
-</div>
+}
+else
+{
+    <div class="card ms-4 bg-danger text-light m-2" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Username</h5>
+            <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
+            <br>
+            <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Absent <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
+            <h6 class="card-subtitle mb-2 text-light">Left on:@Model.entryDate</h6>
+        </div>
+    </div>
+}
+
 

@@ -10,7 +10,7 @@ namespace smartpalika.Models
     {
         [Key]
         public int Entry_id { get; set; }
-        public int Uid { get; set; }
+        public string UserEmail { get; set; }
         public string Entry_time { get; set; }
         
     }
