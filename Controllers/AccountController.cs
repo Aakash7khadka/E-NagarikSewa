@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using smartpalika.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,9 +12,9 @@ namespace smartpalika.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
-        private readonly SignInManager<IdentityUser> signInManager;
-        public AccountController(UserManager<IdentityUser> userManager,SignInManager<IdentityUser>signInManager)
+        private readonly UserManager<ApplicationUser> userManager;
+        private readonly SignInManager<ApplicationUser> signInManager;
+        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
@@ -68,12 +69,20 @@ namespace smartpalika.Controllers
             
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser()
+                var files = HttpContext.Request.Form.Files;
+                var user = new ApplicationUser()
                 {
-                    UserName = registerUserVM.Email,
-                    Email=registerUserVM.Email
+                    UserName = registerUserVM.Name,
+                    Email=registerUserVM.Email,
+                    PhoneNumber=registerUserVM.PhoneNumber,
+                    
+
                 };
-                
+                using (var stream = new MemoryStream())
+                {
+                    files[0].CopyTo(stream);
+                     user.ProfileImage= stream.ToArray();
+                }
                 var result=await userManager.CreateAsync(user, registerUserVM.Password);
                 if (result.Succeeded)
                 {
@@ -89,5 +98,88 @@ namespace smartpalika.Controllers
             }
             return View(registerUserVM);
         }
+        [Authorize]
+        public async Task<IActionResult> EditUser()
+        {
+            
+            var user =await userManager.FindByNameAsync(User.Identity.Name);
+            EditUserVM usr = new EditUserVM()
+            {
+                Name = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                ProfileImage = user.ProfileImage,
+                Email=user.Email
+
+            };
+            return View(usr);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> EditUser(EditUserVM usr)
+        {
+            var files = HttpContext.Request.Form.Files;
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            user.UserName = usr.Name;
+            user.PhoneNumber = usr.PhoneNumber;
+            if (files.Count() != 0)
+            {
+                using (var stream = new MemoryStream())
+                {
+                
+                    
+                        files[0].CopyTo(stream);
+                        user.ProfileImage = stream.ToArray();
+                }
+                    
+            }
+            
+            await userManager.UpdateAsync(user);
+            await signInManager.SignOutAsync();
+            await signInManager.SignInAsync(user,isPersistent:false);
+            return RedirectToAction("EditUser");
+        }
+        [Authorize]
+        public async Task<IActionResult> DeleteUser()
+        {
+
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            EditUserVM usr = new EditUserVM()
+            {
+                Name = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                ProfileImage = user.ProfileImage,
+                Email = user.Email
+
+            };
+            return View(usr);
+        }
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> DeleteUser(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            await signInManager.SignOutAsync();
+            await userManager.DeleteAsync(user);
+
+            return RedirectToAction("Index", "home");
+        }
+        [Authorize]
+        public async Task<IActionResult> Index()
+        {
+            var user = await userManager.FindByNameAsync(User.Identity.Name);
+            EditUserVM usr = new EditUserVM()
+            {
+                Name = user.UserName,
+                PhoneNumber = user.PhoneNumber,
+                ProfileImage = user.ProfileImage,
+                Email = user.Email
+
+            };
+            return View(usr);
+        }
+
+
+
     }
 }

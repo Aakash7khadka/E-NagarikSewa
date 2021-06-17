@@ -1,0 +1,16 @@
+﻿@model smartpalika.Models.EditUserVM
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Model.Name
+@if (Model.ProfileImage != null)
+{
+    var base64 = Convert.ToBase64String(Model.ProfileImage);
+    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+
+    <img src="@imgSrc" width="600" height="400" />
+}
+<h1>Index</h1>
+

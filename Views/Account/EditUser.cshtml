@@ -1,21 +1,21 @@
-﻿@model smartpalika.Models.RegisterUserVM
+﻿@model smartpalika.Models.EditUserVM
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "EditUser";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Register</h1>
+<h1>EditUser</h1>
 
-<h4>Attendance</h4>
+<h4>EditUserVM</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form method="post" enctype="multipart/form-data">
+        <form asp-action="EditUser" enctype="multipart/form-data">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <input asp-for="Email" disabled class="form-control" />
                 <span asp-validation-for="Email" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -23,32 +23,27 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-
             <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
+                @if(Model.ProfileImage!=null){
+                    var base64 = Convert.ToBase64String(Model.ProfileImage);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                
+
+                <img src="@imgSrc" width="600" height="400"/>
+                }
                 <label asp-for="ProfileImage" class="control-label"></label>
                 <input asp-for="ProfileImage" type="file" name="Image" class="form-control" />
                 <span asp-validation-for="ProfileImage" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
+                <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-            <div class="form-group">
-                <label asp-for="ConfirmPassword" class="control-label"></label>
-                <input asp-for="ConfirmPassword" class="form-control" />
-                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Register" class="btn btn-primary" />
-            </div>
-        </form><br />
-        <small class="fs-4">Already a user?<a asp-controller="Account" asp-action="Login">signin</a></small>
+        </form>
     </div>
 </div>
 

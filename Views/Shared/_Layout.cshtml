@@ -1,5 +1,5 @@
-﻿@inject SignInManager<IdentityUser> signInManager
-@inject UserManager<IdentityUser> userManager
+﻿@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
 @using System.Text.RegularExpressions;
 <!DOCTYPE html>
 <html>
@@ -33,7 +33,7 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             var input = @User.Identity.Name;
-                            <small> <i>@input.Substring(0, input.IndexOf("@"))</i></small>
+                            <small> <i>@input</i></small>
 
                         }
                     </a>
@@ -97,11 +97,12 @@
 
                             @if (User.IsInRole("Admin"))
                             {
-                            <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
+                                <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
+                                <a class="nav-link" asp-controller="Attendance" asp-action="Index"><i class="bi bi-card-checklist pr-3"></i>Attendance</a>
                             }
 
 
-                            <a class="nav-link" asp-controller="Attendance" asp-action="Index"><i class="bi bi-card-checklist pr-3"></i>Attendance</a>
+
                         </nav>
                     </div>
                 }

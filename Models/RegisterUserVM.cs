@@ -14,6 +14,16 @@ namespace smartpalika.Models
         public string Email { get; set; }
 
         [Required]
+        public string Name { get; set; }
+
+        [Required]
+        [Display(Name ="Phone Number")]
+        public string PhoneNumber { get; set; }
+
+        [Display(Name = "Profile Photo")]
+        public byte[] ProfileImage { get; set; }
+
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
 

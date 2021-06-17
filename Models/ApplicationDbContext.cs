@@ -9,7 +9,7 @@ using smartpalika.Models;
 
 namespace smartpalika.Models
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
@@ -25,6 +25,7 @@ namespace smartpalika.Models
         }
         public DbSet<smartpalika.Models.LoginVM> LoginVM { get; set; }
         public DbSet<smartpalika.Models.CreateRoleVM> CreateRoleVM { get; set; }
+        public DbSet<smartpalika.Models.EditUserVM> EditUserVM { get; set; }
 
     }
 }

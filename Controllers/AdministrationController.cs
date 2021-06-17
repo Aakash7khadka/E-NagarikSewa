@@ -13,9 +13,9 @@ namespace smartpalika.Controllers
     public class AdministrationController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
-        private UserManager<IdentityUser> userManager;
+        private UserManager<ApplicationUser> userManager;
 
-        public AdministrationController(RoleManager<IdentityRole> roleManager,UserManager<IdentityUser> userManager)
+        public AdministrationController(RoleManager<IdentityRole> roleManager,UserManager<ApplicationUser> userManager)
         {
             this.roleManager = roleManager;
             this.userManager = userManager;

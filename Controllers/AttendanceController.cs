@@ -2,17 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using smartpalika.Models;
 
 namespace smartpalika.Controllers
 {
+    [Authorize(Roles ="Admin")]
     public class AttendanceController : Controller
     {
-        private readonly UserManager<IdentityUser> userManager;
+        private readonly UserManager<ApplicationUser> userManager;
         private readonly ApplicationDbContext _db;
-        public AttendanceController(ApplicationDbContext db,UserManager<IdentityUser> userManager)
+        public AttendanceController(ApplicationDbContext db,UserManager<ApplicationUser> userManager)
         {
             this.userManager = userManager;
             _db = db;
