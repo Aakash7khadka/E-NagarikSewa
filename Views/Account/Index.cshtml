@@ -3,14 +3,55 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@Model.Name
-@if (Model.ProfileImage != null)
-{
-    var base64 = Convert.ToBase64String(Model.ProfileImage);
-    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+
+<div class="card m-2 mt-1 border-0 rounded-3 box_shadow" style="width:550px">
+    <div class="card-body">
+        <div class="mb-3 d-flex justify-content-between align-items-baseline">
+            <span class="text-muted">Profile</span>
+            <div class="d-flex justify-content-end">
+                <a class="f_m d-block mr-3 " asp-controller="Account" asp-action="EditUser"><small class="text-muted"><i class="text-primary fas fa-grip-vertical"></i></small></a>
+                <a class="f_m d-block" asp-controller="Account" asp-action="DeleteUser"><small class="text-muted"><i class="absent far fa-trash-alt"></i></small></a>
+                
+            </div>
+
+        </div>
+      
+        <div class="d-flex justify-content-start flex-wrap">
+            <div class="profile mr-4 ">
+                @if (Model.ProfileImage != null)
+                {
+                    var base64 = Convert.ToBase64String(Model.ProfileImage);
+                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
 
 
-    <img src="@imgSrc" width="600" height="400" />
-}
-<h1>Index</h1>
+                    <img src="@imgSrc" style="object-fit:cover;width:145px;height:145px" />
+                }
+                else
+                {
+                    <img src="https://scontent.fktm1-2.fna.fbcdn.net/v/t1.6435-9/35328872_1802366106520204_7956190344746369024_n.jpg?_nc_cat=103&ccb=1-3&_nc_sid=174925&_nc_ohc=BISBQ6PVtc4AX8xi2yj&_nc_ht=scontent.fktm1-2.fna&oh=db076ee52fe36e3a22ae207a59ad8129&oe=60CF114B" />
+                }
 
+            </div>
+            <div class="mr-4">
+                <span class="text-muted">User Details</span>
+
+                <div class="row">
+                    <div class="col d-none d-sm-block">
+                        <span class="d-block">Name</span>
+                        <span class="d-block">Address</span>
+                        <span class="d-block">Email</span>
+                        <span class="d-block">Phone</span>
+                        <span class="d-block">Role</span>
+                    </div>
+                    <div class="col">
+                        <span class="text-muted text-left d-block">@Model.Name</span>
+                        <span class="text-muted text-left d-block">@Model.Address</span>
+                        <span class="text-muted text-left d-block">@Model.Email</span>
+                        <span class="text-muted text-left d-block">@Model.PhoneNumber</span>
+                        <span class="text-muted text-left d-block">User</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

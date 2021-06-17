@@ -1,19 +1,21 @@
 ﻿:root {
-    --bs-blue: #5e60ce;
+    --bs-primary: #5e60ce;
     --bs-white: #ffffff;
+    --bs-absent: #f64d60;
 }
 
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Inter', sans-serif !important;
+    font-family: 'Poppins', sans-serif !important;
+    background: #f2f6f9 !important;
 }
 .btn-primary {
-    background: var(--bs-blue) !important;
+    background: var(--bs-primary) !important;
 }
 .text-primary {
-    color: var(--bs-blue) !important;
+    color: var(--bs-primary) !important;
 }
 .wrapper {
     max-width: 1768px;
@@ -48,23 +50,68 @@ body {
 }
 
 .sidebar_main {
-    -webkit-box-shadow: 2px 0px 0px 0px #e8ecef;
-    box-shadow: 2px 0px 0px 0px #e8ecef;
+    border-right: 1px solid #EBEDF3;
     font-weight: bolder;
     height: calc(100vh - 70px);
     min-width: 200px;
+    background: white;
 }
 
     .sidebar_main a {
-        color: black;
+        color: #3f4254;
         font-weight: 500;
     }
 
-    .sidebar_main .active {
-        background: var(--bs-blue);
-        color: var(--bs-white)
-    }
+.sidebar_main .active {
+    background: var(--bs-primary);
+    color: var(--bs-white)
+}
 
 .btn_md {
 font-size:1.3rem;
+}
+
+.text-dark {
+    color: #1e1a2a !important;
+}
+
+.box_shadow {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.btn_lg {
+    font-size: 1.5rem !important;
+    color: #f75062;
+}
+.f_m {
+font-size:1.3rem;
+}
+.present{
+    color:var(--bs-primary);
+}
+.absent {
+    color: #f64d60;
+}
+
+.status_card {
+    max-width: 250px !important;
+    min-width: 250px !important;
+    background: white;
+    overflow-x:hidden;
+   
+}
+.present_status {
+    border-left: 6px solid var(--bs-primary);
+    border-radius: 5px;
+}
+.absent_status {
+    border-left: 6px solid var(--bs-absent);
+    border-radius: 5px;
+}
+.profile img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 5%;
 }

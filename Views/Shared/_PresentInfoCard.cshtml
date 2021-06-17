@@ -2,27 +2,61 @@
 
 @if (@Model.isPresent)
 {
-    <div class="card ms-4 bg-success text-light m-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Username</h5>
-            <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
-            <br>
-            <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Present <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
-            <h6 class="card-subtitle mb-2 text-light">Entered on:@Model.entryDate</h6>
+    <div class="status_card card m-2 mt-4 border-0 rounded-3 box_shadow" >
+        <div class="card-body present_status">
+            <div class="head d-flex align-items-center justify-content-start">
+
+                <div class="info ml-1">
+                    <h5 class="mb-0 pb-0 text-dark"> @Model.Username</h5>
+                    <span><small class="text-muted mt-0 mt-0">IT Officer</small></span>
+                    <div class="d-flex justify-content-between">
+                        <span>Present</span>
+                        <span><i class="present fas fa-toggle-on" style="font-size:1.5rem"></i></span>
+                    </div>
+                    <div class="mt-2">
+                        <small class="text-muted">Exit Details</small>
+                        <div class="d-flex justify-content-between">
+                            <span>Time</span>
+                            <span class="text-muted">@Model.entryDate</span>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Date</span>
+                            <span class="text-muted">@Model.entryDate</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 }
 else
 {
-    <div class="card ms-4 bg-danger text-light m-2" style="width: 18rem;">
-        <div class="card-body">
-            <h5 class="card-title">@Model.Username</h5>
-            <h6 class="card-subtitle mb-2 text-light">Deputy Mayor</h6>
-            <br>
-            <h6 class="card-subtitle d-flex justify-content-between align-items-center mb-2 text-light">Absent <span class=""><i class="fas fa-toggle-on fs-2"></i></span></h6>
-            <h6 class="card-subtitle mb-2 text-light">Left on:@Model.entryDate</h6>
+<div class="status_card card m-2 mt-4 border-0 rounded-3 box_shadow">
+    <div class="card-body absent_status">
+        <div class="head d-flex align-items-center justify-content-start">
+
+            <div class="info ml-1">
+                <h5 class="mb-0 pb-0 text-dark"> @Model.Username</h5>
+                <span><small class="text-muted mt-0 mt-0">IT Officer</small></span>
+                <div class="d-flex justify-content-between">
+                    <span>Absent</span>
+                    <span><i class="absent fas fa-toggle-on" style="font-size:1.5rem"></i></span>
+                </div>
+                <div class="mt-2">
+                    <small class="text-muted">Exit Details</small>
+                    <div class="d-flex justify-content-between">
+                        <span>Time</span>
+                        <span class="text-muted">@Model.entryDate</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <span>Date</span>
+                        <span class="text-muted">@Model.entryDate</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 }
 
 
