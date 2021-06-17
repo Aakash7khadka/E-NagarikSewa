@@ -15,6 +15,8 @@ namespace smartpalika.Models
         public string Address { get; set; }
         [DataType(DataType.PhoneNumber)]
         [Display(Name ="Phone Number")]
+
+       
         public string PhoneNumber { get; set; }
         public byte[] ProfileImage { get; set; }
     }

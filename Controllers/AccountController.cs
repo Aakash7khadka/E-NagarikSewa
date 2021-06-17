@@ -127,10 +127,11 @@ namespace smartpalika.Controllers
         public async Task<IActionResult> EditUser(EditUserVM usr)
         {
             var files = HttpContext.Request.Form.Files;
-            var user = await userManager.FindByNameAsync(User.Identity.Name);
-            user.UserName = usr.Name;
+            var user = await userManager.FindByEmailAsync(usr.Email);
+            //user.UserName = usr.Name;
             user.PhoneNumber = usr.PhoneNumber;
             user.Address = usr.Address;
+           
             if (files.Count() != 0)
             {
                 using (var stream = new MemoryStream())
@@ -145,6 +146,7 @@ namespace smartpalika.Controllers
             
             await userManager.UpdateAsync(user);
             await signInManager.SignOutAsync();
+           
             await signInManager.SignInAsync(user,isPersistent:false);
             return RedirectToAction("EditUser");
         }
