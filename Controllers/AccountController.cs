@@ -75,13 +75,20 @@ namespace smartpalika.Controllers
                     UserName = registerUserVM.Name,
                     Email=registerUserVM.Email,
                     PhoneNumber=registerUserVM.PhoneNumber,
+                    Address=registerUserVM.Address
                     
 
                 };
-                using (var stream = new MemoryStream())
+                if (files.Count() != 0)
                 {
-                    files[0].CopyTo(stream);
-                     user.ProfileImage= stream.ToArray();
+                    using (var stream = new MemoryStream())
+                    {
+
+
+                        files[0].CopyTo(stream);
+                        user.ProfileImage = stream.ToArray();
+                    }
+
                 }
                 var result=await userManager.CreateAsync(user, registerUserVM.Password);
                 if (result.Succeeded)
@@ -108,7 +115,8 @@ namespace smartpalika.Controllers
                 Name = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
-                Email=user.Email
+                Email=user.Email,
+                Address=user.Address
 
             };
             return View(usr);
@@ -122,6 +130,7 @@ namespace smartpalika.Controllers
             var user = await userManager.FindByNameAsync(User.Identity.Name);
             user.UserName = usr.Name;
             user.PhoneNumber = usr.PhoneNumber;
+            user.Address = usr.Address;
             if (files.Count() != 0)
             {
                 using (var stream = new MemoryStream())
@@ -173,7 +182,9 @@ namespace smartpalika.Controllers
                 Name = user.UserName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
-                Email = user.Email
+                Email = user.Email,
+                Address=user.Address
+                
 
             };
             return View(usr);

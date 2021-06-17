@@ -24,17 +24,23 @@
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="Address" class="control-label"></label>
+                <input asp-for="Address" class="form-control" />
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="PhoneNumber" class="control-label"></label>
                 <input asp-for="PhoneNumber" class="form-control" />
                 <span asp-validation-for="PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                @if(Model.ProfileImage!=null){
+                @if (Model.ProfileImage != null)
+                {
                     var base64 = Convert.ToBase64String(Model.ProfileImage);
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                
 
-                <img src="@imgSrc" width="600" height="400"/>
+
+                    <img src="@imgSrc" width="600" height="400" />
                 }
                 <label asp-for="ProfileImage" class="control-label"></label>
                 <input asp-for="ProfileImage" type="file" name="Image" class="form-control" />
