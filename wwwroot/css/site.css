@@ -115,3 +115,14 @@ font-size:1.3rem;
     object-position: center;
     border-radius: 5%;
 }
+.file {
+    opacity: 1;
+    width: auto;
+ 
+    position: absolute;
+    font-size:1rem;
+
+}
+.bg_white {
+    background:white !important;
+}

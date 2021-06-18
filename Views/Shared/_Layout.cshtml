@@ -1,7 +1,7 @@
 ﻿@inject SignInManager<ApplicationUser> signInManager
 @inject UserManager<ApplicationUser> userManager
 @using System.Text.RegularExpressions;
-@{ var user = await userManager.FindByNameAsync(User.Identity.Name);}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -33,6 +33,7 @@
                         <i class="bi bi-person-check fw-bolder"></i>
                         @if (signInManager.IsSignedIn(User))
                         {
+                            var user = await userManager.FindByNameAsync(User.Identity.Name);
                             var input = user.FullName;
                             <small> <i>@input</i></small>
 
