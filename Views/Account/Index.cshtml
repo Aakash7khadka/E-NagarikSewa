@@ -5,15 +5,23 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<h3 class="text-dark mt-2 ml-1">Profile</h3>
+<hr />
 <div class="card m-2 mt-1 border-0 rounded-3 box_shadow" style="width:550px">
     <div class="card-body">
         <div class="mb-3 d-flex justify-content-between align-items-baseline">
             <span class="text-muted">Profile</span>
             <div class="d-flex justify-content-end">
-                <a class="f_m d-block mr-3 " asp-controller="Account" asp-action="EditUser"><small class="text-muted"><i class="text-primary fas fa-grip-vertical"></i></small></a>
-                <a class="f_m d-block" asp-controller="Account" asp-action="DeleteUser"><small class="text-muted"><i class="absent far fa-trash-alt"></i></small></a>
+                 <div class="dropdown ">
+                    <a class="f_m d-block dots px-2 py-1 rounded-3 rounded" role="button" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small ><i class="fas fa-grip-vertical"></i></small></a>
 
+
+                    <div class="dropdown-menu box_shadow  dropdown-menu-right text-left" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" asp-controller="Account" asp-action="EditUser"><i class="fas fa-user-edit mr-1 text-muted"></i>Edit</a>
+                        <a class="dropdown-item"  asp-controller="Account" asp-action="DeleteUser"><i class="fas fa-trash-alt mr-2 text-muted"></i>Delete</a>
+                        <a class="dropdown-item" href=""><i class="fas fa-sign-out-alt text-muted mr-2"></i>Logout</a>
+                    </div>
+                </div>
             </div>
 
         </div>
@@ -81,3 +89,4 @@
         </div>
     </div>
 </div>
+
