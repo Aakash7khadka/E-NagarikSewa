@@ -46,7 +46,7 @@
                             <form method="post" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="dropdown-item">Logout @User.Identity.Name</button>
                             </form>
-                            <a class="dropdown-item" asp-controller="Administration" asp-action="ListRole" style="z-index:999"> Roles</a>
+                            @*<a class="dropdown-item" asp-controller="Administration" asp-action="ListRole" style="z-index:999"> Roles</a>*@
                         }
 
                         else
