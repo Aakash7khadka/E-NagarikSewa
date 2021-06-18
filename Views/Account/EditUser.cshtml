@@ -5,14 +5,14 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>EditUser</h1>
+<h1 class="text-dark">Edit User</h1>
 
 <hr />
 <div class="">
 
     <form asp-action="EditUser" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="bg_white w-50  p-4 box_shadow d-block d-md-flex justify-content-between flex-wrap rounded-3 ">
+        <div class="bg_white w-50  p-4 box_shadow d-block d-md-flex justify-content-between flex-wrap rounded rounded-3">
             <div class="w-25 mb-4 mb-md-0">
                 @if (Model.ProfileImage != null)
                 {
@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <input type="submit" asp-route-id="@Model.ID" value="Update" class="btn btn-primary btn-sm" />
                 </div>
-                <a class=" ml-2" asp-controller="Account asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
+                <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
             </div>
         </div>
     </form>
