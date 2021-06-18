@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -17,8 +18,11 @@ namespace smartpalika.Models
         [DataType(DataType.PhoneNumber)]
         [Display(Name ="Phone Number")]
 
+
        
         public string PhoneNumber { get; set; }
         public byte[] ProfileImage { get; set; }
+
+        
     }
 }

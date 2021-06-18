@@ -14,10 +14,13 @@ namespace smartpalika.Controllers
     {
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager)
+        private readonly RoleManager<IdentityRole> roleManager;
+
+        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
+            this.roleManager = roleManager;
         }
         public IActionResult Register()
         {
@@ -190,8 +193,10 @@ namespace smartpalika.Controllers
                 Email = user.Email,
                 Address=user.Address
                 
-
+                
             };
+            
+            
             return View(usr);
         }
 
