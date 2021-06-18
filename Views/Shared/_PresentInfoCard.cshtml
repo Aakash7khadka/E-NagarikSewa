@@ -1,8 +1,9 @@
 ﻿@model smartpalika.Models.UserAttendanceVM
 
+
 @if (@Model.isPresent)
 {
-    <div class="status_card card m-2 mt-4 bg-success border-0 rounded-3 box_shadow" >
+    <div class="status_card card m-2 mt-4  border-0 rounded-3 box_shadow" >
         <div class="card-body present_status">
             <div class="head d-flex align-items-center justify-content-start">
 
@@ -14,15 +15,25 @@
                         <span><i class="present fas fa-toggle-on" style="font-size:1.5rem"></i></span>
                     </div>
                     <div class="mt-2">
-                        <small class="text-muted">Exit Details</small>
-                        <div class="d-flex justify-content-between">
-                            <span>Time</span>
-                            <span class="text-muted">@Model.entryDate</span>
-                        </div>
+                        @if(@Model.entryDate!=null)
+                        {
+                        <small class="text-muted">Entry Details</small>
                         <div class="d-flex justify-content-between">
                             <span>Date</span>
-                            <span class="text-muted">@Model.entryDate</span>
+                            @{
+                            string datee=@Model.entryDate;
+                             <span class="text-muted">@datee.Substring(0,datee.IndexOf(" "))</span>
+                            }
+
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Time</span>
+                           
+                            
+                             <span class="text-muted">@datee.Split(" ").Last()</span>
+                           
+                        </div>
+                        }
                     </div>
                 </div>
             </div>
@@ -31,7 +42,7 @@
 }
 else
 {
-<div class="status_card card m-2 mt-4 bg-danger border-0 rounded-3 box_shadow">
+<div class="status_card card m-2 mt-4  border-0 rounded-3 box_shadow">
     <div class="card-body absent_status">
         <div class="head d-flex align-items-center justify-content-start">
 
@@ -43,15 +54,25 @@ else
                     <span><i class="absent fas fa-toggle-on" style="font-size:1.5rem"></i></span>
                 </div>
                 <div class="mt-2">
+                    @if(@Model.entryDate!=null)
+                        {
                     <small class="text-muted">Exit Details</small>
                     <div class="d-flex justify-content-between">
-                        <span>Time</span>
-                        <span class="text-muted">@Model.entryDate</span>
+                        <span>Date</span>
+                        @{
+                            string datee=@Model.entryDate;
+                            <span class="text-muted">@datee.Substring(0,datee.IndexOf(" "))</span>
+                        }
+
                     </div>
                     <div class="d-flex justify-content-between">
-                        <span>Date</span>
-                        <span class="text-muted">@Model.entryDate</span>
+                        <span>Time</span>
+
+
+                        <span class="text-muted">@datee.Split(" ").Last()</span>
+
                     </div>
+                        }
                 </div>
             </div>
         </div>

@@ -31,7 +31,7 @@ namespace smartpalika.Controllers
                 {
                     UserAttendanceVM usr = new UserAttendanceVM()
                     {
-                        Username = user.Email,
+                        Username = user.FullName,
                         
                     };
                     if (users.Any(s => s == user.NormalizedEmail))
