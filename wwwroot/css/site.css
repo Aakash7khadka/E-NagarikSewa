@@ -1,7 +1,8 @@
 ﻿:root {
     --bs-primary: #5e60ce;
     --bs-white: #ffffff;
-    --bs-absent: #f64d60;
+    --bs-absent: #ea4235;
+    --bs-present: #38b000;
 }
 
 body {
@@ -84,11 +85,11 @@ font-size:1.3rem;
     color: #f75062;
 }
 
-.present{
-    color:var(--bs-primary);
+.present {
+    color: var(--bs-present);
 }
 .absent {
-    color: #f64d60;
+    color:var(--bs-absent);
 }
 
 .status_card {
@@ -99,7 +100,7 @@ font-size:1.3rem;
    
 }
 .present_status {
-    border-left: 6px solid var(--bs-primary);
+    border-left: 6px solid var(--bs-present);
     border-radius: 5px;
 }
 .absent_status {

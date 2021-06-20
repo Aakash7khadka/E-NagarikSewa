@@ -11,10 +11,10 @@
 </div> 
 }
 
-<div class="container-fluid row align-items-center justify-content-center mt-4 ">
-    <div class="row bg_white rounded rounded-3 box_shadow p-3 mt-4">
-        <div class="col ">
-            <form asp-action="Login ">
+<div class="container w-50">
+    <div class="d-flex justify-content-center align-items-center mt-4">
+        <div class="bg_white box_shadow w-75 p-4 rounded rounded-3">
+            <form asp-action="Login">
                 <h4 class="text-center pb-2">Login Form</h4>
                 <div asp-validation-summary="All" class="text-danger"></div>
 
@@ -42,8 +42,7 @@
                 </div>
                 <span class="fs-4">Not registered yet?<a asp-controller="Account" asp-action="Register"> Register Now</a></span>
             </form>
+
+
         </div>
-    </div>
 </div>
-
-
