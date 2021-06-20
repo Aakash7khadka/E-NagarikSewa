@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using SendGrid;
+using SendGrid.Helpers.Mail;
 using smartpalika.Models;
 using System;
 using System.Collections.Generic;
@@ -15,12 +19,15 @@ namespace smartpalika.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
+        private readonly IConfiguration configuration;
+        private readonly ILogger<AccountController> logger;
 
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,RoleManager<IdentityRole> roleManager)
+        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,RoleManager<IdentityRole> roleManager, IConfiguration configuration)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
+            this.configuration = configuration;
         }
         public IActionResult Register()
         {
@@ -52,6 +59,13 @@ namespace smartpalika.Controllers
             
             if (ModelState.IsValid)
             {
+                var user = await userManager.FindByEmailAsync(obj.Email);
+                if(user!=null && !user.EmailConfirmed &&(await userManager.CheckPasswordAsync(user, obj.Password)))
+                {
+                    ModelState.AddModelError("", "Email is not verified");
+                    return View(obj);
+                }
+
                 var result = await signInManager.PasswordSignInAsync(obj.Email, obj.Password, obj.Rememberme,false);
                 if (result.Succeeded)
                 {
@@ -97,9 +111,24 @@ namespace smartpalika.Controllers
                 var result=await userManager.CreateAsync(user, registerUserVM.Password);
                 if (result.Succeeded)
                 {
-                    await signInManager.SignInAsync(user, isPersistent: false);
-                    
-                    return RedirectToAction("index", "home");
+                    //var real_user = userManager.FindByEmailAsync(registerUserVM.Email);
+                    var token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var confirmation_link = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, token = token },Request.Scheme);
+                    Task<bool> email_result = PostMessage(user.Email, confirmation_link,user.FullName);
+                    await Task.WhenAll(email_result);
+                    var saveResult = email_result.Result;
+                    if (saveResult == false)
+                    {
+                        ViewBag.ErrorTitle = "Error";
+                        ViewBag.Message = "Cannot send email";
+                        return View("Error");
+
+                    }
+                    //await signInManager.SignInAsync(user, isPersistent: false);
+                    ViewBag.ErrorTitle = "Registration Sucessful";
+                    ViewBag.Message = "Please Confirm Email before you can get logged in ";
+                    return View("RegistrationSucessful");
+                    //return RedirectToAction("index", "home");
                 }
                 foreach(var error in result.Errors)
                 {
@@ -109,6 +138,57 @@ namespace smartpalika.Controllers
             }
             return View(registerUserVM);
         }
+
+        public async Task<bool> PostMessage(string email, string message,string name)
+        {
+            var apiKey = configuration.GetSection("SENDGRID_API_KEY").Value;
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("enagariksewa@gmail.com", "E-Nagarik team");
+            var subject = "Email Verification";
+            var to = new EmailAddress(email, "Example User");
+            var plainTextContent = "Please verify your email ";
+            var htmlContent = "<strong>Please verify your email with this link: </strong>" + message;
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId,string token)
+        {
+            if(userId==null && token == null)
+            {
+                return View("index", "home");
+            }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                ViewBag.ErrorTitle = "Error";
+                ViewBag.Message = $"User with id{userId} cannot be found";
+                return View("Error");
+            }
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                
+
+                return View();
+            }
+            ViewBag.ErrorTitle = "Error";
+            ViewBag.Message = "Email not confirmed";
+            return View("Error");
+        }
+
+        
         [Authorize]
         public async Task<IActionResult> EditUser()
         {

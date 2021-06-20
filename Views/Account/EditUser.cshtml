@@ -20,9 +20,13 @@
                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
                     <img class="rounded-3" src="@imgSrc" width="200" height="200" style="object-fit:cover" />
                 }
+                else
+                {
+                    <img class="rounded-3" width="200" height="200" src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" />
+                }
 
                 <input class="file d-block fs-1 mt-1 btn btn-sm pl-0 " asp-for="ProfileImage" type="file" name="Image" />
-                
+
                 <span asp-validation-for="ProfileImage" class="text-danger"></span>
             </div>
 

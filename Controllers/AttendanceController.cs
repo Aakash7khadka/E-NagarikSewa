@@ -24,6 +24,7 @@ namespace smartpalika.Controllers
             DateTime date = DateTime.Today;
             IEnumerable<Attendance> data = _db.Attendances.Where(s => s.Entry_time.Contains(date.ToString("yyyy/MM/dd")));
             var users = data.Select(s => s.UserEmail).Distinct().ToList();
+            
             List<UserAttendanceVM> objs = new List<UserAttendanceVM>();
             foreach (var user in userManager.Users)
             {
@@ -53,9 +54,11 @@ namespace smartpalika.Controllers
                             usr.isPresent = false;
                             usr.entryDate = "Not Available";
                         }
+
                         
 
                     }
+
                     objs.Add(usr);
                 }
                 
