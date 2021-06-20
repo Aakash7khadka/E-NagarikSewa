@@ -179,9 +179,9 @@ namespace smartpalika.Controllers
             var result = await userManager.ConfirmEmailAsync(user, token);
             if (result.Succeeded)
             {
-                
 
-                return View();
+                ViewBag.Message = "Email verified successfully!";
+                return View("Login");
             }
             ViewBag.ErrorTitle = "Error";
             ViewBag.Message = "Email not confirmed";

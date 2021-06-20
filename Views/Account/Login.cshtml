@@ -5,39 +5,45 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Login</h1>
+@if (ViewBag.Message != null) {
+<div class="alert alert-success" role="alert">
+    @ViewBag.Message
+</div> 
+}
 
-<h4>LoginVM</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="ID" hidden class="control-label"></label>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check" >
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="Rememberme" /> @Html.DisplayNameFor(model => model.Rememberme)
-                </label>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Login" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="container-fluid row align-items-center justify-content-center mt-4 ">
+    <div class="row bg_white rounded rounded-3 box_shadow p-3 mt-4">
+        <div class="col ">
+            <form asp-action="Login ">
+                <h4 class="text-center pb-2">Login Form</h4>
+                <div asp-validation-summary="All" class="text-danger"></div>
+
+                <div class="form-group">
+                    <label asp-for="ID" hidden class="control-label"></label>
+
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Password" class="control-label"></label>
+                    <input asp-for="Password" class="form-control" />
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                </div>
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="Rememberme" /> @Html.DisplayNameFor(model => model.Rememberme)
+                    </label>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Login" class="btn btn-primary" />
+                </div>
+                <span class="fs-4">Not registered yet?<a asp-controller="Account" asp-action="Register"> Register Now</a></span>
+            </form>
+        </div>
     </div>
 </div>
-
 
 
