@@ -9,6 +9,7 @@ namespace smartpalika.Models
     {
         public string Username { get; set; }
         public bool isPresent { get; set; }
-        public string entryDate { get; set; }
+        public string date { get; set; }
+        public string time { get; set; }
     }
 }
