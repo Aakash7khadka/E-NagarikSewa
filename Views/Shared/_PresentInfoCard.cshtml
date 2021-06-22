@@ -20,20 +20,20 @@
                         @if (Model.date != null)
                         {
                             <small class="text-muted">Entry Details</small>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex ">
 
-                                <span>Date</span>
+                                <span class="pr-4" >Date</span>
 
 
-                                <span class="text-muted">@Model.date</span>
+                                <span class="text-muted pl-4">@Model.date</span>
 
 
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <span>Time</span>
+                            <div class="d-flex " >
+                                <span class="pr-4">Time</span>
 
 
-                                <span class="text-muted">@Model.time</span>
+                                <span class="text-muted pl-4">@Model.time</span>
 
                             </div>
                         }
@@ -47,7 +47,7 @@
 }
 else
 {
-<div class="status_card card m-2 mt-4  border-0 rounded-3 box_shadow">
+<div class="status_card card m-3 mt-4  border-0 rounded-3 box_shadow">
     <div class="absent_status card-body">
         <div class="head d-flex align-items-center justify-content-start">
 
@@ -64,20 +64,20 @@ else
                     @if (Model.date != null)
                     {
                         <small class="text-muted">Exit Details</small>
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex ">
 
-                            <span>Date</span>
+                            <span class="pr-4">Date</span>
 
 
-                            <span class="text-muted">@Model.date</span>
+                            <span class="text-muted pl-4">@Model.date</span>
 
 
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Time</span>
+                        <div class="d-flex">
+                            <span class="pr-4">Time</span>
 
 
-                            <span class="text-muted">@Model.time</span>
+                            <span class="text-muted pl-4">@Model.time</span>
 
                         </div>
                     }

@@ -18,6 +18,9 @@ body {
 .text-primary {
     color: var(--bs-primary) !important;
 }
+.bg_primary {
+background:var(--bs-primary) !important;
+}
 .wrapper {
     max-width: 1768px;
     margin: 0 auto;
@@ -107,6 +110,7 @@ font-size:1.3rem;
     border-left: 6px solid var(--bs-absent);
     border-radius: 5px;
 }
+
 .profile img {
     width: 150px;
     height: 150px;
