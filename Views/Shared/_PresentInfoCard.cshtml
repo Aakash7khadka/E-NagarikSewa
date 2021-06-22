@@ -15,25 +15,30 @@
                         <span><i class="present fas fa-toggle-on" style="font-size:1.5rem"></i></span>
                     </div>
                     <div class="mt-2">
-                        @if(@Model.entryDate!=null)
-                        {
-                        <small class="text-muted">Entry Details</small>
-                        <div class="d-flex justify-content-between">
-                            <span>Date</span>
-                            @{
-                            string datee=@Model.entryDate;
-                             <span class="text-muted">@datee.Substring(0,datee.IndexOf(" "))</span>
-                            }
 
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span>Time</span>
-                           
-                            
-                             <span class="text-muted">@datee.Split(" ").Last()</span>
-                           
-                        </div>
+
+                        @if (Model.date != null)
+                        {
+                            <small class="text-muted">Entry Details</small>
+                            <div class="d-flex justify-content-between">
+
+                                <span>Date</span>
+
+
+                                <span class="text-muted">@Model.date</span>
+
+
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <span>Time</span>
+
+
+                                <span class="text-muted">@Model.time</span>
+
+                            </div>
                         }
+
+
                     </div>
                 </div>
             </div>
@@ -54,25 +59,29 @@ else
                     <span><i class="absent fas fa-toggle-on" style="font-size:1.5rem"></i></span>
                 </div>
                 <div class="mt-2">
-                    @if(@Model.entryDate!=null)
-                        {
-                    <small class="text-muted">Exit Details</small>
-                    <div class="d-flex justify-content-between">
-                        <span>Date</span>
-                        @{
-                            string datee=@Model.entryDate;
-                            <span class="text-muted">@datee.Substring(0,datee.IndexOf(" "))</span>
-                        }
-
-                    </div>
-                    <div class="d-flex justify-content-between">
-                        <span>Time</span>
 
 
-                        <span class="text-muted">@datee.Split(" ").Last()</span>
+                    @if (Model.date != null)
+                    {
+                        <small class="text-muted">Exit Details</small>
+                        <div class="d-flex justify-content-between">
 
-                    </div>
-                        }
+                            <span>Date</span>
+
+
+                            <span class="text-muted">@Model.date</span>
+
+
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>Time</span>
+
+
+                            <span class="text-muted">@Model.time</span>
+
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
