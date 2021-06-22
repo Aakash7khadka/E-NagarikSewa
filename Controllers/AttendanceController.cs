@@ -49,19 +49,9 @@ namespace smartpalika.Controllers
                         {
                             var _date = entrydate.Substring(0, entrydate.IndexOf(" "));
                             usr.date = _date;
-                            var _time = entrydate.Split(" ").Last();
-                            var _hour = Int16.Parse(_time.Substring(0, 2));
-                            var final_time = "";
-                            if (_hour < 13)
-                            {
-                               final_time = _time + " AM";
-                            }
-                            else
-                            {
-                            _time=_time.Replace(Convert.ToString(_hour), Convert.ToString(_hour % 12));
-                            final_time = _time + " PM";
-                            }
-                        usr.time = final_time;
+                            var _time = entrydate.Substring(entrydate.IndexOf(" "));
+                            
+                            usr.time = _time;
                         
                         }
                     if (count % 2 == 1)
