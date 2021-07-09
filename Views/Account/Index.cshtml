@@ -20,7 +20,9 @@
                         <div class="dropdown-menu box_shadow  dropdown-menu-right text-left" aria-labelledby="dropdownMenuLink">
                             <a class="dropdown-item" asp-controller="Account" asp-action="EditUser"><i class="fas fa-user-edit mr-1 text-muted"></i>Edit</a>
                             <a class="dropdown-item" asp-controller="Account" asp-action="DeleteUser"><i class="fas fa-trash-alt mr-2 text-muted"></i>Delete</a>
-                            <a class="dropdown-item" href=""><i class="fas fa-sign-out-alt text-muted mr-2"></i>Logout</a>
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <button  class="dropdown-item" type="submit" ><i class="fas fa-sign-out-alt text-muted mr-2"></i>Logout</button>
+                            </form>
                         </div>
                     </div>
                 </div>

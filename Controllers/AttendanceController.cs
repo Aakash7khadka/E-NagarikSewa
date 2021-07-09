@@ -26,10 +26,10 @@ namespace smartpalika.Controllers
         {
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
             DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
-            DateTime date = DateTime.Today;
+            //DateTime date = DateTime.Today;
             IEnumerable<Attendance> data = _db.Attendances.Where(s => s.Entry_time.Contains(dateTime_Nepal.ToString("yyyy/MM/dd")));
             var users = data.Select(s => s.UserEmail).Distinct().ToList();
-            var users_list =await userManager.GetUsersInRoleAsync("Admin");
+            var users_list =await userManager.GetUsersInRoleAsync("Employee");
             List<UserAttendanceVM> objs = new List<UserAttendanceVM>();
             foreach (var user in users_list)
             {

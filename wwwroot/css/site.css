@@ -137,3 +137,8 @@ font-size:1.3rem;
     background: #5e60ce90;
     color:white !important;
 }
+
+.time_slot {
+    min-width: 100px;
+    max-width: 100px !important;
+}
