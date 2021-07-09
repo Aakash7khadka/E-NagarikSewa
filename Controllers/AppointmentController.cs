@@ -31,6 +31,7 @@ namespace smartpalika.Controllers
             
             var roles = roleManager.Roles.ToList();
             List < String > role_list= new List<String>();
+            List<AppointmentVM> app_list =new List<AppointmentVM>();
             foreach(var role in roles)
             {
                 if (role.ToString() == "Admin" || role.ToString() == "Employee")
@@ -47,6 +48,12 @@ namespace smartpalika.Controllers
                             var count = data.Where(s => s.UserEmail == user.NormalizedEmail).Count();
                         if (count % 2 == 1)
                         {
+                            AppointmentVM app = new AppointmentVM()
+                            {
+                                OfficerName = user.FullName,
+                                service = role.ToString()
+                            };
+                            app_list.Add(app);
                             present_count = 0;
                         }
                             present_count += count;
@@ -64,7 +71,7 @@ namespace smartpalika.Controllers
                                   {
                                       Text = x
                                   });
-            return View();
+            return View(app_list);
         }
     }
 }
