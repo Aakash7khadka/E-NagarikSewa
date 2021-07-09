@@ -14,7 +14,8 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Production",
         "ASPNETCORE_HOSTINGSTARTUPASSEMBLIES": "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"
-      }
+      },
+      "nativeDebugging": false
     },
     "smartpalika": {
       "commandName": "Project",
