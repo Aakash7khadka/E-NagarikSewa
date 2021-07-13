@@ -71,7 +71,28 @@ namespace smartpalika.Controllers
                                   {
                                       Text = x
                                   });
-            return View(app_list);
+
+            var current_user = await userManager.GetUserAsync(User);
+            AppointmentUserDetails user_details = new AppointmentUserDetails()
+            {
+                Email = current_user.Email,
+                Name= current_user.FullName,
+                Address= current_user.Address,
+                Phone= current_user.PhoneNumber
+            };
+            ViewBag.user_details = user_details;
+            ViewBag.app_list = app_list;
+            return View(user_details);
+        }
+
+        [HttpPost]
+        public IActionResult Index(AppointmentUserDetails obj)
+        {
+            return View();
         }
     }
+
+
+
+
 }
