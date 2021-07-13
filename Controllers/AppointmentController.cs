@@ -21,6 +21,7 @@ namespace smartpalika.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+        [HttpGet]
         public async Task<IActionResult> Index()
         {
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
