@@ -27,6 +27,18 @@ namespace smartpalika.Controllers
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
             DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
             //DateTime date = DateTime.Today;
+            string date_ymd = dateTime_Nepal.ToString("yyyy/MM/dd");
+
+            var current_user = await userManager.GetUserAsync(User);
+            var appointment_state = db.Appointment.Where(s => s.Date.Contains(date_ymd) && s.Email == current_user.Email).Count();
+            if (appointment_state > 0)
+            {
+                string error = $"You already have your appointments for today.You cannot make more than 1 appointment per day";
+                TempData["ErrorMessage"] = error;
+                return View("Denied");
+            }
+
+
             IEnumerable<Attendance> data = db.Attendances.Where(s => s.Entry_time.Contains(dateTime_Nepal.ToString("yyyy/MM/dd")));
             var users_from_attendance = data.Select(s => s.UserEmail).Distinct().ToList();
             
@@ -73,7 +85,7 @@ namespace smartpalika.Controllers
                                       Text = x
                                   });
 
-            var current_user = await userManager.GetUserAsync(User);
+           
             AppointmentUserDetails user_details = new AppointmentUserDetails()
             {
                 Email = current_user.Email,
@@ -87,13 +99,17 @@ namespace smartpalika.Controllers
         }
 
         [HttpPost]
-        public IActionResult Index(AppointmentUserDetails obj)
+        public  IActionResult Index(AppointmentUserDetails obj)
         {
+            TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
+            DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
+            var date_ymd= dateTime_Nepal.ToString("yyyy/MM/dd HH:mm:ss");
+            obj.Date = date_ymd;
+
+            
             if (ModelState.IsValid)
             {
-                TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time"); 
-                DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
-                obj.Date = dateTime_Nepal.ToString("yyyy/MM/dd HH:mm:ss");
+                
                 obj.Provider_role = "Vital Registration";
                 db.Appointment.Add(obj);
                 db.SaveChanges();
