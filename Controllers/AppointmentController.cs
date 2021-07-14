@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using smartpalika.Models;
@@ -9,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace smartpalika.Controllers
 {
+    [Authorize]
     public class AppointmentController : Controller
     {
+        
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> userManager;
         private readonly RoleManager<IdentityRole> roleManager;
@@ -22,6 +25,7 @@ namespace smartpalika.Controllers
             this.roleManager = roleManager;
         }
         [HttpGet]
+        
         public async Task<IActionResult> Index()
         {
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
