@@ -93,15 +93,35 @@ namespace smartpalika.Controllers
             {
                 TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time"); 
                 DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
-                obj.Date = dateTime_Nepal.ToString("yyyy:MM:dd HH:mm:ss");
+                obj.Date = dateTime_Nepal.ToString("yyyy/MM/dd HH:mm:ss");
                 obj.Provider_role = "Vital Registration";
                 db.Appointment.Add(obj);
                 db.SaveChanges();
             }
             return RedirectToAction("Index","Home");
         }
+
+        public IActionResult Delete_Confirm(int id)
+        {
+            ViewBag.id = id;
+            return View();
+        }
+        public IActionResult Delete(int id)
+        {
+            var appointment = db.Appointment.FirstOrDefault(s => s.ID== id);
+            if (appointment == null)
+            {
+                string error = $"Cannot find the appointment with id:{TempData["id"]}";
+                return RedirectToAction(nameof(NotFound), new { error = error });
+            }
+            db.Remove(appointment);
+            db.SaveChanges();
+            TempData["message"] = "Sucessfully Cancelled the appointment";
+            return RedirectToAction("Index","Home");
+        }
     }
 
+    
 
 
 

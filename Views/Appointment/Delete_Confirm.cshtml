@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewData["Title"] = "Delete";
+   
+   
+}
+
+<h1>Delete</h1>
+
+
+<h3>Are you sure you want to delete this?</h3>
+
+<a class="btn btn-danger" asp-controller="Appointment" asp-action="Delete"  asp-route-id="@ViewBag.id">Delete</a>
+
+<a class=" ml-2" asp-controller="Home" asp-action="Index" style="z-index:999">&#8592 Back to Appoinments</a>
