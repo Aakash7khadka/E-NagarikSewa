@@ -17,5 +17,7 @@ namespace smartpalika.Models
         public string ServiceType { get; set; }
         public string Date { get; set; }
         public string priority { get; set; }
+
+        public string Provider_role { get; set; }
     }
 }

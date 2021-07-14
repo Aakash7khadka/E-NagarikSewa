@@ -89,7 +89,16 @@ namespace smartpalika.Controllers
         [HttpPost]
         public IActionResult Index(AppointmentUserDetails obj)
         {
-            return View();
+            if (ModelState.IsValid)
+            {
+                TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time"); 
+                DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
+                obj.Date = dateTime_Nepal.ToString("yyyy:MM:dd HH:mm:ss");
+                obj.Provider_role = "Vital Registration";
+                db.Appointment.Add(obj);
+                db.SaveChanges();
+            }
+            return RedirectToAction("Index","Home");
         }
     }
 

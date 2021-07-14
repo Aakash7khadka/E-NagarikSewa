@@ -65,30 +65,40 @@
                             </div>
                         </div>
                         <div class="form-group">
-                        
-                            <input asp-for="ID" type="text" class="form-control"  hidden>
+
+                            <input asp-for="ID" type="text" class="form-control" hidden>
                         </div>
                         <div class="form-group">
-                            
-                            <input asp-for="priority" type="text" value="12:00" class="form-control"  hidden>
+
+                            <input asp-for="priority" type="text" value="12:00" class="form-control" hidden>
                         </div>
                         <div class="form-group">
-                            <label asp-for="Email">Email</label>
-                            <input asp-for="Email" type="text" class="form-control" disabled>
+                            <label >Email</label>
+                            <input  type="text" class="form-control" value="@Model.Email" disabled>
+                        </div>
+                        <div class="form-group">
+
+                            <input asp-for="Email" type="text" class="form-control" hidden>
+                           
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <label asp-for="Name">Name</label>
-                                <input asp-for="Name" type="text" class="form-control" id="inputEmail4"  disabled>
+                                <input type="text" class="form-control" id="inputEmail4" value="@Model.Name" disabled>
                             </div>
+                            
+                            <input asp-for="Name" type="text" class="form-control" id="inputEmail4" hidden>
+
                             <div class="form-group col-md-6">
                                 <label asp-for="Phone">Phone</label>
-                                <input asp-for="Phone" type="text" class="form-control" id="inputPassword4" >
+                                <input asp-for="Phone" type="text" class="form-control" id="inputPassword4">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="form-group">
                             <label asp-for="Address">Address</label>
-                            <input asp-for="Address" type="text" class="form-control" >
+                            <input asp-for="Address" type="text" class="form-control">
+                            <span asp-validation-for="Address" class="text-danger"></span>
 
                         </div>
                         <div class="form-group">
