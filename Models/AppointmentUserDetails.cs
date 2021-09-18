@@ -9,7 +9,7 @@ namespace smartpalika.Models
     public class AppointmentUserDetails
     {
         [Key]
-        public int ID { get; set; }
+        public Guid ID { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Phone { get; set; }
@@ -18,6 +18,8 @@ namespace smartpalika.Models
         public string Date { get; set; }
         public string priority { get; set; }
 
-        public string Provider_role { get; set; }
+        public string Time { get; set; }
+        public string Provider { get; set; }
+        public bool isAvailable { get; set; }
     }
 }

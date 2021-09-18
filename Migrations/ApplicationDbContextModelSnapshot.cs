@@ -226,10 +226,9 @@ namespace smartpalika.Migrations
 
             modelBuilder.Entity("smartpalika.Models.AppointmentUserDetails", b =>
                 {
-                    b.Property<int>("ID")
+                    b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
@@ -246,11 +245,17 @@ namespace smartpalika.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Provider_role")
+                    b.Property<string>("Provider")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ServiceType")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAvailable")
+                        .HasColumnType("bit");
 
                     b.Property<string>("priority")
                         .HasColumnType("nvarchar(max)");

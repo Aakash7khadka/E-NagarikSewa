@@ -9,5 +9,6 @@ namespace smartpalika.Models
     {
         public string OfficerName { get; set; }
         public string service { get; set; }
+        public List<string> Available_Time { get; set; }
     }
 }

@@ -32,9 +32,13 @@ namespace smartpalika.Controllers
             var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
             var current_user = await _userManager.GetUserAsync(User);
             IEnumerable<AppointmentUserDetails> data=null;
-            if (User.IsInRole("Employee"))
+            if (User.IsInRole("Admin"))
             {
                 data = _db.Appointment.Where(s => s.Date.Contains(dateTime_));
+            }
+            else if (User.IsInRole("Employee"))
+            {
+                data = _db.Appointment.Where(s => s.Provider == User.Identity.Name).Where(s =>s.Date.Contains(dateTime_)) ;
             }
             else if(User.Identity.IsAuthenticated)
             {

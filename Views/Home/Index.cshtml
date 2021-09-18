@@ -6,11 +6,19 @@
 }
 
 
-@if(TempData["message"]!=null)
+
+@if (TempData["message"] != null && TempData["message"].ToString().Contains("Sucess"))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["message"];
+
+    </div>
+}
+else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Cancel"))
 {
 <div class="alert alert-danger" role="alert">
-    @TempData["message"]
-    
+    @TempData["message"];
+
 </div>
 }
 
@@ -53,46 +61,47 @@
 </div>
 
 <!-- Appointment list part-->
-@if (Model!=null && Model.Count() > 0 ) { 
-<div class="container">
-    <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
-        <thead>
-            <tr>
-
-                <th scope="col">Priority</th>
-                <th scope="col">Service</th>
-                <th scope="col">Name</th>
-                <th scope="col">Email</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Address</th>
-                <th scope="col">Action</th>
-                @*<th scope="col">Status</th>*@
-                @*<th scope="col">Provider Role</th>*@
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="container">
+        <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+            <thead>
                 <tr>
-                    <td>@obj.priority</td>
-                    <td>@obj.ServiceType</td>
-                    <td>@obj.Name</td>
-                    <td>@obj.Email</td>
-                    <td>@obj.Phone</td>
-                    <td>@obj.Address</td>
-                    <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a></td>
-                    @*<td>Waiting</td>*@
-                    @*<td>Vital Registration</td>*@
-                </tr>
-            }
 
-        </tbody>
-    </table>
-</div>
+                    <th scope="col">Priority</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Action</th>
+                    @*<th scope="col">Status</th>*@
+                    @*<th scope="col">Provider Role</th>*@
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.priority</td>
+                        <td>@obj.ServiceType</td>
+                        <td>@obj.Name</td>
+                        <td>@obj.Email</td>
+                        <td>@obj.Phone</td>
+                        <td>@obj.Address</td>
+                        <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a></td>
+                        @*<td>Waiting</td>*@
+                        @*<td>Vital Registration</td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
 }
-            else if(User.Identity.IsAuthenticated)
-            {
-                <h4>No appointments today</h4>
-            }
+else if (User.Identity.IsAuthenticated)
+{
+    <h4>No appointments today</h4>
+}
 
