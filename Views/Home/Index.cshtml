@@ -73,7 +73,7 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone</th>
-                    <th scope="col">Address</th>
+                    <th scope="col">Availability</th>
                     <th scope="col">Action</th>
                     @*<th scope="col">Status</th>*@
                     @*<th scope="col">Provider Role</th>*@
@@ -83,17 +83,26 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
             <tbody>
                 @foreach (var obj in Model)
                 {
-                    <tr>
-                        <td>@obj.priority</td>
-                        <td>@obj.ServiceType</td>
-                        <td>@obj.Name</td>
-                        <td>@obj.Email</td>
-                        <td>@obj.Phone</td>
-                        <td>@obj.Address</td>
-                        <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a></td>
-                        @*<td>Waiting</td>*@
-                        @*<td>Vital Registration</td>*@
-                    </tr>
+                <tr>
+                    <td>@obj.priority</td>
+                    <td>@obj.ServiceType</td>
+                    <td>@obj.Name</td>
+                    <td>@obj.Email</td>
+                    <td>@obj.Phone</td>
+
+                    @if (obj.isAvailable == true)
+                    {
+                        <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;<a type="button" asp-action="Detail" class="btn btn-outline-primary" asp-route-id="@obj.ID">Detail</a></td>
+
+                    @*<td>Waiting</td>*@
+                    @*<td>Vital Registration</td>*@
+                </tr>
                 }
 
             </tbody>

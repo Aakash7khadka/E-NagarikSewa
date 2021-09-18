@@ -38,13 +38,39 @@ namespace smartpalika.Controllers
             }
             else if (User.IsInRole("Employee"))
             {
-                data = _db.Appointment.Where(s => s.Provider == User.Identity.Name).Where(s =>s.Date.Contains(dateTime_)) ;
+                var user = await _userManager.FindByNameAsync(User.Identity.Name);
+                var name = user.FullName;
+                data = _db.Appointment.Where(s => s.Provider == name).Where(s =>s.Date.Contains(dateTime_)) ;
             }
             else if(User.Identity.IsAuthenticated)
             {
                data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
             }
             return View(data);
+        }
+        public IActionResult Detail(Guid id)
+        {
+            var obj = _db.Appointment.Find(id);
+            if(obj==null)
+            {
+                return NotFound();
+            }
+
+            return View(obj);
+        }
+        [HttpPost]
+        public IActionResult Detail(AppointmentUserDetails obj)
+        {
+            if(ModelState.IsValid)
+            {
+                if (obj == null)
+                    return NotFound();
+                _db.Appointment.Update(obj);
+                _db.SaveChanges();
+                TempData["message"] = "Sucessfully updated your availability";
+                return RedirectToAction("Index", "Home");
+            }
+            return View(obj);
         }
 
         public IActionResult Privacy()
