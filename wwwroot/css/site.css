@@ -142,7 +142,7 @@ font-size:1.3rem;
 
 .time_slot {
     background: #5e60ce90 !important;
-    border: 2px solid red !important;
+
     min-width: 100px;
     max-width: 100px !important;
 }
