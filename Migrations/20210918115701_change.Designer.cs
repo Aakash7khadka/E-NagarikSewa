@@ -10,8 +10,8 @@ using smartpalika.Models;
 namespace smartpalika.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210617080028_extend-identityuser")]
-    partial class extendidentityuser
+    [Migration("20210918115701_change")]
+    partial class change
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -174,6 +174,9 @@ namespace smartpalika.Migrations
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
 
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -223,6 +226,47 @@ namespace smartpalika.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("smartpalika.Models.AppointmentUserDetails", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Date")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Provider")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ServiceType")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Time")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("isAvailable")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("priority")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Appointment");
+                });
+
             modelBuilder.Entity("smartpalika.Models.Attendance", b =>
                 {
                     b.Property<int>("Entry_id")
@@ -254,6 +298,31 @@ namespace smartpalika.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CreateRoleVM");
+                });
+
+            modelBuilder.Entity("smartpalika.Models.EditUserVM", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FullName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ProfileImage")
+                        .HasColumnType("varbinary(max)");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("EditUserVM");
                 });
 
             modelBuilder.Entity("smartpalika.Models.LoginVM", b =>

@@ -1,123 +1,48 @@
-﻿@model smartpalika.Models.AppointmentUserDetails
-
+﻿@if (ViewBag.app_list.Count==0)
+{
+    <h3>No Officers available to provide service. Please try after 10:15 AM</h3>
+}
+else
+{
 @foreach (var officer in ViewBag.app_list)
 {
     <div class="container">
 
-        @officer.OfficerName;
-        @officer.service;
-        @{
-            var clas = @officer.service;
-            ViewBag.clas = clas;
-        }
+
+       
+
     </div>
-}
+
+
+
     <div class="row">
         <div class="bg_white shadow mt-4 p-4 col-7">
-            <h4>Available Time for Vital Registration</h4>
-            <div class=" row">
-                @*<div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">10:00 AM</div>*@
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">11:00 AM</div>
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">12:00 PM</div>
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">1:00 PM</div>
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">2:00 PM</div>
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">3:00 PM</div>
-                <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">4:00 PM</div>
-                @*<div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">1:00 PM</div>*@
+            <h4>Available Time for Vital Registration <small>by @officer.OfficerName</small></h4>
+           
+            @foreach (var str in officer.Available_Time)
+            {
 
-            </div>
+        <div class=" row">
+           
+            
+            <a type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName" class="time_slot btn btn-secondary col m-2">@str</a>
+        </div>
+            }
+            @*<div class=" row">
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">10:00 AM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">11:00 AM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">12:00 PM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">1:00 PM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">2:00 PM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">3:00 PM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">4:00 PM</div>
+                    <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">1:00 PM</div>
+
+                </div>*@
             <div class="col-5"></div>
         </div>
 
     </div>
 
 
-
-    
-    <!-- modal -->
-    <!-- Button trigger modal -->
-    <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-      Launch demo modal
-    </button> -->
-    <!-- Modal -->
-    <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title pl-1" id="exampleModalLabel">Book An Appointment</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-
-                    <form class="p-2" method="post" asp-action="Index">
-
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <div class="col bg-secondary text-light text-center py-2 rounded rounded-2"> <span><i class="fa fa-1x fa-calendar"></i> July 9</span></div>
-
-
-                            </div>
-                            <div class="form-group col-md-6">
-                                <div class="col bg-warning text-light text-center py-2 rounded rounded-2"> <span><i class="fa fa-1x fa-clock-o"></i> 12:00 PM</span></div>
-
-                            </div>
-                        </div>
-                        <div class="form-group">
-                        
-                            <input asp-for="ID" type="text" class="form-control"  hidden>
-                        </div>
-                        <div class="form-group">
-                            
-                            <input asp-for="priority" type="text" value="12:00" class="form-control"  hidden>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Email">Email</label>
-                            <input asp-for="Email" type="text" class="form-control" disabled>
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label asp-for="Name">Name</label>
-                                <input asp-for="Name" type="text" class="form-control" id="inputEmail4"  disabled>
-                            </div>
-                            <div class="form-group col-md-6">
-                                <label asp-for="Phone">Phone</label>
-                                <input asp-for="Phone" type="text" class="form-control" id="inputPassword4" >
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label asp-for="Address">Address</label>
-                            <input asp-for="Address" type="text" class="form-control" >
-
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Service</label>
-                            <select class="form-group" asp-items="@ViewBag.role_list">
-                                <option disabled selected>--Select--category--</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="inputAddress2">Type</label>
-                            <select asp-for="ServiceType" class="form-group">
-                                <option disabled selected>--Select--category--</option>
-                                <option value="Birth Registration">Birth Registration</option>
-                                <option value="Death Registration">Death Registration</option>
-                                <option value="Marriage Registration">Marriage Registration</option>
-                                <option value="Divorce Registration">Divorce Registration</option>
-                                <option value="Migration">Migration</option>
-
-                            </select>
-                        </div>
-
-
-                        <button type="submit" class="btn btn-primary">Confirm</button>
-                    </form>
-
-                </div>
-            </div>
-        </div>
-
-  
-    </div>
- 
+}}

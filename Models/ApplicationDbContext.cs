@@ -16,6 +16,7 @@ namespace smartpalika.Models
 
         }
         public DbSet<Attendance> Attendances { get; set; }
+        public DbSet<AppointmentUserDetails> Appointment { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.HasNoKey();

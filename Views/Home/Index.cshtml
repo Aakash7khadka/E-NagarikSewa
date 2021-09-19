@@ -1,8 +1,27 @@
-﻿@inject SignInManager<ApplicationUser> signInManager
+﻿@model IEnumerable<smartpalika.Models.AppointmentUserDetails>
+@inject SignInManager<ApplicationUser> signInManager
 @inject UserManager<ApplicationUser> userManager
 @{
     ViewData["Title"] = "Home Page";
 }
+
+
+
+@if (TempData["message"] != null && TempData["message"].ToString().Contains("Sucess"))
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["message"];
+
+    </div>
+}
+else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Cancel"))
+{
+<div class="alert alert-danger" role="alert">
+    @TempData["message"];
+
+</div>
+}
+
 <div class="container mx-auto" style="">
     @if (!User.Identity.IsAuthenticated)
     {
@@ -30,7 +49,7 @@
                         <p>
                             Make a quick Appointment for public service on E-Nagarik Sewa.
                         </p>
-                        <a class="btn text-light "  style="background: #5e60ce;" asp-controller="Account" asp-action="Register">Register</a><br>
+                        <a class="btn text-light " style="background: #5e60ce;" asp-controller="Account" asp-action="Register">Register</a><br>
                         <span class="mt-1 d-block"> <a class="text-muted " asp-controller="Account" asp-action="Login">Already a user? Sign in</a></span>
                     </div>
 
@@ -40,3 +59,58 @@
 
     }
 </div>
+
+<!-- Appointment list part-->
+@if (Model != null && Model.Count() > 0)
+{
+    <div class="container">
+        <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+            <thead>
+                <tr>
+
+                    <th scope="col">Priority</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Availability</th>
+                    <th scope="col">Action</th>
+                    @*<th scope="col">Status</th>*@
+                    @*<th scope="col">Provider Role</th>*@
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                <tr>
+                    <td>@obj.priority</td>
+                    <td>@obj.ServiceType</td>
+                    <td>@obj.Name</td>
+                    <td>@obj.Email</td>
+                    <td>@obj.Phone</td>
+
+                    @if (obj.isAvailable == true)
+                    {
+                        <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                    }
+                    else
+                    {
+                        <td></td>
+                    }
+                    <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;<a type="button" asp-action="Detail" class="btn btn-outline-primary" asp-route-id="@obj.ID">Detail</a></td>
+
+                    @*<td>Waiting</td>*@
+                    @*<td>Vital Registration</td>*@
+                </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+}
+else if (User.Identity.IsAuthenticated)
+{
+    <h4>No appointments today</h4>
+}
+
