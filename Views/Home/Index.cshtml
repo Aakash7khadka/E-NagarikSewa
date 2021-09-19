@@ -1,6 +1,7 @@
 ﻿@model IEnumerable<smartpalika.Models.AppointmentUserDetails>
 @inject SignInManager<ApplicationUser> signInManager
 @inject UserManager<ApplicationUser> userManager
+
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -63,31 +64,33 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
 <!-- Appointment list part-->
 @if (Model != null && Model.Count() > 0)
 {
-    <div class="container">
-        <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
-            <thead>
-                <tr>
+    
+<div class="container">
+    <h5>Proceed to office only if you get a confirmation mail to avoid hassle.</h5>
+    <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+        <thead>
+            <tr>
 
-                    <th scope="col">Priority</th>
-                    <th scope="col">Service</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Phone</th>
-                    <th scope="col">Availability</th>
-                    <th scope="col">Action</th>
-                    @*<th scope="col">Status</th>*@
-                    @*<th scope="col">Provider Role</th>*@
+                <th scope="col">Name</th>
+                <th scope="col">Service</th>
+                <th scope="col">Service Provider</th>
+                <th scope="col">Time Slot</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Availability</th>
+                <th scope="col">Action</th>
+                @*<th scope="col">Status</th>*@
+                @*<th scope="col">Provider Role</th>*@
 
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var obj in Model)
-                {
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var obj in Model)
+            {
                 <tr>
-                    <td>@obj.priority</td>
-                    <td>@obj.ServiceType</td>
                     <td>@obj.Name</td>
-                    <td>@obj.Email</td>
+                    <td>@obj.ServiceType</td>
+                    <td>@obj.Provider</td>
+                    <td>@obj.Time</td>
                     <td>@obj.Phone</td>
 
                     @if (obj.isAvailable == true)
@@ -103,14 +106,15 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
                     @*<td>Waiting</td>*@
                     @*<td>Vital Registration</td>*@
                 </tr>
-                }
+            }
 
-            </tbody>
-        </table>
-    </div>
+        </tbody>
+    </table>
+</div>
 }
 else if (User.Identity.IsAuthenticated)
 {
+
     <h4>No appointments today</h4>
 }
 
