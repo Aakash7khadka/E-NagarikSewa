@@ -1,4 +1,5 @@
-﻿@model smartpalika.Models.AppointmentUserDetails
+﻿@inject RoleManager<IdentityRole> roleManager
+@model smartpalika.Models.AppointmentUserDetails
 
 @{
     ViewData["Title"] = "Detail";
@@ -7,128 +8,144 @@
 
 <h1>Detail</h1>
 
-<div>
-    
+<div class="container">
+
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Email)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Email)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ServiceType)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ServiceType)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Date)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Date)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.priority)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.priority)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Time)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Time)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Provider)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Provider)
-        </dd>
-       
-    </dl>
+    <div class="row">
+        <div class="col-8">
+
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Phone)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Phone)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Address)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Address)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.ServiceType)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.ServiceType)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Date)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Date)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.priority)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.priority)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Time)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Time)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Provider)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Provider)
+                </dd>
+
+            </dl>
+        </div>
+        <div class="col-4">
+            
+            @if (User.IsInRole("Employee"))
+                {
+                    <h5>Please click the button to call citizen to office</h5>
+                    <a asp-action="NotifyCitizen"asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>
+                }
+
+
+        </div>
+
+    </div>
 </div>
 <div>
     <form asp-action="Detail">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <input type="hidden" asp-for="ID" hidden />
         <div class="form-group">
-            
-            <input asp-for="Email" class="form-control" hidden/>
+
+            <input asp-for="Email" class="form-control" hidden />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Name" class="form-control" hidden/>
+
+            <input asp-for="Name" class="form-control" hidden />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Phone" class="form-control" hidden/>
+
+            <input asp-for="Phone" class="form-control" hidden />
             <span asp-validation-for="Phone" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Address" class="form-control" hidden/>
+
+            <input asp-for="Address" class="form-control" hidden />
             <span asp-validation-for="Address" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="ServiceType" class="form-control" hidden/>
+
+            <input asp-for="ServiceType" class="form-control" hidden />
             <span asp-validation-for="ServiceType" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Date" class="form-control" hidden/>
+
+            <input asp-for="Date" class="form-control" hidden />
             <span asp-validation-for="Date" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="priority" class="form-control" hidden/>
+
+            <input asp-for="priority" class="form-control" hidden />
             <span asp-validation-for="priority" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Time" class="form-control" hidden/>
+
+            <input asp-for="Time" class="form-control" hidden />
             <span asp-validation-for="Time" class="text-danger"></span>
         </div>
         <div class="form-group">
-            
-            <input asp-for="Provider" class="form-control" hidden/>
+
+            <input asp-for="Provider" class="form-control" hidden />
             <span asp-validation-for="Provider" class="text-danger"></span>
         </div>
-        @if(Model.isAvailable==false)
-            {
-                <h6>Please check the box to show your availability</h6>
-            }
-            else
-            {
-                <h5>Please uncheck to remove your availability</h5>
-            }
+        @if (Model.isAvailable == false)
+        {
+            <h6>Please check the box to show your availability</h6>
+        }
+        else
+        {
+            <h5>Please uncheck to remove your availability</h5>
+        }
         <div class="form-group form-check">
-           
-                <input class="form-check-input " style="width: 5vw; height: 5vh;" asp-for="isAvailable" /> 
-           
+
+            <input class="form-check-input " style="width: 5vw; height: 5vh;" asp-for="isAvailable" />
+
         </div>
         <br /><br /><br />
         <div class="form-group">
