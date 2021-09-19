@@ -5,44 +5,49 @@
 }
 
 
-<div class="container w-75 ml-4">
+<div class="container ml-1 ml-md-2">
+    <div class="row">
+    <div class="col-12 col-md-7">
     <h3 class="mt-4">Roles</h3>
     <a class="btn btn-primary mb-2 base_bg" asp-controller="Administration" asp-action="CreateRole" style="z-index:999"> Create Role</a>
 
-
-    <table class="table  table-bordered table-hover">
-        <thead>
-            <tr>
-                <th class="">SN</th>
-                <th>ID</th>
-                <th>Roles</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{var x = 0; }
-            @if (Model.Any())
-            {
-                foreach (var role in Model)
+    <div class="table-responsive">
+        <table class="table  table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="">SN</th>
+                    <th>ID</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{var x = 0; }
+                @if (Model.Any())
                 {
-                    <tr>
-                        @{x = x + 1; }
-                        <td>@x</td>
-                        <td>@role.Id</td>
-                        <td>@role.Name</td>
-                        <td class="">
-                            <a class="btn_md" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id"><i class="far fa-edit"></i></a>
-                            <a class="ml-2 text-danger btn_md " asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id"><i class="far fa-trash-alt"></i></a>
+                    foreach (var role in Model)
+                    {
+                        <tr>
+                            @{x = x + 1; }
+                            <td>@x</td>
+                            <td>@role.Id</td>
+                            <td>@role.Name</td>
+                            <td class="">
+                                <a class="btn_md" asp-action="EditRole" asp-controller="Administration" asp-route-id="@role.Id"><i class="far fa-edit"></i></a>
+                                <a class="ml-2 text-danger btn_md " asp-action="DeleteRole" asp-controller="Administration" asp-route-id="@role.Id"><i class="far fa-trash-alt"></i></a>
 
-                        </td>
-                    </tr>
+                            </td>
+                        </tr>
+                    }
                 }
-            }
-          else
-{
-    <p>Not found</p>
-    <p>create</p>
-}
-        </tbody>
-    </table>
+                else
+                {
+                    <p>Not found</p>
+                    <p>create</p>
+                }
+            </tbody>
+        </table>
+        </div>
+        </div>
+    </div>
 </div>

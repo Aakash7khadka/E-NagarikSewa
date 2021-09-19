@@ -15,21 +15,21 @@
 
     </div>
 }
-else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Cancel"))
+else if (TempData["message"] != null && TempData["message"].ToString().Contains("Cancel"))
 {
-<div class="alert alert-danger" role="alert">
-    @TempData["message"];
+    <div class="alert alert-danger" role="alert">
+        @TempData["message"];
 
-</div>
+    </div>
 }
 
 <div class="container mx-auto" style="">
     @if (!User.Identity.IsAuthenticated)
     {
 
-        <div class="container " style="max-width: 1024px;margin-left:15%">
+        <div class="container " style="max-width: 1024px;margin-left:">
             <div class="row">
-                <div class="col-6 row justify-content-end align-items-center" style="height: 90vh;">
+                <div class=" d-none d-md-block col-6 row justify-content-end align-items-center" style="height: 90vh;">
                     <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
                         <div class="carousel-inner pr-0 p-4 ">
                             <div class="carousel-item active pr-0 p-4">
@@ -44,7 +44,7 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
                         </div>
                     </div>
                 </div>
-                <div class="col-6 row align-items-center justify-content-start" style="height: 90vh;">
+                <div class="col-12 col-md-6 row align-items-center justify-content-start" style="height: 90vh;">
                     <div class="mb-4 pb-4">
                         <h1 style="color: #5e60ce;">E-Nagarik Sewa</h1>
                         <p>
@@ -64,53 +64,105 @@ else if(TempData["message"]!=null && TempData["message"].ToString().Contains("Ca
 <!-- Appointment list part-->
 @if (Model != null && Model.Count() > 0)
 {
-    
+
 <div class="container">
-    <h5>Proceed to office only if you get a confirmation mail to avoid hassle.</h5>
-    <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
-        <thead>
-            <tr>
-
-                <th scope="col">Name</th>
-                <th scope="col">Service</th>
-                <th scope="col">Service Provider</th>
-                <th scope="col">Time Slot</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Availability</th>
-                <th scope="col">Action</th>
-                @*<th scope="col">Status</th>*@
-                @*<th scope="col">Provider Role</th>*@
-
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var obj in Model)
-            {
+    <div class="d-none d-lg-block card mt-4">
+    <div class="card-body">
+    <h5 class="card-title">Appointments</h5>
+    <h6 class="card-subtitle"><small> Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
+    <div class="table-responsive">
+        <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+            <thead>
                 <tr>
-                    <td>@obj.Name</td>
-                    <td>@obj.ServiceType</td>
-                    <td>@obj.Provider</td>
-                    <td>@obj.Time</td>
-                    <td>@obj.Phone</td>
 
-                    @if (obj.isAvailable == true)
-                    {
-                        <td><i class="fa fa-check" style="font-size:24px"></i></td>
-                    }
-                    else
-                    {
-                        <td></td>
-                    }
-                    <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;<a type="button" asp-action="Detail" class="btn btn-outline-primary" asp-route-id="@obj.ID">Detail</a></td>
+                    <th scope="col">Name</th>
+                    <th scope="col">Service</th>
+                    <th scope="col">Service Provider</th>
+                    <th scope="col">Time Slot</th>
+                    <th scope="col">Phone</th>
+                    <th scope="col">Availability</th>
+                    <th scope="col">Action</th>
+                    @*<th scope="col">Status</th>*@
+                    @*<th scope="col">Provider Role</th>*@
 
-                    @*<td>Waiting</td>*@
-                    @*<td>Vital Registration</td>*@
                 </tr>
-            }
+            </thead>
+            <tbody>
+                @foreach (var obj in Model)
+                {
+                    <tr>
+                        <td>@obj.Name</td>
+                        <td>@obj.ServiceType</td>
+                        <td>@obj.Provider</td>
+                        <td>@obj.Time</td>
+                        <td>@obj.Phone</td>
 
-        </tbody>
-    </table>
+                        @if (obj.isAvailable == true)
+                        {
+                            <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                        <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;<a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm" asp-route-id="@obj.ID">Detail</a></td>
+
+                        @*<td>Waiting</td>*@
+                        @*<td>Vital Registration</td>*@
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+        </div>
+        </div>
 </div>
+
+    <!--My Appointment Start-->
+    <div class="d-block d-lg-none card mt-4 ">
+        <div class="card-body">
+            <h5 class="card-title">My Appointment</h5>
+            <h6 class="card-subtitle mb-2 text-muted"><small>Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
+            <div class="row">
+                <div class="col-5">
+
+                    <ul class="list-unstyled font-weight-bold">
+
+                        <li>Name</li>
+                        <li>Service</li>
+                        <li>Provider</li>
+                        <li>Time</li>
+                        <li>Phone
+                        <li />
+
+                    </ul>
+
+                </div>
+                <div class="col-7">
+                    @foreach (var obj in Model)
+                    {
+                        <ul class="list-unstyled">
+
+                            <li>@obj.Name</li>
+                            <li>@obj.ServiceType</li>
+                            <li>@obj.Provider</li>
+                            <li>@obj.Time</li>
+                            <li>@obj.Phone
+                            <li />
+
+
+                        </ul>
+                    }
+                </div>
+
+            </div>
+            @foreach (var obj in Model) { 
+                <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a> <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm" asp-route-id="@obj.ID">Detail</a>
+            }
+        </div>
+    </div>
+    <!--My Appointment Ends-->
 }
 else if (User.Identity.IsAuthenticated)
 {

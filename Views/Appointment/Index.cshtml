@@ -1,4 +1,13 @@
 ﻿<link rel="stylesheet" href="~/css/site.css" />
+<style>
+    .time_slot {
+        background: #5e60ce50 !important;
+    }
+   .time_slot:hover {
+            background: #5e60ce !important;
+            color:white !important;
+        }
+</style>
 @if (ViewBag.app_list.Count == 0)
 {
     <h3>No Officers available to provide service. Please try after 10:15 AM</h3>
@@ -7,18 +16,11 @@ else
 {
     @foreach (var officer in ViewBag.app_list)
     {
-        <div class="container">
+      
 
-
-
-
-        </div>
-
-
-
-        <div class="row ml-4">
-            <div class="bg_white shadow mt-4 p-4 col-7 rounded rounded-2">
-                <h5>Available Time for Vital Registration <small>by @officer.OfficerName</small></h5>
+        <div class="row ml-1 mr-1 ml-md-4">
+            <div class="bg_white shadow mt-4 p-4 col-12 col-md-7 rounded rounded-2">
+                <h5 ><small><span >Available Time for Vital Registration </span></small><small>by @officer.OfficerName</small></h5>
 
                 @foreach (var str in officer.Available_Time)
                 {
@@ -37,7 +39,7 @@ else
                         <div type="button" class="time_slot btn btn-secondary col m-2" data-toggle="modal" data-target="#exampleModal">1:00 PM</div>
 
                     </div>*@
-                <div class="col-5"></div>
+                <div class="d-none d-md-block col-md-5"></div>
             </div>
 
         </div>

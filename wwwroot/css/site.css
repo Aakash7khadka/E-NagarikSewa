@@ -3,6 +3,8 @@
     --bs-white: #ffffff;
     --bs-absent: #ea4235;
     --bs-present: #38b000;
+    --bs-presentTint: #38b00050;
+    --bs-absentTint: #ea423550;
 }
 
 body {
@@ -89,7 +91,7 @@ font-size:1.3rem;
 }
 
 .present {
-    color: var(--bs-present);
+    color: var(--bs-presentTint);
 }
 .absent {
     color:var(--bs-absent);
@@ -103,11 +105,11 @@ font-size:1.3rem;
    
 }
 .present_status {
-    border-left: 6px solid var(--bs-present);
+    border-left: 6px solid var(--bs-presentTint) !important;
     border-radius: 5px;
 }
 .absent_status {
-    border-left: 6px solid var(--bs-absent);
+    border-left: 6px solid var(--bs-absentTint);
     border-radius: 5px;
 }
 
