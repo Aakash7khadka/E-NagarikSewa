@@ -17,102 +17,81 @@
                             <div class="card-body">
                                 <h4 class="card-title">Detail</h4>
 
-                                <dl class="row">
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Email)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Email)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Name)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Name)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Phone)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Phone)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Address)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Address)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.ServiceType)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.ServiceType)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Date)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Date)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.priority)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.priority)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Time)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Time)
-                                    </dd>
-                                    <dt class="col-sm-2">
-                                        @Html.DisplayNameFor(model => model.Provider)
-                                    </dt>
-                                    <dd class="col-sm-10">
-                                        @Html.DisplayFor(model => model.Provider)
-                                    </dd>
-
-                                </dl>
+                                <div class="">
+                                    Email: <input asp-for="Email" style="width:75%" class="" disabled />
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Name: <input asp-for="Name" class="" disabled />
+                                    <span asp-validation-for="Name" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Phone: <input asp-for="Phone" class="" disabled />
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Address: <input asp-for="Address" class="" disabled />
+                                    <span asp-validation-for="Address" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Service: <input asp-for="ServiceType" class="" disabled />
+                                    <span asp-validation-for="ServiceType" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Date: <input asp-for="Date" class="" disabled />
+                                    <span asp-validation-for="Date" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Priority: <input asp-for="priority" class="l" disabled />
+                                    <span asp-validation-for="priority" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Time: <input asp-for="Time" class="" disabled />
+                                    <span asp-validation-for="Time" class="text-danger"></span>
+                                </div>
+                                <div class="">
+                                    Provider: <input asp-for="Provider" class="" disabled />
+                                    <span asp-validation-for="Provider" class="text-danger"></span>
+                                </div>
 
                                 <div>
 
                                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                                     <input type="hidden" asp-for="ID" hidden />
                                     <div class="">
-                                        Email: <input asp-for="Email" style="width:75%" class="" hidden />
+                                        <input asp-for="Email" style="width:75%" class="" hidden />
                                         <span asp-validation-for="Email" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Name: <input asp-for="Name" class="" hidden />
+                                       <input asp-for="Name" class="" hidden />
                                         <span asp-validation-for="Name" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Phone: <input asp-for="Phone" class="" hidden />
+                                      <input asp-for="Phone" class="" hidden />
                                         <span asp-validation-for="Phone" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Address: <input asp-for="Address" class="" hidden />
+                                        <input asp-for="Address" class="" hidden />
                                         <span asp-validation-for="Address" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Service: <input asp-for="ServiceType" class="" hidden />
+                                         <input asp-for="ServiceType" class="" hidden />
                                         <span asp-validation-for="ServiceType" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Date: <input asp-for="Date" class="" hidden />
+                                        <input asp-for="Date" class="" hidden />
                                         <span asp-validation-for="Date" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Priority: <input asp-for="priority" class="l" hidden />
+                                         <input asp-for="priority" class="l" hidden />
                                         <span asp-validation-for="priority" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Time: <input asp-for="Time" class="" hidden />
+                                     <input asp-for="Time" class="" hidden />
                                         <span asp-validation-for="Time" class="text-danger"></span>
                                     </div>
                                     <div class="">
-                                        Provider: <input asp-for="Provider" class="" hidden />
+                                        <input asp-for="Provider" class="" hidden />
                                         <span asp-validation-for="Provider" class="text-danger"></span>
                                     </div>
 

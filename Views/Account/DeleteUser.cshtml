@@ -10,7 +10,7 @@
 <h3>Are you sure you want to delete this?</h3>
 <div class="">
 
-
+    <form asp-action="DeleteUser" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
         <div class="row">
 
@@ -43,27 +43,23 @@
                     </div>
                     <div class="form-group">
                         <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" disabled class="form-control" disabled />
+                        <input asp-for="Email" disabled class="form-control"  disabled/>
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
-                    <div class="form-group">
+                      <div class="form-group">
                         <label asp-for="PhoneNumber" class="control-label"></label>
-                        <input asp-for="PhoneNumber" class="form-control" disabled />
+                        <input asp-for="PhoneNumber" class="form-control"  disabled />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
-                    <div class="form-group">
-                        <form asp-action="DeleteUser">
-                            <input type="hidden" asp-for="ID" />
-                            <input type="submit" asp-Route-email="@Model.Email" value="Delete" class="btn btn-danger" />
 
-                        </form>
-                        <br />
-                        <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
+                    <div class="form-group">
+                        <input type="submit" asp-route-id="@Model.Email" value="Delete" class="btn btn-primary btn-sm" />
                     </div>
+                    <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
                 </div>
             </div>
-
+    </form>
 
 </div>
 
