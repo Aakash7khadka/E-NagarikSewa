@@ -72,6 +72,7 @@ else if (TempData["message"] != null && TempData["message"].ToString().Contains(
     <h6 class="card-subtitle"><small> Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
     <div class="table-responsive">
         <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+           
             <thead>
                 <tr>
 
@@ -105,7 +106,7 @@ else if (TempData["message"] != null && TempData["message"].ToString().Contains(
                         {
                             <td></td>
                         }
-                        <td><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;<a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm" asp-route-id="@obj.ID">Detail</a></td>
+                        <td><a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;</td>
 
                         @*<td>Waiting</td>*@
                         @*<td>Vital Registration</td>*@
@@ -124,24 +125,26 @@ else if (TempData["message"] != null && TempData["message"].ToString().Contains(
         <div class="card-body">
             <h5 class="card-title">My Appointment</h5>
             <h6 class="card-subtitle mb-2 text-muted"><small>Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
+           <hr />
             <div class="row">
-                <div class="col-5">
+                @foreach (var obj in Model)
+                {
+                    <div class="col-5">
 
-                    <ul class="list-unstyled font-weight-bold">
+                        <ul class="list-unstyled font-weight-bold">
 
-                        <li>Name</li>
-                        <li>Service</li>
-                        <li>Provider</li>
-                        <li>Time</li>
-                        <li>Phone
-                        <li />
+                            <li>Name</li>
+                            <li>Service</li>
+                            <li>Provider</li>
+                            <li>Time</li>
+                            <li>Phone
+                            <li />
 
-                    </ul>
+                        </ul>
 
-                </div>
-                <div class="col-7">
-                    @foreach (var obj in Model)
-                    {
+                    </div>
+                    <div class="col-7">
+
                         <ul class="list-unstyled">
 
                             <li>@obj.Name</li>
@@ -153,13 +156,20 @@ else if (TempData["message"] != null && TempData["message"].ToString().Contains(
 
 
                         </ul>
-                    }
-                </div>
 
+                    </div>
+                    <div class="col-5">
+
+                    </div>
+                    <div class="col-7">
+                        <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a>
+                        <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>  <hr />
+                    </div>
+                  
+                }
             </div>
-            @foreach (var obj in Model) { 
-                <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a> <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm" asp-route-id="@obj.ID">Detail</a>
-            }
+
+           
         </div>
     </div>
     <!--My Appointment Ends-->

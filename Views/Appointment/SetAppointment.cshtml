@@ -1,17 +1,17 @@
 ﻿@model smartpalika.Models.AppointmentUserDetails
 
 
-                <h5 class="modal-title pl-1" id="exampleModalLabel">Book An Appointment</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-              
-
-                <div class="container m-4 p-4">
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-lg-7 mt-2">
+        <div class="card"> 
+            <div class="body p-2">
+                <h5 class="card-title pl-4 pt-4" id="exampleModalLabel">Book An Appointment</h5>
+                <div class="container ">
 
                     <div class="modal-body">
 
-                        <form class="p-2" method="post" asp-action="SetAppointment">
+                        <form class="" method="post" asp-action="SetAppointment">
 
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -19,8 +19,8 @@
 
 
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <div class="col bg-warning text-light text-center py-2 rounded rounded-2"> <span id="time-slot"><i class="fa fa-1x fa-clock-o"></i>@Model.Time</span></div>
+                                <div class="form-group col-md-6 rounded rounded-2"  style="background: #e29578 ">
+                                    <div class="col text-light text-center py-2 rounded rounded-2"> <span id="time-slot" ><i class="fa fa-1x fa-clock-o"></i>@Model.Time</span></div>
 
                                 </div>
                             </div>
@@ -67,11 +67,11 @@
 
                             </div>
                             @*<div class="form-group">
-                    <label for="inputAddress2">Service</label>
-                    <select class="form-group" asp-items="@ViewBag.role_list">
-                        <option disabled selected>--Select--category--</option>
-                    </select>
-                </div>*@
+                <label for="inputAddress2">Service</label>
+                <select class="form-group" asp-items="@ViewBag.role_list">
+                    <option disabled selected>--Select--category--</option>
+                </select>
+            </div>*@
                             <div class="form-group">
                                 <label for="inputAddress2">Type</label>
                                 <select asp-for="ServiceType" class="form-group">
@@ -88,7 +88,10 @@
 
                             <button type="submit" class="btn btn-primary">Confirm</button>
                         </form>
-
                     </div>
-
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+</div>

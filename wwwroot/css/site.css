@@ -3,8 +3,8 @@
     --bs-white: #ffffff;
     --bs-absent: #ea4235;
     --bs-present: #38b000;
-    --bs-presentTint: #38b00050;
-    --bs-absentTint: #ea423550;
+    --bs-presentTint: #38b00080;
+    --bs-absentTint: #fe4a4a;
 }
 
 body {
@@ -149,4 +149,16 @@ font-size:1.3rem;
 .appointment_detail input {
     border: 0px solid white !important;
     background: none !important;
+}
+.login_form {
+    
+    width:50% !important;
+}
+
+@media only screen and (max-width: 500px) {
+
+    .login_form {
+        width: 100% !important;
+    }
+
 }

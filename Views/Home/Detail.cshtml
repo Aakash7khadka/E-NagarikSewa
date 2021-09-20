@@ -6,97 +6,107 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Detail</h1>
 
-<div class="container">
-
-    <hr />
+<div class="container mt-4">
+   
     <form asp-action="Detail" class="appointment_detail">
-        <div class="row">
-            <div class="col-6">
+      
+                <div class="row">
+                    <div class="col-12 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h4 class="card-title">Detail</h4>
+                                <div>
 
-                <div>
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="ID" hidden />
+                                    <div class="">
+                                        Email: <input asp-for="Email" style="width:75%" class="" disabled />
+                                        <span asp-validation-for="Email" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Name: <input asp-for="Name" class="" disabled />
+                                        <span asp-validation-for="Name" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Phone: <input asp-for="Phone" class="" disabled />
+                                        <span asp-validation-for="Phone" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Address: <input asp-for="Address" class="" disabled />
+                                        <span asp-validation-for="Address" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Service: <input asp-for="ServiceType" class="" disabled />
+                                        <span asp-validation-for="ServiceType" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Date: <input asp-for="Date" class="" disabled />
+                                        <span asp-validation-for="Date" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Priority: <input asp-for="priority" class="l" disabled />
+                                        <span asp-validation-for="priority" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Time: <input asp-for="Time" class="" disabled />
+                                        <span asp-validation-for="Time" class="text-danger"></span>
+                                    </div>
+                                    <div class="">
+                                        Provider: <input asp-for="Provider" class="" disabled />
+                                        <span asp-validation-for="Provider" class="text-danger"></span>
+                                    </div>
 
-                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                    <input type="hidden" asp-for="ID" hidden />
-                    <div class="">
-                        Email: <input asp-for="Email" class="" disabled />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Name: <input asp-for="Name" class="" disabled />
-                        <span asp-validation-for="Name" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Phone: <input asp-for="Phone" class="" disabled />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Address: <input asp-for="Address" class="" disabled />
-                        <span asp-validation-for="Address" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Service: <input asp-for="ServiceType" class="" disabled />
-                        <span asp-validation-for="ServiceType" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Date: <input asp-for="Date" class="" disabled />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Priority: <input asp-for="priority" class="l" disabled />
-                        <span asp-validation-for="priority" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Time: <input asp-for="Time" class="" disabled />
-                        <span asp-validation-for="Time" class="text-danger"></span>
-                    </div>
-                    <div class="">
-                        Provider: <input asp-for="Provider" class="" disabled />
-                        <span asp-validation-for="Provider" class="text-danger"></span>
-                    </div>
-                   
-                    <br /><br /><br />
-                   
+                     
 
-                    <a asp-action="Index">Back to List</a>
-                </div>
+                                    <br />
+                                    <a asp-action="Index">&#8592 Back to List</a>
+                                </div>
 
 
-            </div>
-            <div class="col-6">
+                            </div>
+                        </div>
+                    </div>
+            <div class="col-12 col-lg-6 p-0 ">
 
                 <div class="container">
                     @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
                     {
-                        <div class="d-none d-lg-block card mt-4">
+                        <div class=" d-lg-block card mt-1">
                             <div class="card-body">
                                 <h5 class="card-title">For Employees Only</h5>
 
-                                <h5 class="card-subtitle mb-2 text-muted">Please click the button to call citizen to office</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">Please click the button to call citizen to office</h6>
                                 <a asp-action="NotifyCitizen" asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>
 
                             </div>
                         </div>
                     }
-                    else if (User.IsInRole("citizen") || User.IsInRole("Admin"))
-                    {
-                        @if (Model.isAvailable == false)
-                        {
-                            <h6>Please check the box to show you have arrived at ward office.</h6>
-                        }
-                        else
-                        {
-                            <h5>Please uncheck to remove your availability.</h5>
-                        }
-                <div class="form-group form-check">
+                    <div class=" d-lg-block card mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">For Citizen Only</h5>
+                            @if (User.IsInRole("citizen") || User.IsInRole("Admin"))
+                            {
+                                @if (Model.isAvailable == false)
+                                {
+                                    <h6>Please check the box to show you have arrived at ward office.</h6>
+                                }
+                                else
+                                {
+                                    <h5>Please uncheck to remove your availability.</h5>
+                                }
+                                <div class="form-group form-check">
 
-                    <input class="form-check-input " style="width:24px; height:24px;" asp-for="isAvailable" />
-                    <br />
-                    <input type="submit" value="Change" class="btn btn-warning mt-4 " style="background: #5e60ce !important;color:white" />
-                 
-                </div>
-                    }
+                                    <input class="form-check-input " style="width:24px; height:24px;" asp-for="isAvailable" />
+                                    <br />
+                                    <input type="submit" value="Change" class="btn btn-warning mt-4 " style="background: #5e60ce !important;color:white" />
+
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+
                 </div>
 
 

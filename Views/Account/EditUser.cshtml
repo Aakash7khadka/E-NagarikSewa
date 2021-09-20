@@ -12,55 +12,60 @@
 
     <form asp-action="EditUser" enctype="multipart/form-data">
         <div asp-validation-summary="All" class="text-danger"></div>
-        <div class="bg_white w-50  p-4 box_shadow d-block d-md-flex justify-content-between flex-wrap rounded rounded-3">
-            <div class="w-25 mb-4 mb-md-0">
-                @if (Model.ProfileImage != null)
-                {
-                    var base64 = Convert.ToBase64String(Model.ProfileImage);
-                    var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
-                    <img class="rounded-3" src="@imgSrc" width="200" height="200" style="object-fit:cover" />
-                }
-                else
-                {
-                    <img class="rounded-3" width="200" height="200" src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" />
-                }
+        <div class="row">
+            
+            <div class="bg_white col-11 col-lg-6 ml-3  p-3 box_shadow d-block d-md-flex justify-content-between flex-wrap rounded rounded-3">
+                <div class="row">
+                    <div class="col-12 col-lg-5 ">
+                        <div class=" mb-4 mb-md-0">
+                            @if (Model.ProfileImage != null)
+                            {
+                                var base64 = Convert.ToBase64String(Model.ProfileImage);
+                                var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                                <img class="rounded-3" src="@imgSrc" width="200" height="200" style="object-fit:cover" />
+                            }
+                            else
+                            {
+                                <img class="rounded-3" width="200" height="200" src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" />
+                            }
 
-                <input class="file d-block fs-1 mt-1 btn btn-sm pl-0 " asp-for="ProfileImage" type="file" name="Image" />
+                            <input class="file d-block fs-1 mt-1 btn btn-sm pl-0 " asp-for="ProfileImage" type="file" name="Image" />
 
-                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                            <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-lg-7 mt-4 mt-md-0 ml-0">
+                    <div class="form-group">
+                        <label asp-for="FullName" class="control-label"></label>
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email" class="control-label"></label>
+                        <input asp-for="Email" disabled class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Address" class="control-label"></label>
+                        <input asp-for="Address" class="form-control" />
+                        <span asp-validation-for="Address" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="PhoneNumber" class="control-label"></label>
+                        <input asp-for="PhoneNumber" class="form-control" />
+                        <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" asp-route-id="@Model.ID" value="Update" class="btn btn-primary btn-sm" />
+                    </div>
+                    <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
+                </div>
             </div>
-
-            <div class="mt-4 mt-md-0 ml-0">
-                <div class="form-group">
-                    <label asp-for="FullName" class="control-label"></label>
-                    <input asp-for="FullName" class="form-control" />
-                    <span asp-validation-for="FullName" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" disabled class="form-control" />
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <label asp-for="Address" class="control-label"></label>
-                    <input asp-for="Address" class="form-control" />
-                    <span asp-validation-for="Address" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="PhoneNumber" class="control-label"></label>
-                    <input asp-for="PhoneNumber" class="form-control" />
-                    <span asp-validation-for="PhoneNumber" class="text-danger"></span>
-                </div>
-
-                <div class="form-group">
-                    <input type="submit" asp-route-id="@Model.ID" value="Update" class="btn btn-primary btn-sm" />
-                </div>
-                <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
-            </div>
-        </div>
     </form>
- 
+
 </div>
 
 
