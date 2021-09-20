@@ -46,7 +46,7 @@ namespace smartpalika.Controllers
                 var name = user.FullName;
                 data = _db.Appointment.Where(s => s.Provider == name).Where(s =>s.Date.Contains(dateTime_)) ;
             }
-            else if(User.Identity.IsAuthenticated)
+            else if(User.IsInRole("citizen"))
             {
                data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
             }

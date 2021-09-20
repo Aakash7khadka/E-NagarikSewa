@@ -124,7 +124,7 @@ namespace smartpalika.Controllers
                         return View("Error");
 
                     }
-                    bool roleResult;
+                    
                     if (!await roleManager.RoleExistsAsync("citizen"))
                     {
                         try
@@ -137,12 +137,28 @@ namespace smartpalika.Controllers
                             ViewBag.Message = "Error please contact admin";
                             return View("Error");
                         }
-                       
-                      
-                      
-
                     }
-                    await userManager.AddToRoleAsync(user, "citizen");
+                    if (!await roleManager.RoleExistsAsync("Admin"))
+                    {
+                        try
+                        {
+                            await roleManager.CreateAsync(new IdentityRole("Admin"));
+                        }
+                        catch (Exception e)
+                        {
+                            ViewBag.ErrorTitle = "Error";
+                            ViewBag.Message = "Error please contact admin";
+                            return View("Error");
+                        }
+                    }
+                    if(user.Email.ToUpper()=="AAKASH777KHADKA@GMAIL.COM"|| user.Email.ToUpper() == "BISHALKAN6A@GMAIL.COM")
+                    {
+                        await userManager.AddToRoleAsync(user, "Admin");
+                    }
+                    else
+                    {
+                        await userManager.AddToRoleAsync(user, "citizen");
+                    }
                     //await signInManager.SignInAsync(user, isPersistent: false);
                     ViewBag.ErrorTitle = "Registration Sucessful";
                     ViewBag.Message = "Please Confirm Email before you can get logged in ";
