@@ -67,7 +67,7 @@
             <div class="col-6">
 
                 <div class="container">
-                    @if (User.IsInRole("Employee"))
+                    @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
                     {
                         <div class="d-none d-lg-block card mt-4">
                             <div class="card-body">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     }
-                    else if (User.IsInRole("citizen"))
+                    else if (User.IsInRole("citizen") || User.IsInRole("Admin"))
                     {
                         @if (Model.isAvailable == false)
                         {
