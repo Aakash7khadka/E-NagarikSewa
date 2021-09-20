@@ -1,97 +1,94 @@
 ﻿@model smartpalika.Models.AppointmentUserDetails
 
-@*<div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">*@
+
                 <h5 class="modal-title pl-1" id="exampleModalLabel">Book An Appointment</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
-            </div>
-            <div class="modal-body">
+              
 
-                <form class="p-2" method="post" asp-action="SetAppointment">
+                <div class="container m-4 p-4">
 
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <div class="col bg-secondary text-light text-center py-2 rounded rounded-2"> <span><i class="fa fa-1x fa-calendar"></i> @Model.Date</span></div>
+                    <div class="modal-body">
+
+                        <form class="p-2" method="post" asp-action="SetAppointment">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <div class="col bg-secondary text-light text-center py-2 rounded rounded-2"> <span><i class="fa fa-1x fa-calendar"></i> @Model.Date</span></div>
 
 
-                        </div>
-                        <div class="form-group col-md-6">
-                            <div class="col bg-warning text-light text-center py-2 rounded rounded-2"> <span id="time-slot"><i class="fa fa-1x fa-clock-o"></i>@Model.Time</span></div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <div class="col bg-warning text-light text-center py-2 rounded rounded-2"> <span id="time-slot"><i class="fa fa-1x fa-clock-o"></i>@Model.Time</span></div>
 
-                        </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <input asp-for="ID" type="text" class="form-control" hidden>
+                            </div>
+                            <div class="form-group">
+
+                                <input asp-for="priority" type="text" class="form-control" hidden>
+                            </div>
+                            <div class="form-group">
+                                <label>Email</label>
+                                <input type="text" class="form-control" value="@Model.Email" disabled>
+                            </div>
+                            <div class="form-group">
+
+                                <input asp-for="Email" type="text" class="form-control" hidden>
+
+                            </div>
+                            <input asp-for="Date" type="text" class="form-control" hidden>
+                            <input asp-for="Provider" type="text" class="form-control" hidden>
+                            <input asp-for="Time" type="text" class="form-control" hidden>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Name">Name</label>
+                                    <input type="text" class="form-control" id="inputEmail4" value="@Model.Name" disabled>
+                                </div>
+
+                                <input asp-for="Name" type="text" class="form-control" id="inputEmail4" hidden>
+
+                                <div class="form-group col-md-6">
+                                    <label asp-for="Phone">Phone</label>
+                                    <input asp-for="Phone" type="text" class="form-control" id="inputPassword4">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Address">Address</label>
+                                <input asp-for="Address" type="text" class="form-control">
+                                <span asp-validation-for="Address" class="text-danger"></span>
+
+                            </div>
+                            @*<div class="form-group">
+                    <label for="inputAddress2">Service</label>
+                    <select class="form-group" asp-items="@ViewBag.role_list">
+                        <option disabled selected>--Select--category--</option>
+                    </select>
+                </div>*@
+                            <div class="form-group">
+                                <label for="inputAddress2">Type</label>
+                                <select asp-for="ServiceType" class="form-group">
+                                    <option disabled selected>--Select--category--</option>
+                                    <option value="Birth Registration">Birth Registration</option>
+                                    <option value="Death Registration">Death Registration</option>
+                                    <option value="Marriage Registration">Marriage Registration</option>
+                                    <option value="Divorce Registration">Divorce Registration</option>
+                                    <option value="Migration">Migration</option>
+
+                                </select>
+                            </div>
+
+
+                            <button type="submit" class="btn btn-primary">Confirm</button>
+                        </form>
+
                     </div>
-                    <div class="form-group">
 
-                        <input asp-for="ID" type="text" class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-
-                        <input asp-for="priority" type="text"  class="form-control" hidden>
-                    </div>
-                    <div class="form-group">
-                        <label>Email</label>
-                        <input type="text" class="form-control" value="@Model.Email" disabled>
-                    </div>
-                    <div class="form-group">
-
-                        <input asp-for="Email" type="text" class="form-control" hidden>
-
-                    </div>
-                    <input asp-for="Date" type="text" class="form-control" hidden>
-                    <input asp-for="Provider" type="text" class="form-control" hidden>
-                    <input asp-for="Time" type="text" class="form-control" hidden>
-
-
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <label asp-for="Name">Name</label>
-                            <input type="text" class="form-control" id="inputEmail4" value="@Model.Name" disabled>
-                        </div>
-
-                        <input asp-for="Name" type="text" class="form-control" id="inputEmail4" hidden>
-
-                        <div class="form-group col-md-6">
-                            <label asp-for="Phone">Phone</label>
-                            <input asp-for="Phone" type="text" class="form-control" id="inputPassword4">
-                            <span asp-validation-for="Phone" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Address">Address</label>
-                        <input asp-for="Address" type="text" class="form-control">
-                        <span asp-validation-for="Address" class="text-danger"></span>
-
-                    </div>
-                    @*<div class="form-group">
-            <label for="inputAddress2">Service</label>
-            <select class="form-group" asp-items="@ViewBag.role_list">
-                <option disabled selected>--Select--category--</option>
-            </select>
-        </div>*@
-                    <div class="form-group">
-                        <label for="inputAddress2">Type</label>
-                        <select asp-for="ServiceType" class="form-group">
-                            <option disabled selected>--Select--category--</option>
-                            <option value="Birth Registration">Birth Registration</option>
-                            <option value="Death Registration">Death Registration</option>
-                            <option value="Marriage Registration">Marriage Registration</option>
-                            <option value="Divorce Registration">Divorce Registration</option>
-                            <option value="Migration">Migration</option>
-
-                        </select>
-                    </div>
-
-
-                    <button type="submit" class="btn btn-primary">Confirm</button>
-                </form>
-
-            </div>
-        @*</div>
-    </div>
-
-
-</div>*@
+                </div>
