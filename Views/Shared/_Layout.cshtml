@@ -138,9 +138,14 @@
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Account" asp-action="Index">Profile</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" asp-controller="Administration" asp-action="ListRole">Role</a>
-                            </li>
+                            
+                                @if (User.IsInRole("Admin"))
+                                 {
+                                <li class="nav-item">
+                                    <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
+                                </li>
+                                  }
+                        
                             <li class="nav-item">
                                 <a class="nav-link" asp-controller="Attendance" asp-action="Index">Attendance</a>
                             </li>
