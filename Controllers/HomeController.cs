@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using smartpalika.Models;
 using System.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace smartpalika.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

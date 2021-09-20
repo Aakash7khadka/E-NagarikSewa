@@ -10,6 +10,7 @@ using smartpalika.Models;
 namespace smartpalika.Controllers
 {
     //[Authorize(Roles ="Admin")]
+    [Authorize]
     public class AttendanceController : Controller
     {
         private readonly UserManager<ApplicationUser> userManager;
