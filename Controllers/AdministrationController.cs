@@ -195,6 +195,19 @@ namespace smartpalika.Controllers
                 }
                 
                 if(model[i].IsSelected && !(await userManager.IsInRoleAsync(userex, role.Name))){
+                    try
+                    {
+                        if (role.Name == "Admin" || role.Name == "Employee")
+                        {
+                            await userManager.RemoveFromRoleAsync(userex, "citizen");
+                        }
+                    }
+                    catch(Exception e)
+                    {
+                        ViewBag.ErrorTitle = "Error";
+                        ViewBag.Message = "Error please contact admin";
+                        return View("Error");
+                    }
                     result = await userManager.AddToRoleAsync(userex, role.Name);
                 }
                 else if(!model[i].IsSelected && (await userManager.IsInRoleAsync(userex, role.Name))){

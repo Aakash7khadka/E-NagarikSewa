@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     }
-                    else if (!User.IsInRole("Employee"))
+                    else if (User.IsInRole("citizen"))
                     {
                         @if (Model.isAvailable == false)
                         {
