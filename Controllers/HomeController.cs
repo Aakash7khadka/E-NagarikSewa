@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using smartpalika.Models;
 using System.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 
 namespace smartpalika.Controllers
 {
@@ -84,9 +85,41 @@ namespace smartpalika.Controllers
             return View();
         }
 
-        public async Task<IActionResult> NotifyCitizen(string email,string name,string time)
+        //public async Task<IActionResult> NotifyCitizen(string email,string name,string time)
+        //{
+        //    Task<bool> email_result = PostMessage(email,name,time);
+        //    await Task.WhenAll(email_result);
+        //    var saveResult = email_result.Result;
+        //    if (saveResult == false)
+        //    {
+        //        ViewBag.ErrorTitle = "Error";
+        //        ViewBag.Message = "Cannot send email";
+        //        return View("Error");
+
+        //    }
+        //    TempData["message"] = "Sucessfully invitation sent";
+        //    return RedirectToAction("Index");
+        //}
+        public async Task<IActionResult> SendMessageToCitizen(string email, string name, string time)
         {
-            Task<bool> email_result = PostMessage(email,name,time);
+            DetailAppointmentVM obj = new DetailAppointmentVM()
+            {
+                name = name,
+                email=email,
+                time=time,
+                
+
+        };
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var input = user.FullName;
+            obj.sender = input;
+            return View(obj);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendMessageToCitizen(DetailAppointmentVM obj)
+        {
+            Task<bool> email_result = PostMessage(obj.email, obj.name, obj.time,obj.sender,obj.message);
             await Task.WhenAll(email_result);
             var saveResult = email_result.Result;
             if (saveResult == false)
@@ -98,9 +131,9 @@ namespace smartpalika.Controllers
             }
             TempData["message"] = "Sucessfully invitation sent";
             return RedirectToAction("Index");
+            
         }
-
-        public async Task<bool> PostMessage(string email, string name, string time)
+        public async Task<bool> PostMessage(string email, string name, string time,string sender,string message)
         {
             var apiKey = "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";
             var client = new SendGridClient(apiKey);
@@ -108,7 +141,7 @@ namespace smartpalika.Controllers
             var subject = "Ward office visit confirmation";
             var to = new EmailAddress(email, name);
             var plainTextContent = "Please visit ward office on time ";
-            var htmlContent = "Dear "+name+",<br><strong>Please visit  Ward Office with necessary documents at "+time+ " </strong>" ;
+            var htmlContent = "Dear "+name+",<br><strong>"+message+"<br>At:"+time+ " </strong><br>Sender:"+sender ;
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)

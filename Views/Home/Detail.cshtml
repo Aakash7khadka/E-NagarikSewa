@@ -8,103 +8,103 @@
 
 
 <div class="container mt-4">
-   
+
     <form asp-action="Detail" class="appointment_detail">
-      
-                <div class="row">
-                    <div class="col-12 col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <h4 class="card-title">Detail</h4>
 
-                                <div class="">
-                                    Email: <input asp-for="Email" style="width:75%" class="" disabled />
-                                    <span asp-validation-for="Email" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Name: <input asp-for="Name" class="" disabled />
-                                    <span asp-validation-for="Name" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Phone: <input asp-for="Phone" class="" disabled />
-                                    <span asp-validation-for="Phone" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Address: <input asp-for="Address" class="" disabled />
-                                    <span asp-validation-for="Address" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Service: <input asp-for="ServiceType" class="" disabled />
-                                    <span asp-validation-for="ServiceType" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Date: <input asp-for="Date" class="" disabled />
-                                    <span asp-validation-for="Date" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Priority: <input asp-for="priority" class="l" disabled />
-                                    <span asp-validation-for="priority" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Time: <input asp-for="Time" class="" disabled />
-                                    <span asp-validation-for="Time" class="text-danger"></span>
-                                </div>
-                                <div class="">
-                                    Provider: <input asp-for="Provider" class="" disabled />
-                                    <span asp-validation-for="Provider" class="text-danger"></span>
-                                </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="card-title">Detail</h4>
 
-                                <div>
-
-                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                                    <input type="hidden" asp-for="ID" hidden />
-                                    <div class="">
-                                        <input asp-for="Email" style="width:75%" class="" hidden />
-                                        <span asp-validation-for="Email" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                       <input asp-for="Name" class="" hidden />
-                                        <span asp-validation-for="Name" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                      <input asp-for="Phone" class="" hidden />
-                                        <span asp-validation-for="Phone" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                        <input asp-for="Address" class="" hidden />
-                                        <span asp-validation-for="Address" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                         <input asp-for="ServiceType" class="" hidden />
-                                        <span asp-validation-for="ServiceType" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                        <input asp-for="Date" class="" hidden />
-                                        <span asp-validation-for="Date" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                         <input asp-for="priority" class="l" hidden />
-                                        <span asp-validation-for="priority" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                     <input asp-for="Time" class="" hidden />
-                                        <span asp-validation-for="Time" class="text-danger"></span>
-                                    </div>
-                                    <div class="">
-                                        <input asp-for="Provider" class="" hidden />
-                                        <span asp-validation-for="Provider" class="text-danger"></span>
-                                    </div>
-
-
-
-                                    <br />
-                                    <a asp-action="Index">&#8592 Back to List</a>
-                                </div>
-
-
-                            </div>
+                        <div class="">
+                            Email: <input asp-for="Email" style="width:75%" class="" disabled />
+                            <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
+                        <div class="">
+                            Name: <input asp-for="Name" class="" disabled />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Phone: <input asp-for="Phone" class="" disabled />
+                            <span asp-validation-for="Phone" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Address: <input asp-for="Address" class="" disabled />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Service: <input asp-for="ServiceType" class="" disabled />
+                            <span asp-validation-for="ServiceType" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Date: <input asp-for="Date" class="" disabled />
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Priority: <input asp-for="priority" class="l" disabled />
+                            <span asp-validation-for="priority" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Time: <input asp-for="Time" class="" disabled />
+                            <span asp-validation-for="Time" class="text-danger"></span>
+                        </div>
+                        <div class="">
+                            Provider: <input asp-for="Provider" class="" disabled />
+                            <span asp-validation-for="Provider" class="text-danger"></span>
+                        </div>
+
+                        <div>
+
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            <input type="hidden" asp-for="ID" hidden />
+                            <div class="">
+                                <input asp-for="Email" style="width:75%" class="" hidden />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Name" class="" hidden />
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Phone" class="" hidden />
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Address" class="" hidden />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="ServiceType" class="" hidden />
+                                <span asp-validation-for="ServiceType" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Date" class="" hidden />
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="priority" class="l" hidden />
+                                <span asp-validation-for="priority" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Time" class="" hidden />
+                                <span asp-validation-for="Time" class="text-danger"></span>
+                            </div>
+                            <div class="">
+                                <input asp-for="Provider" class="" hidden />
+                                <span asp-validation-for="Provider" class="text-danger"></span>
+                            </div>
+
+
+
+                            <br />
+                            <a asp-action="Index">&#8592 Back to List</a>
+                        </div>
+
+
                     </div>
+                </div>
+            </div>
             <div class="col-12 col-lg-6 p-0 ">
 
                 <div class="container">
@@ -115,7 +115,8 @@
                                 <h5 class="card-title">For Employees Only</h5>
 
                                 <h6 class="card-subtitle mb-2 text-muted">Please click the button to call citizen to office</h6>
-                                <a asp-action="NotifyCitizen" asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>
+
+                                <a asp-action="SendMessageToCitizen" asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>
 
                             </div>
                         </div>
@@ -153,5 +154,6 @@
 
         </div>
     </form>
-</div>
+   
+    </div>
             

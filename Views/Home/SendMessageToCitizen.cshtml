@@ -1,0 +1,57 @@
+﻿@model smartpalika.Models.DetailAppointmentVM
+
+@{
+    ViewData["Title"] = "SendMessageToCitizen";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h5>Send Message To Citizen</h5>
+
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="SendMessageToCitizen" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="name" class="control-label"></label>
+                <input asp-for="name" class="form-control" hidden/>
+                <input asp-for="name" class="form-control" disabled/>
+                <span asp-validation-for="name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" hidden/>
+                <input asp-for="email" class="form-control" disabled/>
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="time" class="control-label"></label>
+                <input asp-for="time" class="form-control" hidden/>
+                <input asp-for="time" class="form-control" disabled/>
+                <span asp-validation-for="time" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="message" class="control-label"></label>
+                <textarea cols="40" rows="5" asp-for="message" class="form-control" ></textarea>
+               
+                <span asp-validation-for="message" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="sender" class="control-label"></label>
+                <input asp-for="sender" class="form-control" hidden/>
+                <input asp-for="sender" class="form-control" disabled/>
+                <span asp-validation-for="sender" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Send" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to Home</a>
+</div>
+
