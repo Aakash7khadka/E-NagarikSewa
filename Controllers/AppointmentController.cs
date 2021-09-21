@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
 using smartpalika.Models;
 using System;
 using System.Collections.Generic;
@@ -35,7 +36,9 @@ namespace smartpalika.Controllers
             string date_ymd = dateTime_Nepal.ToString("yyyy/MM/dd");
 
             var current_user = await userManager.GetUserAsync(User);
-            var appointment_state = db.Appointment.Where(s => s.Date.Contains(date_ymd) && s.Email == current_user.Email).Count();
+            var appointment_state = db.Appointment.Include(u => u.ApplicationUser).Where(s => s.ApplicationUser.Email == current_user.Email).Count();
+            //var appointment_state = db.Appointment.Where(s => s.Date.Contains(date_ymd) && s.Email == current_user.Email).Count();
+            
             if (appointment_state > 0)
             {
                 string error = $"You already have your appointments for today.You cannot make more than 1 appointment per day";
@@ -53,6 +56,7 @@ namespace smartpalika.Controllers
 
             
             //foreach(var role in roles)
+            
             //{
             //    //if (role.ToString() == "Admin" || role.ToString() == "Employee")
             //    //{
@@ -189,11 +193,12 @@ namespace smartpalika.Controllers
             List<string> times = new List<string>() { "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM", "4:00 PM" };
             AppointmentUserDetails obj = new AppointmentUserDetails()
             {
-                Email = current_user.Email,
-                Name = current_user.FullName,
-                Address = current_user.Address,
-                Phone = current_user.PhoneNumber
+                //Email = current_user.Email,
+                //Name = current_user.FullName,
+                //Address = current_user.Address,
+                //Phone = current_user.PhoneNumber
             };
+            
             obj.Date = dateTime_Nepal.ToString("yyyy/MM/dd");
             obj.priority = (times.IndexOf(time))+"";
             obj.Time = time;

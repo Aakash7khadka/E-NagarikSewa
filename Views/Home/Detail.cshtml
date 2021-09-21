@@ -17,7 +17,7 @@
                     <div class="card-body">
                         <h4 class="card-title">Detail</h4>
 
-                        <div class="">
+                        @*<div class="">
                             Email: <input asp-for="Email" style="width:75%" class="" disabled />
                             <span asp-validation-for="Email" class="text-danger"></span>
                         </div>
@@ -32,7 +32,7 @@
                         <div class="">
                             Address: <input asp-for="Address" class="" disabled />
                             <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
+                        </div>*@
                         <div class="">
                             Service: <input asp-for="ServiceType" class="" disabled />
                             <span asp-validation-for="ServiceType" class="text-danger"></span>
@@ -58,7 +58,7 @@
 
                             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                             <input type="hidden" asp-for="ID" hidden />
-                            <div class="">
+                            @*<div class="">
                                 <input asp-for="Email" style="width:75%" class="" hidden />
                                 <span asp-validation-for="Email" class="text-danger"></span>
                             </div>
@@ -73,7 +73,7 @@
                             <div class="">
                                 <input asp-for="Address" class="" hidden />
                                 <span asp-validation-for="Address" class="text-danger"></span>
-                            </div>
+                            </div>*@
                             <div class="">
                                 <input asp-for="ServiceType" class="" hidden />
                                 <span asp-validation-for="ServiceType" class="text-danger"></span>
@@ -116,7 +116,7 @@
 
                                 <h6 class="card-subtitle mb-2 text-muted">Please click the button to call citizen to office</h6>
 
-                                <a asp-action="SendMessageToCitizen" asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>
+                                @*<a asp-action="SendMessageToCitizen" asp-route-name="@Model.Name" asp-route-time="@Model.Time" asp-route-email="@Model.Email" class="btn btn-outline-danger">Click Here</a>*@
 
                             </div>
                         </div>

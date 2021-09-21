@@ -13,6 +13,7 @@ using smartpalika.Models;
 using System.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace smartpalika.Controllers
 {
@@ -38,20 +39,22 @@ namespace smartpalika.Controllers
             //DateTime date = DateTime.Today;
             var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
             var current_user = await _userManager.GetUserAsync(User);
-            IEnumerable<AppointmentUserDetails> data=null;
+            IEnumerable<AppointmentUserDetails> appointments=_db.Appointment.Include(u=>u.ApplicationUser).Where(s => s.Date.Contains(dateTime_));
+            IEnumerable<AppointmentUserDetails> data = null; 
             if (User.IsInRole("Admin"))
             {
-                data = _db.Appointment.Where(s => s.Date.Contains(dateTime_));
+                data = appointments;
             }
             else if (User.IsInRole("Employee"))
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var name = user.FullName;
-                data = _db.Appointment.Where(s => s.Provider == name).Where(s =>s.Date.Contains(dateTime_)) ;
+                data = appointments.Where(s => s.Provider == name) ;
             }
             else if(User.IsInRole("citizen"))
             {
-               data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
+                //data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
+                data = appointments.Where(s => s.ApplicationUser.Email == current_user.Email);
             }
             return View(data);
         }

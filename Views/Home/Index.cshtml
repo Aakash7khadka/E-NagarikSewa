@@ -96,11 +96,11 @@
                         @foreach (var obj in Model)
                 {
                         <tr>
-                            <td>@obj.Name</td>
+                            <td>@obj.ApplicationUser.FullName</td>
                             <td>@obj.ServiceType</td>
                             <td>@obj.Provider</td>
                             <td>@obj.Time</td>
-                            <td>@obj.Phone</td>
+                            <td>@obj.ApplicationUser.PhoneNumber</td>
 
                             @if (obj.isAvailable == true)
                         {
@@ -161,11 +161,11 @@
 
                 <ul class="list-unstyled">
 
-                    <li>@obj.Name</li>
+                    <li>@obj.ApplicationUser.FullName</li>
                     <li>@obj.ServiceType</li>
                     <li>@obj.Provider</li>
                     <li>@obj.Time</li>
-                    <li>@obj.Phone
+                    <li>@obj.ApplicationUser.PhoneNumber
                     <li />
 
 
