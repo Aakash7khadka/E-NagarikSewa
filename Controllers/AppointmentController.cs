@@ -204,8 +204,15 @@ namespace smartpalika.Controllers
         {
             if (ModelState.IsValid)
             {
-
-               
+                TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
+                DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
+                string dt = dateTime_Nepal.ToString("yyyy/MM/dd");
+                var result=db.Appointment.Where(s => s.Date == dt && s.Provider == obj.Provider && s.Time==obj.Time);
+                if(result.Count()!=0)
+                {
+                    TempData["message"] = "Oops! Somebody stole your time please try another time slot. So your appointment was cancelled ";
+                    return RedirectToAction("Index", "Home");
+                }
                 db.Appointment.Add(obj);
                 db.SaveChanges();
                 TempData["message"] = "Sucessfully created appointment";

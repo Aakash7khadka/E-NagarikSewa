@@ -182,7 +182,7 @@ namespace smartpalika.Controllers
             var subject = "Email Verification";
             var to = new EmailAddress(email, "Example User");
             var plainTextContent = "Please verify your email ";
-            var htmlContent = "<strong>Please verify your email with this link: </strong>" + message;
+            var htmlContent = "<strong>Dear User,<br>Please verify your email with this link: </strong><a href=\" "+ message+"\"> Here</a><br>If you can't verify please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)

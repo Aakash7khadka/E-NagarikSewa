@@ -8,20 +8,14 @@
 
 
 
-@if (TempData["message"] != null && TempData["message"].ToString().Contains("Sucess"))
+@if(TempData["message"] != null)
 {
-<div class="alert alert-success" role="alert">
+<div class="alert alert-primary" role="alert">
     @TempData["message"];
 
 </div>
 }
-else if (TempData["message"] != null && TempData["message"].ToString().Contains("Cancel"))
-{
-<div class="alert alert-danger" role="alert">
-    @TempData["message"];
 
-</div>
-}
 
 <div class="container mx-auto" style="">
     @if (!User.Identity.IsAuthenticated)
@@ -196,7 +190,17 @@ else if (TempData["message"] != null && TempData["message"].ToString().Contains(
 }
 else if (User.Identity.IsAuthenticated)
 {
+<div class="row">
+    <div class="col-12 col-lg-6 ">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title ">No Appointments today</h5>
+              
+                
+            </div>
+        </div>
+    </div>
 
-<h4>No appointments today</h4>
+</div>
 }
 
