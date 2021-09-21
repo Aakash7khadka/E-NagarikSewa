@@ -24,6 +24,7 @@ namespace smartpalika.Controllers
             this.userManager = userManager;
             this.roleManager = roleManager;
         }
+        //[Authorize(Roles ="citizen")]
         [HttpGet]
         
         public async Task<IActionResult> Index()
