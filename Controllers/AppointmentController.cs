@@ -203,11 +203,14 @@ namespace smartpalika.Controllers
             obj.priority = (times.IndexOf(time))+"";
             obj.Time = time;
             obj.Provider = officer;
+           
             return View(obj);
         }
         [HttpPost]
-        public IActionResult SetAppointment(AppointmentUserDetails obj)
+        public async Task<IActionResult> SetAppointmentAsync(AppointmentUserDetails obj)
         {
+            var current_user = await userManager.GetUserAsync(User);
+            obj.ApplicationUser = current_user;
             if (ModelState.IsValid)
             {
                 TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");

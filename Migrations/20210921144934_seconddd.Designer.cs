@@ -10,8 +10,8 @@ using smartpalika.Models;
 namespace smartpalika.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210921130355_first")]
-    partial class first
+    [Migration("20210921144934_seconddd")]
+    partial class seconddd
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -232,6 +232,10 @@ namespace smartpalika.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("ApplicationUserId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("Date")
                         .HasColumnType("nvarchar(max)");
 
@@ -244,9 +248,6 @@ namespace smartpalika.Migrations
                     b.Property<string>("Time")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<bool>("isAvailable")
                         .HasColumnType("bit");
 
@@ -255,7 +256,7 @@ namespace smartpalika.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("ApplicationUserId");
 
                     b.ToTable("Appointment");
                 });
@@ -333,7 +334,9 @@ namespace smartpalika.Migrations
                 {
                     b.HasOne("smartpalika.Models.ApplicationUser", "ApplicationUser")
                         .WithMany("Appointments")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
 
                     b.Navigation("ApplicationUser");
                 });

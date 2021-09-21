@@ -23,17 +23,17 @@ namespace smartpalika.Models
             //modelBuilder.HasNoKey();
             base.OnModelCreating(modelBuilder);
             //modelBuilder.Seed();
-            //modelBuilder.Entity<AppointmentUserDetails>()
-            //.HasOne(o => o.ApplicationUser)
-            //.WithMany(o => o.Appointments)
-            //.IsRequired()
-            //.OnDelete(DeleteBehavior.NoAction);
-       
+            modelBuilder.Entity<AppointmentUserDetails>()
+            .HasOne(o => o.ApplicationUser)
+            .WithMany(o => o.Appointments)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
+
 
 
         }
-        
-     
+
+
 
     }
 }
