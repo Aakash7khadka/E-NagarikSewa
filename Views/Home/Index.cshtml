@@ -153,6 +153,7 @@
                     <li>Time</li>
                     <li>Phone
                     <li />
+                    <li>Availability</li>
 
                 </ul>
 
@@ -167,6 +168,16 @@
                     <li>@obj.Time</li>
                     <li>@obj.ApplicationUser.PhoneNumber
                     <li />
+                    <li>
+                        @if (obj.isAvailable == true)
+                        {
+                            <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                        }
+                        else
+                        {
+                            <td></td>
+                        }
+                    </li>
 
 
                 </ul>
