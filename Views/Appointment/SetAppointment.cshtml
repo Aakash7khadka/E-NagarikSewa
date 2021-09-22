@@ -53,8 +53,8 @@
 
                             <div class="form-group">
                                 <label for="inputAddress2">Type</label>
-                                <select asp-for="ServiceType" class="form-group">
-                                    <option disabled >--Select--category--</option>
+                                <select asp-for="ServiceType" class="form-group" required>
+                                    <option disabled selected >--Select--category--</option>
                                     <option value="Birth Registration">Birth Registration</option>
                                     <option value="Death Registration">Death Registration</option>
                                     <option value="Marriage Registration">Marriage Registration</option>

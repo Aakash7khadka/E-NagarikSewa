@@ -36,7 +36,7 @@ namespace smartpalika.Controllers
             string date_ymd = dateTime_Nepal.ToString("yyyy/MM/dd");
 
             var current_user = await userManager.GetUserAsync(User);
-            var appointment_state = db.Appointment.Include(u => u.ApplicationUser).Where(s => s.ApplicationUser.Email == current_user.Email).Count();
+            var appointment_state = db.Appointment.Include(u => u.ApplicationUser).Where(s => s.ApplicationUser.Email == current_user.Email && s.Date==date_ymd).Count();
             //var appointment_state = db.Appointment.Where(s => s.Date.Contains(date_ymd) && s.Email == current_user.Email).Count();
             
             if (appointment_state > 0)
@@ -105,7 +105,7 @@ namespace smartpalika.Controllers
                         AppointmentVM app = new AppointmentVM();
                         app.OfficerName = employee.FullName;
                         app.service = "Employee".ToString();
-                        var appointment_list=db.Appointment.Where(s => s.Provider == employee.FullName && s.Date.Contains(date_ymd)).ToList();
+                        var appointment_list=db.Appointment.Where(s => s.Provider == employee.FullName && s.Date==date_ymd).ToList();
                         List<string> times =new List<string>(){ "11:00 AM", "12:00 PM", "1:00 PM", "2:00 PM", "3:00 PM" ,"4:00 PM"};
                         if (appointment_list.Count() == 0)
                         {

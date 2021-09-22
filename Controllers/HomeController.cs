@@ -60,12 +60,13 @@ namespace smartpalika.Controllers
         }
         public IActionResult Detail(Guid id)
         {
-            var obj = _db.Appointment.Find(id);
+            var obj = _db.Appointment.Include(u=>u.ApplicationUser).FirstOrDefault(u=>u.ID==id);
+            //var obj1=obj.Include(u => u.ApplicationUser);
             if(obj==null)
             {
                 return NotFound();
             }
-
+            
             return View(obj);
         }
         [HttpPost]
