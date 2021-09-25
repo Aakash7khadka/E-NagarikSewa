@@ -3,32 +3,46 @@
     .time_slot {
         background: #5e60ce50 !important;
     }
-   .time_slot:hover {
+
+        .time_slot:hover {
             background: #5e60ce !important;
-            color:white !important;
+            color: white !important;
         }
 </style>
 @if (ViewBag.app_list.Count == 0)
 {
-    <h3>No Officers available to provide service. Please try after 10:15 AM</h3>
+    
+    <div class="row">
+        <div class="col-12 col-lg-6 ">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title ">No Officers available to provide service.</h5>
+                    <h6 class="card-body"> Please try after 10:15 AM</h6>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
 }
 else
 {
     @foreach (var officer in ViewBag.app_list)
     {
-      
+
 
         <div class="row ml-1 mr-1 ml-md-4">
             <div class="bg_white shadow mt-4 p-4 col-12 col-md-7 rounded rounded-2">
-                <h5 ><small><span >Available Time for Vital Registration </span></small><small>by @officer.OfficerName</small></h5>
+                <h5><small><span>Available Time for Vital Registration </span></small><small>by @officer.OfficerName</small></h5>
 
                 @foreach (var str in officer.Available_Time)
                 {
 
-                    <a class="time_slot d-inline  btn  mt-2 mr-2"  type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName" >@str</a>
+                    <a class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName">@str</a>
 
                 }
-               
+
                 <div class="d-none d-md-block col-md-5"></div>
             </div>
 
