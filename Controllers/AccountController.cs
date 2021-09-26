@@ -180,7 +180,7 @@ namespace smartpalika.Controllers
             var client = new SendGridClient(apiKey);
             var from = new EmailAddress("enagariksewa@gmail.com", "E-Nagarik team");
             var subject = "Email Verification";
-            var to = new EmailAddress(email, "Example User");
+            var to = new EmailAddress(email, name);
             var plainTextContent = "Please verify your email ";
             var htmlContent = "<strong>Dear User,<br>Please verify your email with this link: </strong><a href=\" "+ message+"\"> Here</a><br>If you can't verify please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
@@ -314,8 +314,123 @@ namespace smartpalika.Controllers
             
             return View(usr);
         }
+        [AllowAnonymous]
+        public  IActionResult ForgotPassword()
+        {
+            return View(new ForgotPasswordVM());
+        }
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                var user = await userManager.FindByEmailAsync(model.Email);
+                
+                if (user != null && await userManager.IsEmailConfirmedAsync(user))
+                {
+                    
+                    var token = await userManager.GeneratePasswordResetTokenAsync(user);
 
+                    
+                    var passwordResetLink = Url.Action("ResetPassword", "Account",
+                            new { email = model.Email, token = token }, Request.Scheme);
 
+                   
+                        
+                        Task<bool> email_result = PostMessageForgotPassword(user.Email, passwordResetLink, user.FullName);
+                        await Task.WhenAll(email_result);
+                        var saveResult = email_result.Result;
+                        if (saveResult == false)
+                        {
+                            ViewBag.ErrorTitle = "Error";
+                            ViewBag.Message = "Cannot send email";
+                            return View("Error");
+
+                        }
+                        // Log the password reset link
+                        //logger.Log(LogLevel.Warning, passwordResetLink);
+
+                        // Send the user to Forgot Password Confirmation view
+                        return View("ForgotPasswordConfirmation");
+                }
+
+                
+                return View("ForgotPasswordConfirmation");
+            }
+
+            return View(model);
+        }
+
+        public async Task<bool> PostMessageForgotPassword(string email, string message, string name)
+        {
+            var apiKey = configuration.GetSection("SENDGRID_API_KEY").Value;
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("enagariksewa@gmail.com", "E-Nagarik team");
+            var subject = "Email Verification";
+            var to = new EmailAddress(email, name);
+            var plainTextContent = "Please verify your email ";
+            var htmlContent = "<strong>Dear User,<br>Please change your password with this link: </strong><a href=\" " + message + "\"> Here</a><br>If you can't change please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string token, string email)
+        {
+            // If password reset token or email is null, most likely the
+            // user tried to tamper the password reset link
+            if (token == null || email == null)
+            {
+                ModelState.AddModelError("", "Invalid password reset token");
+            }
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        public async Task<IActionResult> ResetPassword(PasswordResetVM model)
+        {
+            if (ModelState.IsValid)
+            {
+                // Find the user by email
+                var user = await userManager.FindByEmailAsync(model.Email);
+
+                if (user != null)
+                {
+                    // reset the user password
+                    var result = await userManager.ResetPasswordAsync(user, model.Token, model.Password);
+                    if (result.Succeeded)
+                    {
+                        return View("ResetPasswordConfirmation");
+                    }
+                    // Display validation errors. For example, password reset token already
+                    // used to change the password or password complexity rules not met
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    return View(model);
+                }
+
+                // To avoid account enumeration and brute force attacks, don't
+                // reveal that the user does not exist
+                return View("ResetPasswordConfirmation");
+            }
+            // Display validation errors if model state is not valid
+            return View(model);
+        }
 
     }
 }

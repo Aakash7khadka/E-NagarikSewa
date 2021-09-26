@@ -18,37 +18,40 @@
       <div class="col-12 col-lg-10 mt-4">
 
          <div class=" d-flex justify-content-center align-items-center mt-4">
-        <div class="bg_white login_form box_shadow  p-4 rounded rounded-3">
-            <form asp-action="Login">
-                <h4 class="text-center pb-2">Login Form</h4>
-                @*<div asp-validation-summary="All" class="text-danger"></div>*@
+             <div class="bg_white login_form box_shadow  p-4 rounded rounded-3">
+                 <form asp-action="Login">
+                     <h4 class="text-center pb-2">Login Form</h4>
+                     <div asp-validation-summary="All" class="text-danger"></div>
 
-                <div class="form-group">
-                    <label asp-for="ID" hidden class="control-label"></label>
+                     <div class="form-group">
+                         <label asp-for="ID" hidden class="control-label"></label>
 
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label" style=""></label>
-                    <input asp-for="Email" class="form-control pr-4" style=""/>
-                    <span asp-validation-for="Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="control-label"></label>
-                    <input asp-for="Password" class="form-control" />
-                    <span asp-validation-for="Password" class="text-danger"></span>
-                </div>
-                <div class="form-group form-check">
-                    <label class="form-check-label">
-                        <input class="form-check-input" asp-for="Rememberme" /> @Html.DisplayNameFor(model => model.Rememberme)
-                    </label>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Login" class="btn btn-primary" />
-                </div>
-                <span class="fs-4">Not registered yet?<a asp-controller="Account" asp-action="Register"> Register Now</a></span>
-            </form>
+                     </div>
+                     <div class="form-group">
+                         <label asp-for="Email" class="control-label" style=""></label>
+                         <input asp-for="Email" class="form-control pr-4" style="" />
+                         <span asp-validation-for="Email" class="text-danger"></span>
+                     </div>
+                     <div class="form-group">
+                         <label asp-for="Password" class="control-label"></label>
+                         <input asp-for="Password" class="form-control" />
+                         <span asp-validation-for="Password" class="text-danger"></span>
+                     </div>
+                     <div class="form-group form-check">
+                         <label class="form-check-label">
+                             <input class="form-check-input" asp-for="Rememberme" /> @Html.DisplayNameFor(model => model.Rememberme)
+                         </label>
+                     </div>
+                     <div class="form-group">
+                         <input type="submit" value="Login" class="btn btn-primary" />
+                     </div>
+                     <span class="fs-4">Not registered yet?<a asp-controller="Account" asp-action="Register"> Register Now</a></span>
+                 </form>
+                 <div>
+                     <a asp-action="ForgotPassword">Forgot Password?</a>
+                 </div>
 
-            </div>
+             </div>
         </div>
       </div>
         <div class="  col-1">
