@@ -28,6 +28,7 @@ namespace smartpalika.Models
             .WithMany(o => o.Appointments)
             .IsRequired()
             .OnDelete(DeleteBehavior.NoAction);
+            //.OnDelete(DeleteBehavior.ClientNoAction);
 
 
 

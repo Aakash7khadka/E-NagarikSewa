@@ -20,14 +20,16 @@ namespace smartpalika.Controllers
         private readonly SignInManager<ApplicationUser> signInManager;
         private readonly RoleManager<IdentityRole> roleManager;
         private readonly IConfiguration configuration;
+        private readonly ApplicationDbContext db;
         private readonly ILogger<AccountController> logger;
 
-        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager,SignInManager<ApplicationUser> signInManager,RoleManager<IdentityRole> roleManager, IConfiguration configuration,ApplicationDbContext db)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.roleManager = roleManager;
             this.configuration = configuration;
+            this.db = db;
         }
         public IActionResult Register()
         {
@@ -182,7 +184,7 @@ namespace smartpalika.Controllers
             var subject = "Email Verification";
             var to = new EmailAddress(email, name);
             var plainTextContent = "Please verify your email ";
-            var htmlContent = "<strong>Dear User,<br>Please verify your email with this link: </strong><a href=\" "+ message+"\"> Here</a><br>If you can't verify please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
+            var htmlContent = "<strong>Dear "+name+",<br>Please verify your email with this link: </strong><a href=\" "+ message+"\"> Here</a><br>If you can't verify please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)
@@ -281,19 +283,26 @@ namespace smartpalika.Controllers
                 FullName = user.FullName,
                 PhoneNumber = user.PhoneNumber,
                 ProfileImage = user.ProfileImage,
-                Email = user.Email
+                Email = user.Email,
+                ID=user.Id,
+                Address=user.Address,
+                
+                
 
             };
             return View(usr);
         }
         [Authorize]
         [HttpPost]
-        public async Task<IActionResult> DeleteUser(string email)
+        public async Task<IActionResult> DeleteUser(EditUserVM model)
         {
-            var user = await userManager.FindByEmailAsync(email);
+            var user = await userManager.FindByEmailAsync(model.Email);
             await signInManager.SignOutAsync();
             await userManager.DeleteAsync(user);
-
+            //var appointments = db.Appointment.Where(s => s.ApplicationUser == user);
+            
+            //db.Appointment.Remove(appointment);
+            
             return RedirectToAction("Index", "home");
         }
         [Authorize]
@@ -371,7 +380,7 @@ namespace smartpalika.Controllers
             var subject = "Email Verification";
             var to = new EmailAddress(email, name);
             var plainTextContent = "Please verify your email ";
-            var htmlContent = "<strong>Dear User,<br>Please change your password with this link: </strong><a href=\" " + message + "\"> Here</a><br>If you can't change please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
+            var htmlContent = "<strong>Dear " + name +",<br>Please change your password with this link: </strong><a href=\" " + message + "\"> Here</a><br>If you can't change please email us with your registered email address<br>Otherwise, visit the ward office with your National ID card";
             var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
             var response = await client.SendEmailAsync(msg);
             if (response.IsSuccessStatusCode)

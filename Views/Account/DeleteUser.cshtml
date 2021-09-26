@@ -29,7 +29,7 @@
                                 <img class="rounded-3" width="200" height="200" src="https://t3.ftcdn.net/jpg/01/18/01/98/360_F_118019822_6CKXP6rXmVhDOzbXZlLqEM2ya4HhYzSV.jpg" />
                             }
 
-                            <input class="file d-block fs-1 mt-1 btn btn-sm pl-0 " asp-for="ProfileImage" type="file" name="Image" />
+                           @* <input class="file d-block fs-1 mt-1 btn btn-sm pl-0 " asp-for="ProfileImage" type="file" name="Image" />*@
 
                             <span asp-validation-for="ProfileImage" class="text-danger"></span>
                         </div>
@@ -42,19 +42,19 @@
                         <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
                     <div class="form-group">
-                        <label asp-for="Email" class="control-label"></label>
-                        <input asp-for="Email" disabled class="form-control"  disabled/>
+                        @*<label asp-for="Email" class="control-label"></label>*@
+                        <input asp-for="@Model.Email" hidden class="form-control"  />
                         <span asp-validation-for="Email" class="text-danger"></span>
                     </div>
 
                       <div class="form-group">
                         <label asp-for="PhoneNumber" class="control-label"></label>
-                        <input asp-for="PhoneNumber" class="form-control"  disabled />
+                        <input asp-for="@Model.PhoneNumber" class="form-control"  disabled />
                         <span asp-validation-for="PhoneNumber" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
-                        <input type="submit" asp-route-id="@Model.Email" value="Delete" class="btn btn-primary btn-sm" />
+                        <input type="submit"  value="Delete" class="btn btn-primary btn-sm" />
                     </div>
                     <a class=" ml-2" asp-controller="Account" asp-action="Index" style="z-index:999">&#8592 Back to Profile</a>
                 </div>
