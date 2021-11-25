@@ -53,6 +53,7 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <a class="dropdown-item" asp-action="Index" asp-controller="account">Profile</a>
+                            <div class="dropdown-divider"></div>
                             <form method="post" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="dropdown-item">Logout @User.Identity.Name.Substring(0, @User.Identity.Name.IndexOf("@"))</button>
                             </form>
@@ -63,13 +64,14 @@
                         {
 
                             <a class="dropdown-item" asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
                         }
-                        <div class="dropdown-divider"></div>
+                        @*<div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/docs/versions/">All versions</a>
+        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/docs/versions/">All versions</a>*@
 
 
                     </div>
@@ -77,13 +79,13 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-light pl-2 pr-2 mx-1 py-3 my-n2" href="https://github.com/twbs" target="_blank" rel="noopener" aria-label="GitHub">
-                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>4
                     </a>
                 </li>
-
+                
                 <li class="nav-item">
                     <a class="nav-link text-light  px-2 mx-1 py-3 my-n2" href="https://bootstrap-slack.herokuapp.com/" target="_blank" rel="noopener" aria-label="Slack">
-                        <i class="bi bi-bell fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                        <i class="bi bi-bell fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>@TempData.Peek("count").ToString()
                     </a>
                 </li>
 
