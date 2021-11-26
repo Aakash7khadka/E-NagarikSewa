@@ -52,7 +52,9 @@ namespace smartpalika.Controllers
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var name = user.FullName;
-                data = appointments.Where(s => s.Provider == name);
+
+                data = appointments.Where(s => s.Provider == name) ;
+
                 count = data.Count();
             }
             else if (User.IsInRole("citizen"))
@@ -60,8 +62,10 @@ namespace smartpalika.Controllers
                 //data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
                 data = appointments.Where(s => s.ApplicationUser.Email == current_user.Email);
             }
+
             TempData["count"] = count.ToString();
            return View(data);
+
         }
         public IActionResult Detail(Guid id)
         {

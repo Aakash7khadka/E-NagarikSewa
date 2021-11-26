@@ -53,6 +53,7 @@
                         @if (signInManager.IsSignedIn(User))
                         {
                             <a class="dropdown-item" asp-action="Index" asp-controller="account">Profile</a>
+                            <div class="dropdown-divider"></div>
                             <form method="post" asp-action="Logout" asp-controller="Account">
                                 <button type="submit" class="dropdown-item">Logout @User.Identity.Name.Substring(0, @User.Identity.Name.IndexOf("@"))</button>
                             </form>
@@ -63,13 +64,14 @@
                         {
 
                             <a class="dropdown-item" asp-controller="Account" asp-action="Register" style="z-index:999">  Register</a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" asp-controller="Account" asp-action="Login" style="z-index:999">  login</a>
                         }
-                        <div class="dropdown-divider"></div>
+                        @*<div class="dropdown-divider"></div>
 
-                        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/docs/versions/">All versions</a>
+        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/docs/versions/">All versions</a>*@
 
 
                     </div>
@@ -77,9 +79,10 @@
 
                 <li class="nav-item">
                     <a class="nav-link text-light pl-2 pr-2 mx-1 py-3 my-n2" href="https://github.com/twbs" target="_blank" rel="noopener" aria-label="GitHub">
-                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>
+                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>4
                     </a>
                 </li>
+
 
 
                 <!-- Notification here -->
@@ -87,6 +90,7 @@
                 <li class="nav-item dropdown">
                     <a class="nav-item nav-link text-light dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="bi bi-bell fs-4"></i> <small class="bg-danger rounded rounded-6 px-1  "  style="position:absolute;bottom:20px;font-size:10px;left:20px">@TempData["count"]</small>
+
                     </a>
                     <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
                        
