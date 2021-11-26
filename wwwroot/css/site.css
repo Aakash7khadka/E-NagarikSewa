@@ -61,6 +61,7 @@ background:var(--bs-primary) !important;
     height: calc(100vh - 70px);
     min-width: 200px;
     background: white;
+    margin-bottom:70px
 }
 
     .sidebar_main a {

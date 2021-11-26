@@ -1,6 +1,7 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<ApplicationUser> signInManager
 @inject UserManager<ApplicationUser> userManager
+@inject smartpalika.Services.NotificationService noti
 
 @using System.Text.RegularExpressions;
 
@@ -69,9 +70,9 @@
                         }
                         @*<div class="dropdown-divider"></div>
 
-        <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
-        <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="/docs/versions/">All versions</a>*@
+                <a class="dropdown-item" href="https://getbootstrap.com/2.3.2/">v2.3.2</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/docs/versions/">All versions</a>*@
 
 
                     </div>
@@ -87,24 +88,26 @@
 
                 <!-- Notification here -->
 
-                <li class="nav-item dropdown">
-                    <a class="nav-item nav-link text-light dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="bi bi-bell fs-4"></i> <small class="bg-danger rounded rounded-6 px-1  "  style="position:absolute;bottom:20px;font-size:10px;left:20px">@TempData["count"]</small>@{TempData.Keep("count");}
+                @if(signInManager.IsSignedIn(User) && !User.IsInRole("citizen"))
+                              {
+                    <li class="nav-item dropdown">
+                        <a class="nav-item nav-link text-light dropdown-toggle mr-md-2" href="#" id="bd-versions" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="bi bi-bell fs-4"></i> <small class="bg-danger rounded rounded-6 px-1  " style="position:absolute;bottom:20px;font-size:10px;left:20px">@await noti.GetAppointmentCount() </small>
 
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
-                       
-                
-                        <a class="dropdown-item">You have  @TempData["count"] Appointments pending</a>
-
-
-                    </div>
-                </li>
-
-            
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
 
 
-            </ul>
+                            <a asp-controller="Home" asp-action="Appointment" class="dropdown-item">You have @await noti.GetAppointmentCount()  Appointments pending</a>
+
+
+                        </div>
+                    </li>
+
+                    }
+
+
+                </ul>
             <a class="btn btn-bd-download d-none d-lg-inline-block mb-3 mb-md-0 ml-md-3 border border-light" asp-action="Index" asp-controller="Appointment">Appointment</a>
 
         </header>
@@ -113,9 +116,10 @@
 
 
         @if (User.Identity.IsAuthenticated)
-        {
-         
-             
+                {
+
+
+
     <div class=" row  content_area m-0 p-0">
 
 

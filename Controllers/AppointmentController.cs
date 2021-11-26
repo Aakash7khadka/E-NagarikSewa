@@ -181,7 +181,7 @@ namespace smartpalika.Controllers
             db.Remove(appointment);
             db.SaveChanges();
             TempData["message"] = "Sucessfully Cancelled the appointment";
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Appointment","Home");
         }
 
         public async Task<IActionResult> SetAppointment(string time,string officer)
@@ -226,7 +226,7 @@ namespace smartpalika.Controllers
                 db.SaveChanges();
                 TempData["message"] = "Sucessfully created appointment";
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Appointment", "Home");
         }
     }
 

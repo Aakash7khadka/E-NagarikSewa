@@ -1,0 +1,217 @@
+﻿@model IEnumerable<smartpalika.Models.AppointmentUserDetails>
+@inject SignInManager<ApplicationUser> signInManager
+@inject UserManager<ApplicationUser> userManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+
+@if (TempData["message"] != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @TempData["message"];
+
+    </div>
+}
+
+
+<div class="container mx-auto" style="">
+    @if (!User.Identity.IsAuthenticated)
+    {
+
+        <div class="container " style="max-width: 1024px;margin-left:">
+            <div class="row">
+                <div class=" d-none d-md-block col-6 row justify-content-end align-items-center" style="height: 90vh;">
+                    <div id="carouselExampleSlidesOnly" class="carousel slide carousel-fade" data-ride="carousel">
+                        <div class="carousel-inner pr-0 p-4 ">
+                            <div class="carousel-item active pr-0 p-4">
+                                <img src="~/images/book.svg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item pr-0 p-4">
+                                <img src="~/images/online.svg" class="d-block w-100" alt="...">
+                            </div>
+                            <div class="carousel-item pr-0 p-4">
+                                <img src="~/images/os.svg" class="d-block w-100" alt="...">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-6 row align-items-center justify-content-start" style="height: 90vh;">
+                    <div class="mb-4 pb-4">
+                        <h1 style="color: #5e60ce;">E-Nagarik Sewa</h1>
+                        <p>
+                            Make a quick Appointment for public service on E-Nagarik Sewa.
+                        </p>
+                        <a class="btn text-light " style="background: #5e60ce;" asp-controller="Account" asp-action="Register">Register</a><br>
+                        <span class="mt-1 d-block"> <a class="text-muted " asp-controller="Account" asp-action="Login">Already a user? Sign in</a></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+<!-- Appointment list part-->
+@if (Model != null && Model.Count() > 0)
+{
+
+    <div class="container">
+        <div class="d-none d-lg-block card mt-4">
+            <div class="card-body">
+                @if (User.IsInRole("citizen"))
+                {
+
+
+                    <h5 class="card-title">My Appointment</h5>
+                    <h6 class="card-subtitle"><small> Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
+                }
+                @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+                {
+                    <h5 class="card-title">Appointment List</h5>
+
+                }
+                <div class="table-responsive">
+                    <table class="table table-striped mt-4 bg_white box_shadow rounded rounded-2">
+
+                        <thead>
+                            <tr>
+
+                                <th scope="col">Name</th>
+                                <th scope="col">Service</th>
+                                <th scope="col">Service Provider</th>
+                                <th scope="col">Time Slot</th>
+                                <th scope="col">Phone</th>
+                                <th scope="col">Availability</th>
+                                <th scope="col">Action</th>
+                                @*<th scope="col">Status</th>*@
+                                @*<th scope="col">Provider Role</th>*@
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var obj in Model)
+                            {
+                                <tr>
+                                    <td>@obj.ApplicationUser.FullName</td>
+                                    <td>@obj.ServiceType</td>
+                                    <td>@obj.Provider</td>
+                                    <td>@obj.Time</td>
+                                    <td>@obj.ApplicationUser.PhoneNumber</td>
+
+                                    @if (obj.isAvailable == true)
+                                    {
+                                        <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                                    }
+                                    else
+                                    {
+                                        <td></td>
+                                    }
+                                    <td><a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;</td>
+
+                                    @*<td>Waiting</td>*@
+                                    @*<td>Vital Registration</td>*@
+                                </tr>
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--My Appointment Start-->
+    <div class="d-block d-lg-none card mt-4 ">
+        <div class="card-body">
+            @if (User.IsInRole("citizen"))
+            {
+
+
+                <h5 class="card-title">My Appointment</h5>
+                <h6 class="card-subtitle"><small> Proceed to office only if you get a confirmation mail to avoid hassle.</small></h6>
+            }
+            @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+            {
+                <h5 class="card-title">Appointment List</h5>
+
+            }
+            <hr />
+            <div class="row">
+                @foreach (var obj in Model)
+                {
+                    <div class="col-5">
+
+                        <ul class="list-unstyled font-weight-bold">
+
+                            <li>Name</li>
+                            <li>Service</li>
+                            <li>Provider</li>
+                            <li>Time</li>
+                            <li>Phone
+                            <li />
+                            <li>Availability</li>
+
+                        </ul>
+
+                    </div>
+                    <div class="col-7">
+
+                        <ul class="list-unstyled">
+
+                            <li>@obj.ApplicationUser.FullName</li>
+                            <li>@obj.ServiceType</li>
+                            <li>@obj.Provider</li>
+                            <li>@obj.Time</li>
+                            <li>@obj.ApplicationUser.PhoneNumber
+                            <li />
+                            <li>
+                                @if (obj.isAvailable == true)
+                                {
+                                    <td><i class="fa fa-check" style="font-size:24px"></i></td>
+                                }
+                                else
+                                {
+                                    <td></td>
+                                }
+                            </li>
+
+
+                        </ul>
+
+                    </div>
+                    <div class="col-5">
+
+                    </div>
+                    <div class="col-7">
+                        <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a>
+                        <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>  <hr />
+                    </div>
+
+                }
+            </div>
+
+
+        </div>
+    </div>
+    <!--My Appointment Ends-->
+}
+else if (User.Identity.IsAuthenticated)
+{
+    <div class="row">
+        <div class="col-12 col-lg-6 ">
+            <div class="card mt-4">
+                <div class="card-body">
+                    <h5 class="card-title ">No Appointments today</h5>
+
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+}
+
