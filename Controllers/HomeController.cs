@@ -40,23 +40,28 @@ namespace smartpalika.Controllers
             var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
             var current_user = await _userManager.GetUserAsync(User);
             IEnumerable<AppointmentUserDetails> appointments=_db.Appointment.Include(u=>u.ApplicationUser).Where(s => s.Date.Contains(dateTime_));
-            IEnumerable<AppointmentUserDetails> data = null; 
+            IEnumerable<AppointmentUserDetails> data = null;
+
+            var count = 0;
             if (User.IsInRole("Admin"))
             {
                 data = appointments;
+                count = data.Count();
             }
             else if (User.IsInRole("Employee"))
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var name = user.FullName;
-                data = appointments.Where(s => s.Provider == name) ;
+                data = appointments.Where(s => s.Provider == name);
+                count = data.Count();
             }
-            else if(User.IsInRole("citizen"))
+            else if (User.IsInRole("citizen"))
             {
                 //data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
                 data = appointments.Where(s => s.ApplicationUser.Email == current_user.Email);
             }
-            return View(data);
+            TempData["count"] = count.ToString();
+           return View(data);
         }
         public IActionResult Detail(Guid id)
         {
