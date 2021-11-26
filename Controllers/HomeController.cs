@@ -31,8 +31,11 @@ namespace smartpalika.Controllers
             _userManager = userManager;
           
         }
-
         public async Task<IActionResult> Index()
+        {
+            return View();
+        }
+            public async Task<IActionResult> Appointment()
         {
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
             DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
