@@ -65,13 +65,22 @@ background:var(--bs-primary) !important;
 }
 
 .login_container {
-    background: url(../images/nepal-village.jpg);
+    background: url(../images/bb.jpg);
     background-size: cover;
-    background-position: center;
-    height: 80vh ;
+    background-position:top;
+    height: calc(100vh - 62px);
+   
     width: 100vw !important;
-    padding:0 !important;
-    margin:0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+.bg_overlay {
+    height: calc(100vh - 62px);
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: rgb(255,255,255);
+    background: linear-gradient(317deg, rgba(255,255,255,0.6194852941176471) 0%, rgba(255,255,255,0.6278886554621849) 100%);
 }
 
 .sidebar_main a {
@@ -83,9 +92,11 @@ background:var(--bs-primary) !important;
     background: var(--bs-primary);
     color: var(--bs-white)
 }
-
+.login_title {
+    color: var(--bs-primary) !important;
+}
 .btn_md {
-font-size:1.3rem;
+    font-size: 1.3rem;
 }
 
 .text-dark {
@@ -140,7 +151,7 @@ font-size:1.3rem;
 
 }
 .bg_white {
-    background:white !important;
+    background:#ffffffcc !important;
 }
 .f_m {
     font-size: 1.3rem;
