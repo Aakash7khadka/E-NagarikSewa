@@ -63,13 +63,12 @@ background:var(--bs-primary) !important;
     background: white;
 
 }
-
+/*https://ibb.co/K5Mgs05*/
 .login_container {
-    background: url(../images/bb.jpg);
+    background: url("https://i.ibb.co/9pF048p/bb.jpg");
     background-size: cover;
-    background-position:top;
+    background-position: top;
     height: calc(100vh - 62px);
-   
     width: 100vw !important;
     padding: 0 !important;
     margin: 0 !important;

@@ -121,31 +121,31 @@
 
 
 
-    <div class=" row  content_area m-0 p-0">
+      <div class=" row  content_area m-0 p-0">
 
 
 
         <div class="d-none d-lg-block col-2 p-0 text-dark sidebar_main left">
             <nav class="ml-3 nav flex-column">
-                <a class="nav-link p-3 pt-4" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill pr-3" style="font-size:18px;" ></i>Home</a>
-                <a class="nav-link p-3" asp-controller="Home" asp-action="Appointment"><i class="bi bi-calendar-check-fill pr-3" style="font-size:18px;"></i>Appointment</a>
-                <a class="nav-link p-3" asp-controller="Account" asp-action="Index"><i class="bi bi-person-circle pr-3" style="font-size:18px;"></i>Profile</a>
+                <a switch="Home" class="nav-link p-3 pt-4 active" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill pr-3" style="font-size:18px;" ></i>Home</a>
+                <a switch="Appointment" class="nav-link p-3" asp-controller="Home" asp-action="Appointment"><i class="bi bi-calendar-check-fill pr-3" style="font-size:18px;"></i>Appointment</a>
+                <a switch="Profile" class="nav-link p-3" asp-controller="Account" asp-action="Index"><i class="bi bi-person-circle pr-3" style="font-size:18px;"></i>Profile</a>
 
                 @*@if (User.IsInRole("Admin"))
-        {
-        <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
-         <a class="nav-link" asp-controller="Attendance" asp-action="Index"><i class="bi bi-card-checklist pr-3"></i>Attendance</a>
-        }*@
+                {
+                <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
+                 <a class="nav-link" asp-controller="Attendance" asp-action="Index"><i class="bi bi-card-checklist pr-3"></i>Attendance</a>
+                }*@
                 @if (User.IsInRole("Admin"))
                 {
-                    <a class="nav-link p-3" asp-controller="Administration" asp-action="ListRole"><i class="fas fa-briefcase pr-3" style="font-size:18px;"></i>Roles</a>
+                    <a switch="Roles" class="nav-link p-3" asp-controller="Administration" asp-action="ListRole"><i class="fas fa-briefcase pr-3" style="font-size:18px;"></i>Roles</a>
                 }
-                <a class="nav-link p-3" asp-controller="Attendance" asp-action="Index"><i class="bi bi-person-badge pr-3" style="font-size:18px;"></i>Attendance</a>
+                <a switch="Attendance" class="nav-link p-3" asp-controller="Attendance" asp-action="Index"><i class="bi bi-person-badge pr-3" style="font-size:18px;"></i>Attendance</a>
 
 
 
             </nav>
-                </div>
+        </div>
                 <!-- Mobile SideBar Starts -->
                 <nav class="d-lg-none col-12 navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand btn btn-sm btn-outline-dark" asp-action="Index" asp-controller="Appointment"><small>Take Appointment</small></a>
@@ -155,27 +155,27 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav">
                             <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
+                                <a switch="Home" class="nav-link" asp-controller="Home" asp-action="Index">Home <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Home" asp-action="Appointment">Appointment <span class="sr-only">(current)</span></a>
+                                <a switch="Appointment" class="nav-link" asp-controller="Home" asp-action="Appointment">Appointment <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item active">
-                                <a class="nav-link" asp-controller="Appointment" asp-action="Index">Attendance <span class="sr-only">(current)</span></a>
+                                <a switch="Attendance" class="nav-link" asp-controller="Appointment" asp-action="Index">Attendance <span class="sr-only">(current)</span></a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Account" asp-action="Index">Profile</a>
+                                <a switch="Profile" class="nav-link" asp-controller="Account" asp-action="Index">Profile</a>
                             </li>
 
                             @if (User.IsInRole("Admin"))
                             {
                                 <li class="nav-item">
-                                    <a class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
+                                    <a switch="Roles" class="nav-link" asp-controller="Administration" asp-action="ListRole"><i class="bi bi-card-checklist pr-3"></i>Roles</a>
                                 </li>
                             }
 
                             <li class="nav-item">
-                                <a class="nav-link" asp-controller="Attendance" asp-action="Index">Attendance</a>
+                                <a switch="Attendance" class="nav-link" asp-controller="Attendance" asp-action="Index">Attendance</a>
                             </li>
 
                         </ul>
@@ -205,12 +205,21 @@
                         @*</div>*@
                     @*</div>*@
                 }
-            </div>
+    </div>
 
             <script type="text/javascript">
-                $(document).on('click', '.sidebar_main a', function () {
-                    $(this).addClass('active').siblings().removeClass('active')
-                })
+               
+                $(".nav-link").click(function () {
+                    $(".nav-link").removeClass('active');
+                    $(this).addClass('active');
+                    localStorage.switch= this.getAttribute("switch")
+                });
+                $(window).ready(function () {
+                    $(".nav-link").removeClass('active');
+                    var _switch = localStorage.switch || 'Home';
+                    $('a[switch="' + _switch + '"]').addClass('active');
+                });
+                
             </script>
         </body>
         </html>
