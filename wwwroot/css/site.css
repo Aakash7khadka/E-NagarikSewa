@@ -12,7 +12,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif !important;
-    background: #f2f6f9 !important;
+    background: #f9fafe !important;
 }
 .btn-primary {
     background: var(--bs-primary) !important;
@@ -58,16 +58,26 @@ background:var(--bs-primary) !important;
 .sidebar_main {
     border-right: 1px solid #EBEDF3;
     font-weight: bolder;
-    height: calc(100vh - 70px);
-    min-width: 200px;
+    height: calc(100vh - 62px);
+    min-width: 300px;
     background: white;
-    margin-bottom:70px
+
 }
 
-    .sidebar_main a {
-        color: #3f4254;
-        font-weight: 500;
-    }
+.login_container {
+    background: url(../images/nepal-village.jpg);
+    background-size: cover;
+    background-position: center;
+    height: 80vh ;
+    width: 100vw !important;
+    padding:0 !important;
+    margin:0 !important;
+}
+
+.sidebar_main a {
+    color: #3f4254;
+    font-weight: 500;
+}
 
 .sidebar_main .active {
     background: var(--bs-primary);
