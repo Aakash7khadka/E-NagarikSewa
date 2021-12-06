@@ -65,7 +65,7 @@ background:var(--bs-primary) !important;
 }
 /*https://ibb.co/K5Mgs05*/
 .login_container {
-    background: url("https://i.ibb.co/9pF048p/bb.jpg");
+  /*  background: url("../images/logo.jpg");*/
     background-size: cover;
     background-position: top;
     height: calc(100vh - 62px);
@@ -73,14 +73,7 @@ background:var(--bs-primary) !important;
     padding: 0 !important;
     margin: 0 !important;
 }
-.bg_overlay {
-    height: calc(100vh - 62px);
-    width: 100vw !important;
-    padding: 0 !important;
-    margin: 0 !important;
-    background: rgb(255,255,255);
-    background: linear-gradient(317deg, rgba(255,255,255,0.6194852941176471) 0%, rgba(255,255,255,0.6278886554621849) 100%);
-}
+
 
 .sidebar_main a {
     color: #3f4254;
@@ -173,19 +166,37 @@ background:var(--bs-primary) !important;
 }
 .login_form {
     
-    width:50% !important;
+    width:100% !important;
 }
 .notification_count{
     display:none !important;
 }
 
+.login_container {
+    height: calc(100vh - 62px);
+}
 /*Customized CSS*/
 .red {
     color: #fe4a4b !important;
 }
+
 @media only screen and (max-width: 500px) {
     .login_form {
         width: 100% !important;
     }
+    .login_wrapper_mobile {
+        background: url("../images/emb.png");
+        background-size: contain;
+        background-repeat:no-repeat;
+        background-position: center;
+       
+    }
+    .bg_overlay_mobile {
 
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: rgb(255,255,255);
+    background: linear-gradient(317deg, rgba(255,255,255,0.6194852941176471) 0%, rgba(255,255,255,0.6278886554621849) 100%);
+}
 }
