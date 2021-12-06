@@ -179,6 +179,10 @@ background:var(--bs-primary) !important;
     display:none !important;
 }
 
+/*Customized CSS*/
+.red {
+    color: #fe4a4b !important;
+}
 @media only screen and (max-width: 500px) {
     .login_form {
         width: 100% !important;
