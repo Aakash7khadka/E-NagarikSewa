@@ -125,9 +125,9 @@
 
 
 
-        <div class="d-none d-lg-block col-2 p-0 text-dark sidebar_main left">
+        <div class="d-none d-lg-block col-3 p-0 text-dark sidebar_main left">
             <nav class="ml-3 nav flex-column">
-                <a switch="Home" class="nav-link p-3 pt-4 active" asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill pr-3" style="font-size:18px;" ></i>Home</a>
+                <a switch="Home" class="nav-link p-3 pt-4 " asp-controller="Home" asp-action="Index"><i class="bi bi-house-fill pr-3" style="font-size:18px;" ></i>Home</a>
                 <a switch="Appointment" class="nav-link p-3" asp-controller="Home" asp-action="Appointment"><i class="bi bi-calendar-check-fill pr-3" style="font-size:18px;"></i>Appointment</a>
                 <a switch="Profile" class="nav-link p-3" asp-controller="Account" asp-action="Index"><i class="bi bi-person-circle pr-3" style="font-size:18px;"></i>Profile</a>
 
@@ -185,8 +185,8 @@
 
 
 
-                <div class="col-12 col-md-9 col-xl-10 right">
-                    <div class="container-fluid">
+                <div class="col-12 col-md-9 col-lg-9 right">
+                    <div class="container">
                         @RenderBody()
                     </div>
                 </div>
@@ -209,16 +209,22 @@
 
             <script type="text/javascript">
                
-                $(".nav-link").click(function () {
-                    $(".nav-link").removeClass('active');
-                    $(this).addClass('active');
-                    localStorage.switch= this.getAttribute("switch")
-                });
+                //$(".nav-link").click(function () {
+                //    $(".nav-link").removeClass('active');
+                //    $(this).addClass('active');
+                //    localStorage.switch= this.getAttribute("switch")
+                //});
+                //$(window).ready(function () {
+                //    $(".nav-link").removeClass('active');
+                //    var _switch = localStorage.switch || 'Home';
+                //    $('a[switch="' + _switch + '"]').addClass('active');
+                //});
+
                 $(window).ready(function () {
-                    $(".nav-link").removeClass('active');
-                    var _switch = localStorage.switch || 'Home';
-                    $('a[switch="' + _switch + '"]').addClass('active');
+                    $('.sidebar_main').find('[href="' + window.location.pathname + '"]').addClass('active')
+
                 });
+
                 
             </script>
         </body>

@@ -143,50 +143,31 @@
             <div class="row">
                 @foreach (var obj in Model)
                 {
-                    <div class="col-5">
+                    <div class="col-12">
 
-                        <ul class="list-unstyled font-weight-bold">
+                        <ul class="list-unstyled ">
 
-                            <li>Name</li>
-                            <li>Service</li>
-                            <li>Provider</li>
-                            <li>Time</li>
-                            <li>Phone
-                            <li />
-                            <li>Availability</li>
-
-                        </ul>
-
-                    </div>
-                    <div class="col-7">
-
-                        <ul class="list-unstyled">
-
-                            <li>@obj.ApplicationUser.FullName</li>
-                            <li>@obj.ServiceType</li>
-                            <li>@obj.Provider</li>
-                            <li>@obj.Time</li>
-                            <li>@obj.ApplicationUser.PhoneNumber
-                            <li />
-                            <li>
-                                @if (obj.isAvailable == true)
-                                {
-                                    <td><i class="fa fa-check" style="font-size:24px"></i></td>
-                                }
-                                else
-                                {
-                                    <td></td>
-                                }
-                            </li>
-
+                            <li class="">Name: @obj.ApplicationUser.FullName </li>
+                            <li>Service: @obj.ServiceType</li>
+                            <li>Provider: @obj.Provider</li>
+                            <li>Time: @obj.Time</li>
+                            <li>Phone: @obj.ApplicationUser.PhoneNumber<li />
+                                                                      <li>
+                                                                          Availability:@if (obj.isAvailable == true)
+                                                                          {
+                                                                              <i class="fa fa-check" style="font-size:24px"></i>
+                                                                          }
+                                                                          else
+                                                                          {
+                                                                            
+                                                                          }
+                                                                      </li>
 
                         </ul>
 
                     </div>
-                    <div class="col-5">
-
-                    </div>
-                    <div class="col-7">
+             
+                    <div class="col-12">
                         <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a>
                         <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>  <hr />
                     </div>

@@ -59,7 +59,7 @@ background:var(--bs-primary) !important;
     border-right: 1px solid #EBEDF3;
     font-weight: bolder;
     height: calc(100vh - 62px);
-    min-width: 300px;
+    max-width: 270px !important;
     background: white;
 
 }
