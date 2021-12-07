@@ -79,11 +79,6 @@
                     </div>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link text-light pl-2 pr-2 mx-1 py-3 my-n2" href="https://github.com/twbs" target="_blank" rel="noopener" aria-label="GitHub">
-                        <i class="bi bi-envelope fs-4"></i><span class="badge bg-secondary bg-danger fw-normal">4</span>4
-                    </a>
-                </li>
 
 
 
@@ -96,16 +91,15 @@
                             <i class="bi bi-bell fs-4"></i> <small class="bg-danger rounded rounded-6 px-1  " style="position:absolute;bottom:20px;font-size:10px;left:20px">@await noti.GetAppointmentCount() </small>
 
                         </a>
-                        <div class="dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
+                        <div class="notification_dropdown dropdown-menu dropdown-menu-md-right" aria-labelledby="bd-versions">
 
-
-                            <a asp-controller="Home" asp-action="Appointment" class="dropdown-item">You have @await noti.GetAppointmentCount()  Appointments pending</a>
-
+                            <a asp-controller="Home" asp-action="Appointment" class=" dropdown-item ">You have @await noti.GetAppointmentCount()  Appointments pending</a>
 
                         </div>
                     </li>
 
                     }
+                <!-- Notification here -->
 
 
                 </ul>

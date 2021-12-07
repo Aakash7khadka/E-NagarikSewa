@@ -198,5 +198,10 @@ background:var(--bs-primary) !important;
     margin: 0 !important;
     background: rgb(255,255,255);
     background: linear-gradient(317deg, rgba(255,255,255,0.6194852941176471) 0%, rgba(255,255,255,0.6278886554621849) 100%);
+
 }
+
+    .notification_dropdown{
+        margin-left:0 !important;
+    }
 }
