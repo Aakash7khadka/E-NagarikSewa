@@ -17,6 +17,7 @@ namespace smartpalika.Models
         }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<AppointmentUserDetails> Appointment { get; set; }
+        public DbSet<Appointment_All> Appointment_All { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

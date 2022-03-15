@@ -40,7 +40,7 @@ else
                 {
 
 
-                    @if (User.IsInRole("Employee"))
+                    @if (User.IsInRole("Employeee"))
                     {
                         <button disabled  class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName" >@str</button>
 

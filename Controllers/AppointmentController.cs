@@ -170,7 +170,7 @@ namespace smartpalika.Controllers
             ViewBag.id = id;
             return View();
         }
-        public IActionResult Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             var appointment = db.Appointment.FirstOrDefault(s => s.ID== id);
             if (appointment == null)
@@ -180,6 +180,18 @@ namespace smartpalika.Controllers
             }
             db.Remove(appointment);
             db.SaveChanges();
+            Appointment_All obj1 = new Appointment_All();
+            var current_user = await userManager.GetUserAsync(User);
+            obj1.ApplicationUser = current_user;
+            obj1.Date = appointment.Date;
+            obj1.priority = appointment.priority;
+            obj1.isAvailable = appointment.isAvailable;
+            obj1.Provider = appointment.Provider;
+            obj1.Time = appointment.Time;
+            obj1.Status = "Remove";
+            db.Appointment_All.Add(obj1);
+            db.SaveChanges();
+
             TempData["message"] = "Sucessfully Cancelled the appointment";
             return RedirectToAction("Appointment","Home");
         }
@@ -209,6 +221,7 @@ namespace smartpalika.Controllers
         [HttpPost]
         public async Task<IActionResult> SetAppointmentAsync(AppointmentUserDetails obj)
         {
+            Appointment_All obj1 = new Appointment_All();
             var current_user = await userManager.GetUserAsync(User);
             obj.ApplicationUser = current_user;
             if (ModelState.IsValid)
@@ -223,6 +236,18 @@ namespace smartpalika.Controllers
                     return RedirectToAction("Index", "Home");
                 }
                 db.Appointment.Add(obj);
+               
+                db.SaveChanges();
+
+                obj1.ApplicationUser = current_user;
+                obj1.Date = obj.Date;
+                obj1.priority = obj.priority;
+                obj1.isAvailable = obj.isAvailable;
+                obj1.Provider = obj.Provider;
+                obj1.Time = obj.Time;
+                obj1.Status = "Add";
+                obj1.ServiceType=obj.ServiceType;
+                db.Appointment_All.Add(obj1);
                 db.SaveChanges();
                 TempData["message"] = "Sucessfully created appointment";
             }

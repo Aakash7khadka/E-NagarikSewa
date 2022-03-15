@@ -14,6 +14,8 @@ using System.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Nancy.Json;
 
 namespace smartpalika.Controllers
 {
@@ -33,6 +35,19 @@ namespace smartpalika.Controllers
         }
         public async Task<IActionResult> Index()
         {
+            try
+            {
+                var appointment_day = _db.Appointment_All.GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderByDescending(s=>s.Date).ToList();
+                //var appointment_day_json=  JsonConvert.SerializeObject(appointment_day);
+                var appointment_day_json = new JavaScriptSerializer().Serialize(appointment_day);
+                ViewBag.appointment_day_json = appointment_day_json;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+           
             return View();
         }
             public async Task<IActionResult> Appointment()
