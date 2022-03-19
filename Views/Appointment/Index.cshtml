@@ -9,53 +9,76 @@
             color: white !important;
         }
 </style>
-@if (ViewBag.app_list.Count == 0)
-{
-    
-    <div class="row">
-        <div class="col-12 col-lg-6 ">
-            <div class="card mt-4">
-                <div class="card-body">
-                    <h5 class="card-title ">No Officers available to provide service.</h5>
-                    <h6 class="card-body"> Please try after 10:15 AM</h6>
+
+<div class="row">
+    <div class="col-12 col-md-7">
+        @if (ViewBag.app_list.Count == 0)
+        {
+
+            <div class="row">
+                <div class="col-12 ">
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h5 class="card-title ">No Officers available to provide service.</h5>
+                            <h6 class="card-body"> Please try after 10:15 AM</h6>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        }
+
+        else
+        {
+            @foreach (var officer in ViewBag.app_list)
+            {
+
+
+                <div class="row ml-1 mr-1 ml-md-4">
+                    <div class="bg_white border mt-4 p-4 col-12 rounded rounded-2">
+                        <h4><small><span>Appointment with </span></small><small> @officer.OfficerName <span class="font-italic" style="font-size:15px">(Vital Registration) </span> </small> </h4>
+
+                        @foreach (var str in officer.Available_Time)
+                        {
+
+
+                            @if (User.IsInRole("Employeee"))
+                            {
+                                <button disabled class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName">@str</button>
+
+                            }
+                            else
+                            {
+
+                                <a class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-time="@str" asp-route-officer="@officer.OfficerName">@str</a>
+                            }
+                        }
+
+                        <div class="d-none d-md-block col-md-5"></div>
+                    </div>
 
 
                 </div>
-            </div>
-        </div>
 
+
+            }}
     </div>
-}
-else
-{
-    @foreach (var officer in ViewBag.app_list)
-    {
-
-
-        <div class="row ml-1 mr-1 ml-md-4">
-            <div class="bg_white border mt-4 p-4 col-12 col-md-7 rounded rounded-2">
-                <h4><small><span>Appointment with </span></small><small> @officer.OfficerName <span class="font-italic" style="font-size:15px">(Vital Registration) </span> </small> </h4>
-
-                @foreach (var str in officer.Available_Time)
-                {
-
-
-                    @if (User.IsInRole("Employeee"))
-                    {
-                        <button disabled  class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment" asp-route-obj="@Model" asp-route-time="@str" asp-route-officer="@officer.OfficerName" >@str</button>
-
-                    }
-                    else
-                    {
-
-                         <a class="time_slot d-inline  btn  mt-2 mr-2" type="button" asp-controller="Appointment" asp-action="SetAppointment"  asp-route-time="@str" asp-route-officer="@officer.OfficerName">@str</a>
-                     }
-                    }
-
-                <div class="d-none d-md-block col-md-5"></div>
+    <div class="col-12 col-md-5 mt-4">
+        <div class="card" style="width: ;">
+            <div class="card-body">
+                <h5 class="card-title">Application Instruction</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Follow these instructions to book an appointment</h6>
+                <ol>
+                    <li>Select required time-slot available</li>
+                    <li>Select required Service</li>
+                    <li>Confirm appointment</li>
+                    <li>Check email for appointment details</li>
+                    <li>Confirm your availability at the office</li>
+                </ol>
             </div>
-
         </div>
+    </div>
+</div>
 
-
-    }}

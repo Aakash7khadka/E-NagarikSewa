@@ -1,27 +1,28 @@
 ﻿@*<head>
-    <script>
-        var appointment_list_data=[];
-        var appointment_count_list=@Html.Raw(@ViewBag.appointment_day_json);
-        for(item of appointment_count_list)
-        {
-            appointment_list_data.push(item['date'],item[''appointmentCount]);
-        }
-        debugger;
-    </script>
-</head>*@
+        <script>
+            var appointment_list_data=[];
+            var appointment_count_list=@Html.Raw(@ViewBag.appointment_day_json);
+            for(item of appointment_count_list)
+            {
+                appointment_list_data.push(item['date'],item[''appointmentCount]);
+            }
+            debugger;
+        </script>
+    </head>*@
 
 @*<input type="hidden" id="appointment_count_list" />*@
 
-<div class="container-fluid pt-4 mt-4">
+<div class="container-fluid pt-2 mt-2">
     <div class="row">
         @if (ViewBag.today_total_appointments > 0)
         {
             <div class="col-12 col-md-4">
-                <div class="card" style="width: ;">
+                <div class="card" style="width: ">
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">Total Appointments Today</h6>
-                        <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">@ViewBag.today_total_appointments</h1>
-                        <p class="card-text mt-0 pt-0"><small>Write something</small></p>
+                        <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">@ViewBag.today_total_appointments </h1>
+                       
+                        <p class="card-text mt-0 pt-0"><small><a href="#">View</a></small></p>
                     </div>
                 </div>
             </div>
@@ -34,32 +35,32 @@
                     <div class="card-body">
                         <h6 class="card-subtitle mb-2 text-muted">Pending Appointments</h6>
                         <h1 class=" card-title display-5 mb-0 pb-0" style="color: #fe4a4b ">@ViewBag.today_total_pending</h1>
-                        <p class="card-text mt-0 pt-0"><small>Write something</small></p>
+                        <p class="card-text mt-0 pt-0"><small><a href="#">View</a></small></p>
                     </div>
                 </div>
             </div>
         }
-   
-        
+
+
         <div class="col-12 col-md-4">
             <div class="card" style="width:;">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Available Citizens</h6>
                     <h1 class="card-title display-5 mb-0 pb-0 " style="color: #38b000aa;">@ViewBag.today_total_available_citizens</h1>
-                    <p class="card-text mt-0 pt-0"><small>Write something</small></p>
+                    <p class="card-text mt-0 pt-0"><small><a href="#">View</a></small></p>
                 </div>
             </div>
         </div>
-      
+
         @*<div class="col-12 col-md-3">
-            <div class="card" style="width:;">
-                <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Total Appointments</h6>
-                    <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">05</h1>
-                    <p class="card-text mt-0 pt-0"><small>Write something</small></p>
+                <div class="card" style="width:;">
+                    <div class="card-body">
+                        <h6 class="card-subtitle mb-2 text-muted">Total Appointments</h6>
+                        <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">05</h1>
+                        <p class="card-text mt-0 pt-0"><small>Write something</small></p>
+                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
 
     </div>
     <div class="row">
@@ -73,12 +74,12 @@
         </div>
     </div>
 
-    </div>
+</div>
 
 
 
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
 
        var appointment_list_data=[["Date", "Appointment Count", { role: "style" } ]];
         var appointment_count_list=@Html.Raw(@ViewBag.appointment_day_json);
@@ -101,12 +102,13 @@
 
       var options = {
         title: "Appointment Counts by Day",
-       
+
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
       };
       var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
       chart.draw(view, options);
   }
-    </script>
+</script>
+
 
