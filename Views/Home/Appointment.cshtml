@@ -62,7 +62,7 @@
     <div class="container">
         <div class="d-none d-lg-block card mt-4">
             <div class="card-body">
-                @if (User.IsInRole("citizen"))
+                @if (User.IsInRole("citizen") && !User.IsInRole("Employee") && !User.IsInRole("Admin"))
                 {
 
 
