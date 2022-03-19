@@ -37,7 +37,31 @@ namespace smartpalika.Controllers
         {
             try
             {
-                var appointment_day = _db.Appointment_All.GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderByDescending(s=>s.Date).ToList();
+                var current_user = await _userManager.GetUserAsync(User);
+                var appointment_day = _db.Appointment_All.GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderByDescending(s=>s.AppointmentCount).ToList();
+                int today_total_appointments=0;
+                int today_total_pending = 0;
+                int today_total_available_citizens = 0;
+                TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
+                DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
+                //DateTime date = DateTime.Today;
+                var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
+
+                if (User.IsInRole("Admin"))
+                {
+                    today_total_appointments = _db.Appointment.Where(s=> s.Date == dateTime_).Count();
+                    today_total_pending = _db.Appointment.Where(s=> s.Date == dateTime_ && s.isCompleted == false).Count();
+                    today_total_available_citizens = _db.Appointment.Where(s => s.Date == dateTime_ && s.isCompleted == false && s.isAvailable == true).Count();
+                }
+                else if(User.IsInRole("Employee"))
+                {
+                    today_total_appointments = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_).Count();
+                    today_total_pending = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_ && s.isCompleted == false).Count();
+                    today_total_available_citizens = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_ && s.isCompleted == false && s.isAvailable == true).Count();
+                }
+                ViewBag.today_total_appointments = today_total_appointments;
+                ViewBag.today_total_pending = today_total_pending;
+                ViewBag.today_total_available_citizens = today_total_available_citizens;
                 //var appointment_day_json=  JsonConvert.SerializeObject(appointment_day);
                 var appointment_day_json = new JavaScriptSerializer().Serialize(appointment_day);
                 ViewBag.appointment_day_json = appointment_day_json;

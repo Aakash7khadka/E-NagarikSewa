@@ -110,7 +110,11 @@
                                     {
                                 <td> <i class="fa fa-times" style="font-size:18px"></i></td>
                                     }
-                                    <td><a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a><a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>&nbsp;</td>
+                                    <td><a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a>
+                                       @if(!obj.isCompleted){
+                                        <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>
+                                       }
+                                        &nbsp;</td>
 
                                     @*<td>Waiting</td>*@
                                     @*<td>Vital Registration</td>*@

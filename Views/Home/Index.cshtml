@@ -1,45 +1,57 @@
-﻿<head>
+﻿@*<head>
     <script>
-        var appointment_count_list=JSON.parse(@ViewBag.appointment_day_json);
+        var appointment_list_data=[];
+        var appointment_count_list=@Html.Raw(@ViewBag.appointment_day_json);
+        for(item of appointment_count_list)
+        {
+            appointment_list_data.push(item['date'],item[''appointmentCount]);
+        }
         debugger;
     </script>
-</head>
+</head>*@
 
 @*<input type="hidden" id="appointment_count_list" />*@
 
 <div class="container-fluid pt-4 mt-4">
     <div class="row">
+        @if(ViewBag.today_total_appointments>0)
+        {
         <div class="col-12 col-md-3">
             <div class="card" style="width: ;">
                 <div class="card-body">
-                    <h6 class="card-subtitle mb-2 text-muted">Total Appointments</h6>
-                    <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">5</h1>
+                    <h6 class="card-subtitle mb-2 text-muted">Total Appointments Today</h6>
+                    <h1 class="card-title display-5 mb-0 pb-0 " style="color: #5e60ce;">@ViewBag.today_total_appointments</h1>
                     <p class="card-text mt-0 pt-0"><small>Write something</small></p>
                 </div>
             </div>
         </div>
+        }
+        @if (ViewBag.today_total_pending>0)
+        {
 
-        <div class="col-12 col-md-3">
-            <div class="card" style="width: ;">
+            <div class="col-12 col-md-3">
+                <div class="card" style="width: ;">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Pending Appointments</h6>
-                    <h1 class=" card-title display-5 mb-0 pb-0" style="color: #fe4a4b ">3</h1>
+                    <h1 class=" card-title display-5 mb-0 pb-0" style="color: #fe4a4b ">@ViewBag.today_total_pending</h1>
                     <p class="card-text mt-0 pt-0"><small>Write something</small></p>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-md-3">
-            <div class="card" style="width:;">
+        }
+        @if (ViewBag.today_total_available_citizens > 0)
+        {
+            <div class="col-12 col-md-3">
+                <div class="card" style="width:;">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Available Citizens</h6>
-                    <h1 class="card-title display-5 mb-0 pb-0 " style="color: #38b000aa;">1</h1>
+                    <h1 class="card-title display-5 mb-0 pb-0 " style="color: #38b000aa;">@ViewBag.today_total_available_citizens</h1>
                     <p class="card-text mt-0 pt-0"><small>Write something</small></p>
                 </div>
             </div>
         </div>
-
-        <div class="col-12 col-md-3">
+        }
+        @*<div class="col-12 col-md-3">
             <div class="card" style="width:;">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Total Appointments</h6>
@@ -47,9 +59,10 @@
                     <p class="card-text mt-0 pt-0"><small>Write something</small></p>
                 </div>
             </div>
-        </div>
+        </div>*@
         <div class="col-12 col-md-3">
-                 <div id="curve_chart" style="width: 900px; height: 500px"></div>
+                 <div id="columnchart_values" style="width: 900px; height: 500px"></div>
+              
         </div>
     </div>
 </div>
@@ -57,29 +70,35 @@
 
 
      <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-       
+  <script type="text/javascript">
+       var appointment_list_data=[["Date", "Appointment Count", { role: "style" } ]];
+        var appointment_count_list=@Html.Raw(@ViewBag.appointment_day_json);
+        for(item of appointment_count_list)
+        {
+            appointment_list_data.push([item['date'],item['appointmentCount'],'#797BE7']);
+        }
+    google.charts.load("current", {packages:['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable(appointment_list_data);
 
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+      var view = new google.visualization.DataView(data);
+      view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       2]);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales'],
-          ['2004',  800],
-          ['2005',  1200],
-          ['2006',  1000],
-          ['2007',  1030]
-        ]);
+      var options = {
+        title: "Appointment Counts by Day",
+        width: 600,
+        height: 400,
+        bar: {groupWidth: "95%"},
+        legend: { position: "none" },
+      };
+      var chart = new google.visualization.ColumnChart(document.getElementById("columnchart_values"));
+      chart.draw(view, options);
+  }
+  </script>
 
-        var options = {
-          title: 'Company Performance',
-          curveType: 'function',
-          legend: { position: 'bottom' }
-        };
-
-        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
-
-        chart.draw(data, options);
-      }
-    </script>

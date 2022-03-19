@@ -99,6 +99,30 @@
                             </div>
                         </div>
                     }
+                    @if (User.IsInRole("Employee") || User.IsInRole("Admin"))
+                    {
+
+                        @if (Model.isCompleted == false)
+                        {
+                       <div class=" d-lg-block card mt-2">
+                        <div class="card-body">
+                            <h5 class="card-title">For Employees Only</h5>
+                            <h6>Please check the box to show that service is completed.</h6>
+
+
+                            <div class="form-group form-check">
+
+                                <input class="form-check-input " style="width:24px; height:24px;" asp-for="isCompleted" />
+                                <br />
+                                <input type="submit" value="Change" class="btn btn-warning mt-4 " style="background: #5e60ce !important;color:white" />
+
+                            </div>
+                            </div>
+                            </div>
+                                
+                        }
+
+                    }
                     <div class=" d-lg-block card mt-2">
                         <div class="card-body">
                             <h5 class="card-title">For Citizen Only</h5>

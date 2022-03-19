@@ -19,7 +19,7 @@ namespace smartpalika.Models
         public string Time { get; set; }
         public string Provider { get; set; }
         public bool isAvailable { get; set; }
-
+        public bool isCompleted { get; set; }
         
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
