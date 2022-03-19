@@ -5,25 +5,32 @@
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<div class="row mt-4">
+<h3 class="text-dark mt-2 ml-1">Profile</h3>
+<hr />
+<div class="row">
     <div class="col-12 col-md-7 pb-4">
-        <div class="card mx-2 mb-3 border-0 rounded rounded-3 box_shadow">
-            <div class="pl-4 pr-4 pt-2 d-flex justify-content-between">
+        <div class="card mx-2 mb-1">
+            <div class="bg_white  card-header  d-flex justify-content-between align-items-baseline">
                 <span class="text-muted">Profile</span>
-                <div class="dropdown ">
-                    <a class="f_m d-block dots px-2  rounded-3 rounded" role="button" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small><i class="fas fa-grip-vertical"></i></small></a>
+                <div class="d-flex justify-content-end">
+                    <div class="dropdown ">
+                        <a class="f_m d-block dots px-2  rounded-3 rounded" role="button" href="" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><small><i class="fas fa-grip-vertical"></i></small></a>
 
 
-                    <div class="dropdown-menu box_shadow  dropdown-menu-right text-left" aria-labelledby="dropdownMenuLink">
-                        <a class="dropdown-item" asp-controller="Account" asp-action="EditUser"><i class="fas fa-user-edit mr-1 text-muted"></i>Edit</a>
-                        <a class="dropdown-item" asp-controller="Account" asp-action="DeleteUser"><i class="fas fa-trash-alt mr-2 text-muted"></i>Delete</a>
-                        <form method="post" asp-action="Logout" asp-controller="Account">
-                            <button class="dropdown-item" type="submit"><i class="fas fa-sign-out-alt text-muted mr-2"></i>Logout</button>
-                        </form>
+                        <div class="dropdown-menu box_shadow  dropdown-menu-right text-left" aria-labelledby="dropdownMenuLink">
+                            <a class="dropdown-item" asp-controller="Account" asp-action="EditUser"><i class="fas fa-user-edit mr-1 text-muted"></i>Edit</a>
+                            <a class="dropdown-item" asp-controller="Account" asp-action="DeleteUser"><i class="fas fa-trash-alt mr-2 text-muted"></i>Delete</a>
+                            <form method="post" asp-action="Logout" asp-controller="Account">
+                                <button  class="dropdown-item" type="submit" ><i class="fas fa-sign-out-alt text-muted mr-2"></i>Logout</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
+
             </div>
+        </div>
+
+        <div class="card mx-2 mb-2 border-0 rounded rounded-3 box_shadow">
             <div class="card-body pb-4">
 
 
@@ -92,6 +99,3 @@
         </div>
     </div>
 </div>
-
-
-<!--New Profile-->
