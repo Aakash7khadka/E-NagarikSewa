@@ -38,7 +38,7 @@ namespace smartpalika.Controllers
             try
             {
                 var current_user = await _userManager.GetUserAsync(User);
-                var appointment_day = _db.Appointment_All.GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderByDescending(s=>s.AppointmentCount).ToList();
+                var appointment_day = _db.Appointment_All.Where(s=>s.Status=="Add").GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderByDescending(s=>s.AppointmentCount).ToList();
                 int today_total_appointments=0;
                 int today_total_pending = 0;
                 int today_total_available_citizens = 0;
