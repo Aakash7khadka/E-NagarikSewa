@@ -14,7 +14,7 @@
 
 <div class="container-fluid pt-2 mt-2">
     <div class="row">
-        @if (ViewBag.today_total_appointments > 0)
+        @if(ViewBag.today_total_appointments > 0)
         {
             <div class="col-12 col-md-4">
                 <div class="card" style="width: ">
@@ -41,9 +41,10 @@
             </div>
         }
 
-
-        <div class="col-12 col-md-4">
-            <div class="card" style="width:;">
+         @if (ViewBag.today_total_available_citizens> 0)
+        {
+            <div class="col-12 col-md-4">
+                <div class="card" style="width:;">
                 <div class="card-body">
                     <h6 class="card-subtitle mb-2 text-muted">Available Citizens</h6>
                     <h1 class="card-title display-5 mb-0 pb-0 " style="color: #38b000aa;">@ViewBag.today_total_available_citizens</h1>
@@ -51,7 +52,7 @@
                 </div>
             </div>
         </div>
-
+        }
         @*<div class="col-12 col-md-3">
                 <div class="card" style="width:;">
                     <div class="card-body">
