@@ -41,16 +41,15 @@ namespace smartpalika.Services
             if (User.IsInRole("Admin"))
             {
                 data = appointments;
-                count = data.Count();
+                count = _db.Appointment.Include(u => u.ApplicationUser).Where(s => s.Date.Contains(dateTime_) && s.isCompleted==false).Count();
             }
             else if (User.IsInRole("Employee"))
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var name = user.FullName;
 
-                data = appointments.Where(s => s.Provider == name);
+                count = _db.Appointment.Include(u => u.ApplicationUser).Where(s => s.Date.Contains(dateTime_) && s.isCompleted == false && s.Provider==name).Count();
 
-                count = data.Count();
             }
             return count;
         }
