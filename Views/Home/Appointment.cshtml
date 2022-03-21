@@ -173,7 +173,9 @@
              
                     <div class="col-12">
                         <a type="button" asp-action="Detail" class="btn btn-outline-primary btn-sm mr-2" asp-route-id="@obj.ID">Detail</a>
+                         @if(!obj.isCompleted){
                         <a class="text-danger" asp-controller="Appointment" asp-action="Delete_Confirm" asp-route-id="@obj.ID"><i class="fa fa-lg fa-trash"></i></a>  <hr />
+                         }
                     </div>
 
                 }
