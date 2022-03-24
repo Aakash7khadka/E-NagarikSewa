@@ -232,7 +232,7 @@ namespace smartpalika.Controllers
                 var result=db.Appointment.Where(s => s.Date == dt && s.Provider == obj.Provider && s.Time==obj.Time);
                 if(result.Count()!=0)
                 {
-                    TempData["message"] = "Oops! Somebody stole your time please try another time slot. So your appointment was cancelled ";
+                    TempData["message"] = "Oops! Some erro occured";
                     return RedirectToAction("Index", "Home");
                 }
                 db.Appointment.Add(obj);
