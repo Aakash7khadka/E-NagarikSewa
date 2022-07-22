@@ -13,6 +13,9 @@ using smartpalika.Models;
 using System.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using Nancy.Json;
 
 namespace smartpalika.Controllers
 {
@@ -30,39 +33,91 @@ namespace smartpalika.Controllers
             _userManager = userManager;
           
         }
-
         public async Task<IActionResult> Index()
+        {
+            try
+            {
+                var current_user = await _userManager.GetUserAsync(User);
+                var appointment_day = _db.Appointment.Where(s=>s.isCompleted==true).GroupBy(s => s.Date).Select(x=> new{Date= x.Key, AppointmentCount=x.Count() }).OrderBy(s=>s.Date).ToList();
+                int today_total_appointments=0;
+                int today_total_pending = 0;
+                int today_total_available_citizens = 0;
+                TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
+                DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
+                //DateTime date = DateTime.Today;
+                var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
+
+                if (User.IsInRole("Admin"))
+                {
+                    today_total_appointments = _db.Appointment.Where(s=> s.Date == dateTime_).Count();
+                    today_total_pending = _db.Appointment.Where(s=> s.Date == dateTime_ && s.isCompleted == false).Count();
+                    today_total_available_citizens = _db.Appointment.Where(s => s.Date == dateTime_ && s.isCompleted == false && s.isAvailable == true).Count();
+                }
+                else if(User.IsInRole("Employee"))
+                {
+                    today_total_appointments = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_).Count();
+                    today_total_pending = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_ && s.isCompleted == false).Count();
+                    today_total_available_citizens = _db.Appointment.Where(s => s.Provider == current_user.FullName && s.Date == dateTime_ && s.isCompleted == false && s.isAvailable == true).Count();
+                }
+                ViewBag.today_total_appointments = today_total_appointments;
+                ViewBag.today_total_pending = today_total_pending;
+                ViewBag.today_total_available_citizens = today_total_available_citizens;
+                //var appointment_day_json=  JsonConvert.SerializeObject(appointment_day);
+                var appointment_day_json = new JavaScriptSerializer().Serialize(appointment_day);
+                ViewBag.appointment_day_json = appointment_day_json;
+            }
+            catch (Exception e)
+            {
+
+                throw;
+            }
+           
+            return View();
+        }
+            public async Task<IActionResult> Appointment()
         {
             TimeZoneInfo Nepal_Standard_Time = TimeZoneInfo.FindSystemTimeZoneById("Nepal Standard Time");
             DateTime dateTime_Nepal = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Nepal_Standard_Time);
             //DateTime date = DateTime.Today;
             var dateTime_ = dateTime_Nepal.ToString("yyyy/MM/dd");
             var current_user = await _userManager.GetUserAsync(User);
-            IEnumerable<AppointmentUserDetails> data=null;
+            IEnumerable<AppointmentUserDetails> appointments=_db.Appointment.Include(u=>u.ApplicationUser).Where(s => s.Date.Contains(dateTime_));
+            IEnumerable<AppointmentUserDetails> data = null;
+
+            var count = 0;
             if (User.IsInRole("Admin"))
             {
-                data = _db.Appointment.Where(s => s.Date.Contains(dateTime_));
+                data = appointments;
+                count = data.Count();
             }
             else if (User.IsInRole("Employee"))
             {
                 var user = await _userManager.FindByNameAsync(User.Identity.Name);
                 var name = user.FullName;
-                data = _db.Appointment.Where(s => s.Provider == name).Where(s =>s.Date.Contains(dateTime_)) ;
+
+                data = appointments.Where(s => s.Provider == name) ;
+
+                count = data.Count();
             }
-            else if(User.IsInRole("citizen"))
+            else if (User.IsInRole("citizen"))
             {
-               data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
+                //data = _db.Appointment.Where(s => s.Date.Contains(dateTime_) && s.Email==current_user.Email);
+                data = appointments.Where(s => s.ApplicationUser.Email == current_user.Email);
             }
-            return View(data);
+
+            TempData["count"] = count.ToString();
+           return View(data);
+
         }
         public IActionResult Detail(Guid id)
         {
-            var obj = _db.Appointment.Find(id);
+            var obj = _db.Appointment.Include(u=>u.ApplicationUser).FirstOrDefault(u=>u.ID==id);
+            //var obj1=obj.Include(u => u.ApplicationUser);
             if(obj==null)
             {
                 return NotFound();
             }
-
+            
             return View(obj);
         }
         [HttpPost]

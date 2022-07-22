@@ -12,7 +12,7 @@ body {
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif !important;
-    background: #f2f6f9 !important;
+    background: #f9fafe !important;
 }
 .btn-primary {
     background: var(--bs-primary) !important;
@@ -58,23 +58,37 @@ background:var(--bs-primary) !important;
 .sidebar_main {
     border-right: 1px solid #EBEDF3;
     font-weight: bolder;
-    height: calc(100vh - 70px);
-    min-width: 200px;
+    height: calc(100vh - 62px);
+    max-width: 270px !important;
     background: white;
+
+}
+/*https://ibb.co/K5Mgs05*/
+.login_container {
+  /*  background: url("../images/logo.jpg");*/
+    background-size: cover;
+    background-position: top;
+    height: calc(100vh - 62px);
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 
-    .sidebar_main a {
-        color: #3f4254;
-        font-weight: 500;
-    }
+
+.sidebar_main a {
+    color: #3f4254;
+    font-weight: 500;
+}
 
 .sidebar_main .active {
     background: var(--bs-primary);
     color: var(--bs-white)
 }
-
+.login_title {
+    color: var(--bs-primary) !important;
+}
 .btn_md {
-font-size:1.3rem;
+    font-size: 1.3rem;
 }
 
 .text-dark {
@@ -129,7 +143,7 @@ font-size:1.3rem;
 
 }
 .bg_white {
-    background:white !important;
+    background:#ffffffcc !important;
 }
 .f_m {
     font-size: 1.3rem;
@@ -152,13 +166,42 @@ font-size:1.3rem;
 }
 .login_form {
     
-    width:50% !important;
+    width:100% !important;
+}
+.notification_count{
+    display:none !important;
+}
+
+.login_container {
+    height: calc(100vh - 62px);
+}
+/*Customized CSS*/
+.red {
+    color: #fe4a4b !important;
 }
 
 @media only screen and (max-width: 500px) {
-
     .login_form {
         width: 100% !important;
     }
+    .login_wrapper_mobile {
+        background: url("../images/emb.png");
+        background-size: contain;
+        background-repeat:no-repeat;
+        background-position: center;
+       
+    }
+    .bg_overlay_mobile {
 
+    width: 100vw !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    background: rgb(255,255,255);
+    background: linear-gradient(317deg, rgba(255,255,255,0.6194852941176471) 0%, rgba(255,255,255,0.6278886554621849) 100%);
+
+}
+
+    .notification_dropdown{
+        margin-left:0 !important;
+    }
 }

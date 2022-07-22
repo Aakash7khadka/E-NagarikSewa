@@ -11,6 +11,7 @@ namespace smartpalika.Models
         public string Address { get; set; }
         public string FullName { get; set; }
         public byte[] ProfileImage { get; set; }
+        public virtual ICollection<AppointmentUserDetails> Appointments { get; set; }
 
     }
 }

@@ -17,17 +17,25 @@ namespace smartpalika.Models
         }
         public DbSet<Attendance> Attendances { get; set; }
         public DbSet<AppointmentUserDetails> Appointment { get; set; }
+        public DbSet<Appointment_All> Appointment_All { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.HasNoKey();
             base.OnModelCreating(modelBuilder);
             //modelBuilder.Seed();
-            
+            modelBuilder.Entity<AppointmentUserDetails>()
+            .HasOne(o => o.ApplicationUser)
+            .WithMany(o => o.Appointments)
+            .IsRequired()
+            .OnDelete(DeleteBehavior.NoAction);
+            //.OnDelete(DeleteBehavior.ClientNoAction);
+
+
+
         }
-        public DbSet<smartpalika.Models.LoginVM> LoginVM { get; set; }
-        public DbSet<smartpalika.Models.CreateRoleVM> CreateRoleVM { get; set; }
-        public DbSet<smartpalika.Models.EditUserVM> EditUserVM { get; set; }
-     
+
+
 
     }
 }

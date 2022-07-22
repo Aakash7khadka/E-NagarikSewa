@@ -4,9 +4,23 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Denied</h1>
 
 
+<div class="row">
+   
+    <div class="col-lg-3 "></div>
+    <div class="col-12 col-lg-6 ">
+        <div class="card mt-4">
+            <div class="card-body">
+                <h5 class="card-title text-danger" >Denied</h5>
 
-Message:
-@TempData["ErrorMessage"]
+              
+                <h6 class="card-body">@TempData["ErrorMessage"] </h6>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3 "></div>
+</div>
+

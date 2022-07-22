@@ -160,6 +160,7 @@ namespace smartpalika.Controllers
             List<RoleUsersVM> model = new List<RoleUsersVM>();
             foreach(var user in userManager.Users)
             {
+                if (user.EmailConfirmed) { 
                 RoleUsersVM obj = new RoleUsersVM()
                 {
                     UserId = Id,
@@ -172,6 +173,7 @@ namespace smartpalika.Controllers
                     
                 }
                 model.Add(obj);
+                }
             }
             return View(model);
         }
