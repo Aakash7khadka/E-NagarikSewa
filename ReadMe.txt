@@ -1,1 +1,1 @@
-<embed src="https://github.com/Aakash7khadka/E-NagarikSewa/blob/master/ENS.pdf" type="application/pdf">
+<embed src="https://vishalpurkuti.com.np/wp-content/uploads/2022/07/Final-Copy-ENS.pdf" type="application/pdf">
